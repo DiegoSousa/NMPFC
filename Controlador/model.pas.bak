@@ -1,0 +1,479 @@
+//------------------------------------------------------------------------------
+//
+// model.pas
+//
+//------------------------------------------------------------------------------
+//
+// Procedures for simulating robot behaviour (updates v, vn, and w references to
+// actual speeds, according to robot model)
+//
+//------------------------------------------------------------------------------
+
+unit model;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  Classes, SysUtils,dynmatrix,dynmatrixutils,Utils,Main,LCLProc,math, Param;
+
+type
+
+
+
+//------------------------------------------------------
+// TMotorState
+// Model parameters for simulation
+//------------------------------------------------------
+TMotorState = record
+  v : double                //motor speed, in m/s
+end;
+
+
+//------------------------------------------------------
+// TSimRobot
+// Robot for simulation
+//------------------------------------------------------
+TSimRobot = record
+  RobotState : TRobotState;
+  MotorState : Array[0 .. 2] of TMotorState;
+end;
+
+//------------------------------------------------------
+// TSimBall
+// Robot for simulation
+//------------------------------------------------------
+TSimBall = record
+  BallState : TBallState;
+  sigmaS: TDMatrix;
+  detsigma: double;
+end;
+
+
+//------------------------------------------------------
+// TModelParams
+// Model parameters for simulation
+//------------------------------------------------------
+TModelParams = record
+  d:double;                    //distance from wheels to center
+  maxWheelSpeed : double;      //max wheel speed for saturation control
+  motorTao : double            //[motor + controller + robot] system time constant
+end;
+
+//load robot parameters
+procedure loadParameters(vmax,tao : double);
+//reset model state
+procedure resetModel();
+//simulate Robot (vref,vnref,vwref -> v,vn,w)
+procedure simRobotComplete(var Robot : TSimRobot; v_ref,vn_ref,w_ref : double; var v,vn,w : double);
+//simulate Diferential Robot (vref,vnref,vwref -> v,vn,w)
+//procedure simRobotComplete2(var Robot : TSimRobot; v_ref,vn_ref,w_ref : double; var v,vn,w : double);
+//simulate motors (motor ref speeds -> motor actual speeds)
+procedure simMotors(var Robot : TSimRobot; var v1,v2,v3 : double);
+//inverse kinematic (v,vn,w->v1,v2,v3)
+procedure IK(v,vn,w: double; var v1,v2,v3 : double);
+//inverse kinematic (v,vn,w->v1,v2,v3)
+procedure IKd(v,w: double; var v1,v2: double);
+//direct kinematic (v1,v2,v3->v,vn,w)
+procedure DK(v1, v2, v3: double; var v, vn, w: double);
+//updates robot position
+procedure simRobotMovement(var Robot : TSimRobot; var v,vn,w : double);
+//updates covariance matrix
+function SimCovariance(Robot : TSimRobot; Ball: TSimBall; val,k1,k2: double):TDMatrix;
+//updates covariance matrix
+function SimCovariance2(MyRobot : TSimRobot; Robot : TSimRobot; Ball: TSimBall; val,k1,k2: double):TDMatrix;
+//updates covariance matrix IST
+function SimCovarianceIST(Robot : TSimRobot; Ball: TSimBall; val,k1,k2,k3,k4: double):TDMatrix;
+function SimCovarianceIST2(MyRobot : TSimRobot; Robot : TSimRobot; Ball: TSimBall; val,k1,k2,k3,k4: double):TDMatrix;
+//Sum the covariance matrixes
+function SimCovarianceSUM(sgt1, sgt2: TDMatrix):TDMatrix;
+//updates ball position
+procedure simBallMovement(var Ball : TSimBall);
+
+var
+    //Model Parameters
+    ModelParams : TModelParams;
+
+    //SimRobot structure
+    SimRobot : TSimRobot;
+
+    //SimBall structure
+    SimBall : TSimBall;
+
+    //global variables for debugging
+    a_g,b_g,v1ref_g,v2ref_g,v3ref_g,v1real_g,v2real_g,v3real_g : double;
+
+const
+
+     simTimeStep = 0.01;
+
+
+implementation
+
+
+//----------------------------------------------------------------------------
+//
+// loadParameters()
+//
+//----------------------------------------------------------------------------
+// define model parameters
+//
+//----------------------------------------------------------------------------
+procedure loadParameters(vmax,tao : double);
+begin
+
+     ModelParams.d := WheeltoCenterdist;  //distance from wheel to center
+     ModelParams.maxWheelSpeed := vmax;   //max motor speed (m/s)
+     ModelParams.motorTao := tao;         //[motor + controller + robot] system time constant
+
+end;
+
+//----------------------------------------------------------------------------
+//
+// resetModel()
+//
+//----------------------------------------------------------------------------
+// reset model state
+//
+//----------------------------------------------------------------------------
+procedure resetModel();
+begin
+
+    simRobot.RobotState.x := 0;
+    simRobot.RobotState.y := 0;
+    simRobot.RobotState.teta := 0;
+    simRobot.RobotState.v:=0;
+    simRobot.RobotState.vn:=0;
+    simRobot.RobotState.w:=0;
+
+    SimRobot.MotorState[0].v := 0;
+    SimRobot.MotorState[1].v := 0;
+    SimRobot.MotorState[2].v := 0;
+
+    SimBall.BallState.x := 0;
+    SimBall.BallState.y := 0;
+    SimBall.BallState.vy := 0;
+    SimBall.BallState.vx := 0;
+    SimBall.BallState.quality := 0;
+
+end;
+
+
+//----------------------------------------------------------------------------
+//
+// IK()
+//
+//----------------------------------------------------------------------------
+// inverse kinematic (v,vn,w->v1,v2,v3)
+//
+//----------------------------------------------------------------------------
+procedure IK(v, vn, w: double; var v1, v2, v3: double);
+begin
+
+     v1 := sin(pi/3)*v + cos(pi/3)*vn + ModelParams.d*w;
+     v2 := -1*sin(pi/3)*v + cos(pi/3)*vn + ModelParams.d*w;
+     v3 := -1*vn + ModelParams.d*w;
+
+end;
+
+//----------------------------------------------------------------------------
+//
+// IK() Robo Diferencial
+//
+//----------------------------------------------------------------------------
+// inverse kinematic (v,w->v1,v2)
+//
+//----------------------------------------------------------------------------
+procedure IKd(v, w: double; var v1, v2: double);
+begin
+
+     v1 := v + 0.0297*w;
+     v2 := v - 0.0297*w;
+
+
+end;
+
+//----------------------------------------------------------------------------
+//
+// DK()
+//
+//----------------------------------------------------------------------------
+// Direct Kinematics(v1,v2,v3->v,vn,w)
+//
+//----------------------------------------------------------------------------
+procedure DK(v1, v2, v3: double; var v, vn, w: double);
+begin
+     v := (sqrt(3)/3)*(v1-v2);
+     vn := (1/3)*(v1+v2)-(2/3)*v3;
+     w := (1/(ModelParams.d*3))*(v1+v2+v3);
+end;
+
+
+//----------------------------------------------------------------------------
+//
+// SimRobotMovement()
+//
+//----------------------------------------------------------------------------
+// Updates the simulated robot's position taking into account the current
+// position, and input values. Uses 10ms intervals (run 4 times for 40 ms)
+//----------------------------------------------------------------------------
+procedure simRobotMovement(var Robot : TSimRobot; var v,vn,w : double);
+var
+   cteta,steta : double;
+begin
+          cteta := cos(Robot.RobotState.teta);
+          steta := sin(Robot.RobotState.teta);
+
+          if Robot.RobotState.teta > pi then
+             Robot.RobotState.teta := Robot.RobotState.teta - 2*pi;
+
+          Robot.RobotState.teta := Robot.RobotState.teta + simTimeStep*w;
+          Robot.RobotState.x := Robot.RobotState.x + simTimeStep*(v*cteta-vn*steta);
+          Robot.RobotState.y := Robot.RobotState.y + simTimeStep*(v*steta+vn*cteta);
+
+end;
+
+//----------------------------------------------------------------------------
+//
+// SimCovariance()
+//
+//----------------------------------------------------------------------------
+// Updates the simulated ball's covariance taking into account the current
+// positions of robot and ball. Uses 10ms intervals (run 4 times for 40 ms)
+//----------------------------------------------------------------------------
+function SimCovariance(Robot : TSimRobot; Ball: TSimBall; val,k1,k2: double):TDMatrix;
+var sgt,sgt2: TDMatrix;
+    d,sigX,sigY,tetao,sigphi: double;
+begin
+  sgt.SetSize(2,2);
+  sgt:=Mzeros(2,2);
+
+  d:=(sqrt(power((Robot.RobotState.x-Ball.BallState.x),2)+power((Robot.RobotState.y-Ball.BallState.y),2)));
+
+  sigX:=k1*(power(d,2));
+  sigY:=k2*d;
+  //sigY:=power((k2*d),2)/d;
+  //sigY:=power((d-k2),2)/d;
+
+  sgt.setv(0,0,sigX);
+  sgt.setv(0,1,0);
+  sgt.setv(1,0,0);
+  sgt.setv(1,1,sigY);
+
+  result:=sgt;
+end;
+
+function SimCovarianceIST(Robot : TSimRobot; Ball: TSimBall; val,k1,k2,k3,k4: double):TDMatrix;
+var sgt,sgt2: TDMatrix;
+    d,r,sigphi,sigr,sigy,tetao: double;
+begin
+  sgt.SetSize(2,2);
+  sgt:=Mzeros(2,2);
+
+  d:=(sqrt(power((Robot.RobotState.x-Ball.BallState.x),2)+power((Robot.RobotState.y-Ball.BallState.y),2)));
+  r:=(sqrt(power((Robot.RobotState.x-Ball.BallState.x),2)+power((Robot.RobotState.y-Ball.BallState.y),2)+0.4225));
+  tetao:=arctan(0.65/d);
+
+  sigr:=k1*(power(d,2)/0.02)+k2*(0.4225/(2*(power(r,2)-0.01)))+k3*(0.4225/(0.04*(power(r,2)-0.01)));
+  sigphi:=k4/(2*(power(r,2)-(0.01*power((sin(tetao)),2))));
+  sigy:=(power(r,2)+sigr)*sigphi;
+
+  sgt.setv(0,0,sigr);
+  sgt.setv(0,1,0);
+  sgt.setv(1,0,0);
+  sgt.setv(1,1,sigy);
+
+  result:=sgt;
+end;
+
+function SimCovariance2(MyRobot : TSimRobot; Robot : TSimRobot; Ball: TSimBall; val,k1,k2: double):TDMatrix;
+var sgt,sgt2: TDMatrix;
+    dist,alfa,sigX,sigY,v,a,b,c,d,tetao: double;
+begin
+  sgt.SetSize(2,2);
+  sgt:=Mzeros(2,2);
+
+  alfa:=atan2((MyRobot.RobotState.y - Ball.BallState.y),(MyRobot.RobotState.x - Ball.BallState.x))-atan2((Robot.RobotState.y - Ball.BallState.y),(Robot.RobotState.x - Ball.BallState.x));
+
+  dist:=(sqrt(power((Robot.RobotState.x-Ball.BallState.x),2)+power((Robot.RobotState.y-Ball.BallState.y),2)));
+
+  sigX:=k1*(power(dist,2));
+  sigY:=k2*dist;
+  //sigY:=power((k2*dist),2)/dist;
+  //sigY:=power((dist-k2),2)/dist;
+
+  //Rt(a)*Cl*R(a)
+  a:=(power(cos(alfa),2)*sigX)+(power(sin(alfa),2)*sigY);
+  b:=(cos(alfa)*sin(alfa)*sigX)-(cos(alfa)*sin(alfa)*sigY);
+  c:=(cos(alfa)*sin(alfa)*sigX)-(cos(alfa)*sin(alfa)*sigY);
+  d:=(power(cos(alfa),2)*sigY)+(power(sin(alfa),2)*sigX);
+
+  sgt.setv(0,0,a);
+  sgt.setv(0,1,b);
+  sgt.setv(1,0,c);
+  sgt.setv(1,1,d);
+
+  result:=sgt;
+end;
+
+function SimCovarianceIST2(MyRobot : TSimRobot; Robot : TSimRobot; Ball: TSimBall; val,k1,k2,k3,k4: double):TDMatrix;
+var sgt,sgt2: TDMatrix;
+    dist,alfa,sigy,v,r,sigphi,sigr,tetao,a,b,c,d: double;
+begin
+  sgt.SetSize(2,2);
+  sgt:=Mzeros(2,2);
+
+  alfa:=atan2((MyRobot.RobotState.y - Ball.BallState.y),(MyRobot.RobotState.x - Ball.BallState.x))-atan2((Robot.RobotState.y - Ball.BallState.y),(Robot.RobotState.x - Ball.BallState.x));
+
+  dist:=(sqrt(power((Robot.RobotState.x-Ball.BallState.x),2)+power((Robot.RobotState.y-Ball.BallState.y),2)));
+  r:=(sqrt(power((Robot.RobotState.x-Ball.BallState.x),2)+power((Robot.RobotState.y-Ball.BallState.y),2)+0.4225));
+  tetao:=arctan(0.65/dist);
+
+  sigr:=k1*(power(dist,2)/0.02)+k2*(0.4225/(2*(power(r,2)-0.01)))+k3*(0.4225/(0.04*(power(r,2)-0.01)));
+  sigphi:=k4/(2*(power(r,2)-(0.01*power((sin(tetao)),2))));
+  sigy:=(power(r,2)+sigr)*sigphi;
+
+  //Rt(a)*Cl*R(a)
+  a:=(power(cos(alfa),2)*sigr)+(power(sin(alfa),2)*sigy);
+  b:=(cos(alfa)*sin(alfa)*sigr)-(cos(alfa)*sin(alfa)*sigy);
+  c:=(cos(alfa)*sin(alfa)*sigr)-(cos(alfa)*sin(alfa)*sigy);
+  d:=(power(cos(alfa),2)*sigy)+(power(sin(alfa),2)*sigr);
+
+  sgt.setv(0,0,a);
+  sgt.setv(0,1,b);
+  sgt.setv(1,0,c);
+  sgt.setv(1,1,d);
+
+  result:=sgt;
+end;
+
+function SimCovarianceSUM(sgt1, sgt2: TDMatrix):TDMatrix;
+var sgt,sgttemp: TDMatrix;
+    v,a,b,c,d,r,s,t,u: double;
+begin
+  sgt.SetSize(2,2);
+  sgt:=Mzeros(2,2);
+  sgttemp.SetSize(2,2);
+  sgttemp:=Mzeros(2,2);
+
+  sgttemp.setv(0,0,(sgt1.getv(0,0)+sgt2.getv(0,0)));    //a
+  sgttemp.setv(0,1,(sgt1.getv(0,1)+sgt2.getv(0,1)));    //b
+  sgttemp.setv(1,0,(sgt1.getv(1,0)+sgt2.getv(1,0)));    //c
+  sgttemp.setv(1,1,(sgt1.getv(1,1)+sgt2.getv(1,1)));    //d
+
+  v:=1/((sgttemp.getv(0,0)*sgttemp.getv(1,1))-(sgttemp.getv(0,1)*sgttemp.getv(1,0)));
+
+  //inverts the matrix
+  r:=(v*sgttemp.getv(1,1));                //r
+  s:=(v*(-sgttemp.getv(0,1)));             //s
+  t:=(v*(-sgttemp.getv(1,0)));             //t
+  u:=(v*sgttemp.getv(0,0));                //u
+
+  a:=(sgt1.getv(0,0));    //a
+  b:=(sgt1.getv(0,1));    //b
+  c:=(sgt1.getv(1,0));    //c
+  d:=(sgt1.getv(1,1));    //d
+
+  sgt.setv(0,0,(a-(a*((a*r)+(b*t))+c*((a*s)+(b*u)))));
+  sgt.setv(0,1,(b-(b*((a*r)+(b*t))+d*((a*s)+(b*u)))));
+  sgt.setv(1,0,(c-(a*((c*r)+(d*t))+c*((c*s)+(d*u)))));
+  sgt.setv(1,1,(d-(b*((c*r)+(d*t))+d*((c*s)+(d*u)))));
+
+  result:=sgt;
+end;
+
+
+//----------------------------------------------------------------------------
+//
+// SimRobotComplete()
+//
+//----------------------------------------------------------------------------
+// Simulate Robot (vref,vnref,wref -> v,vn,w), 10ms period
+//
+//----------------------------------------------------------------------------
+procedure simRobotComplete(var Robot : TSimRobot; v_ref,vn_ref,w_ref : double; var v,vn,w : double);
+var
+   v1,v2,v3 : double;
+begin
+
+   //v,vn,w -> v1,v2,v3
+   IK(v_ref,vn_ref,w_ref,v1,v2,v3);
+
+   //simulate motors
+   simMotors(Robot,v1,v2,v3);
+
+   //v1,v2,v3 -> v,vn,w
+   DK(v1,v2,v3,v,vn,w);
+
+end;
+
+//----------------------------------------------------------------------------
+//
+// SimBallMovement()
+//
+//----------------------------------------------------------------------------
+// Simulate Robot (vref,vnref,wref -> v,vn,w), 10ms period
+//
+//----------------------------------------------------------------------------
+procedure simBallMovement(var Ball: TSimBall);
+begin
+
+     Ball.BallState.x := Ball.BallState.x + simTimeStep*Ball.BallState.vx;
+     Ball.BallState.y := Ball.BallState.y + simTimeStep*Ball.BallState.vy;
+
+     Ball.BallState.vx:=Ball.BallState.vx*BallFrictionCoef;
+     Ball.BallState.vy:=Ball.BallState.vy*BallFrictionCoef;
+
+end;
+
+//----------------------------------------------------------------------------
+//
+// SimMotors()
+//
+//----------------------------------------------------------------------------
+// Simulate Motors (v1ref, v2ref, v3ref -> v1,v2,v3), 10ms period
+//
+//----------------------------------------------------------------------------
+procedure simMotors(var Robot : TSimRobot; var v1,v2,v3 : double);
+var
+   i: integer;
+   a,b : double;
+   u : array[0..2] of double;
+begin
+
+     //input vector (motor speed references)
+     u[0] := v1;
+     u[1] := v2;
+     u[2] := v3;
+
+     a := exp((-1/ModelParams.motorTao)*simTimeStep);
+     b := 1 - a;
+
+     //DEBUG
+     v1ref_g:=u[0];
+     v2ref_g:=u[1];
+     v3ref_g:=u[2];
+
+     a_g := a;
+     b_g := b;
+
+     //LTI step response simulation for motors
+    for i:= 0 to 2  do begin
+        Robot.MotorState[i].v := a*Robot.MotorState[i].v + b*u[i];
+    end;
+
+    //update reference
+    v1 := Robot.MotorState[0].v;
+    v2 := Robot.MotorState[1].v;
+    v3 := Robot.MotorState[2].v;
+
+    //DEBUG
+    v1real_g := v1;
+    v2real_g := v2;
+    v3real_g := v3;
+
+end;
+
+end.
+

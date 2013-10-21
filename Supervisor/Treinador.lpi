@@ -1,0 +1,521 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="7"/>
+    <General>
+      <MainUnit Value="0"/>
+      <TargetFileExt Value=""/>
+      <Icon Value="0"/>
+      <UseXPManifest Value="True"/>
+      <ActiveEditorIndexAtStart Value="0"/>
+    </General>
+    <VersionInfo>
+      <Language Value=""/>
+      <CharSet Value=""/>
+    </VersionInfo>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="3">
+      <Item1>
+        <PackageName Value="TAChartLazarusPkg"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="lnetvisual"/>
+        <MinVersion Minor="6" Release="5" Valid="True"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="LCL"/>
+      </Item3>
+    </RequiredPackages>
+    <Units Count="42">
+      <Unit0>
+        <Filename Value="Treinador.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Treinador"/>
+        <CursorPos X="27" Y="21"/>
+        <TopLine Value="3"/>
+        <UsageCount Value="201"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="coach.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FCoach"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Coach"/>
+        <CursorPos X="3" Y="826"/>
+        <TopLine Value="824"/>
+        <EditorIndex Value="0"/>
+        <UsageCount Value="201"/>
+        <Bookmarks Count="4">
+          <Item0 X="26" Y="1181" ID="0"/>
+          <Item1 X="1" Y="584" ID="1"/>
+          <Item2 X="20" Y="802" ID="5"/>
+          <Item3 X="10" Y="829" ID="6"/>
+        </Bookmarks>
+        <Loaded Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="Field.pas"/>
+        <UnitName Value="Field"/>
+        <CursorPos X="10" Y="261"/>
+        <TopLine Value="242"/>
+        <UsageCount Value="2"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="Tactic.pas"/>
+        <UnitName Value="Tactic"/>
+        <CursorPos X="58" Y="428"/>
+        <TopLine Value="416"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="101"/>
+        <Bookmarks Count="1">
+          <Item0 X="58" Y="428" ID="2"/>
+        </Bookmarks>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="Roles.pas"/>
+        <UnitName Value="Roles"/>
+        <CursorPos X="3" Y="112"/>
+        <TopLine Value="112"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="101"/>
+        <Loaded Value="True"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="Tasks.pas"/>
+        <UnitName Value="Tasks"/>
+        <CursorPos X="7" Y="1309"/>
+        <TopLine Value="1299"/>
+        <UsageCount Value="95"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="obsavoid.pas"/>
+        <UnitName Value="obsavoid"/>
+        <CursorPos X="22" Y="155"/>
+        <TopLine Value="149"/>
+        <UsageCount Value="95"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="Robots.pas"/>
+        <UnitName Value="Robots"/>
+        <CursorPos X="27" Y="276"/>
+        <TopLine Value="249"/>
+        <EditorIndex Value="7"/>
+        <UsageCount Value="101"/>
+        <Loaded Value="True"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="Utils.pas"/>
+        <UnitName Value="Utils"/>
+        <CursorPos X="1" Y="59"/>
+        <TopLine Value="59"/>
+        <UsageCount Value="39"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="Param.pas"/>
+        <UnitName Value="Param"/>
+        <CursorPos X="5" Y="617"/>
+        <TopLine Value="598"/>
+        <UsageCount Value="2"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="locmap.pas"/>
+        <UnitName Value="LocMap"/>
+        <CursorPos X="3" Y="319"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="9"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="Actions.pas"/>
+        <UnitName Value="Actions"/>
+        <CursorPos X="8" Y="116"/>
+        <TopLine Value="116"/>
+        <UsageCount Value="94"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="field.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FField"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Field"/>
+        <CursorPos X="51" Y="155"/>
+        <TopLine Value="143"/>
+        <UsageCount Value="201"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="param.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FParam"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Param"/>
+        <CursorPos X="40" Y="256"/>
+        <TopLine Value="242"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="DecConsts.pas"/>
+        <UnitName Value="DecConsts"/>
+        <CursorPos X="17" Y="9"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="101"/>
+        <Loaded Value="True"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="../../../../usr/share/fpcsrc/2.4.0/rtl/objpas/sysutils/filutilh.inc"/>
+        <CursorPos X="10" Y="87"/>
+        <TopLine Value="77"/>
+        <UsageCount Value="9"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="../../../../usr/share/fpcsrc/2.4.0/packages/fcl-base/src/inifiles.pp"/>
+        <UnitName Value="IniFiles"/>
+        <CursorPos X="3" Y="120"/>
+        <TopLine Value="117"/>
+        <UsageCount Value="9"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/lcl/include/customform.inc"/>
+        <CursorPos X="7" Y="1596"/>
+        <TopLine Value="1587"/>
+        <UsageCount Value="4"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/lcl/include/application.inc"/>
+        <CursorPos X="1" Y="1256"/>
+        <TopLine Value="1246"/>
+        <UsageCount Value="4"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/lcl/include/control.inc"/>
+        <CursorPos X="1" Y="4057"/>
+        <TopLine Value="4047"/>
+        <UsageCount Value="4"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/lcl/lclproc.pas"/>
+        <UnitName Value="LCLProc"/>
+        <CursorPos X="1" Y="1490"/>
+        <TopLine Value="1480"/>
+        <UsageCount Value="4"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/lcl/include/wincontrol.inc"/>
+        <CursorPos X="1" Y="5960"/>
+        <TopLine Value="5950"/>
+        <UsageCount Value="4"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/lcl/include/brush.inc"/>
+        <CursorPos X="1" Y="46"/>
+        <TopLine Value="36"/>
+        <UsageCount Value="4"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/lcl/graphics.pp"/>
+        <UnitName Value="Graphics"/>
+        <CursorPos X="120" Y="145"/>
+        <TopLine Value="139"/>
+        <UsageCount Value="36"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/lcl/include/pen.inc"/>
+        <CursorPos X="1" Y="151"/>
+        <TopLine Value="141"/>
+        <UsageCount Value="4"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/lcl/include/canvas.inc"/>
+        <CursorPos X="1" Y="1217"/>
+        <TopLine Value="1207"/>
+        <UsageCount Value="4"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/lcl/include/controlcanvas.inc"/>
+        <CursorPos X="1" Y="90"/>
+        <TopLine Value="80"/>
+        <UsageCount Value="4"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/lcl/include/winapi.inc"/>
+        <CursorPos X="26" Y="362"/>
+        <TopLine Value="351"/>
+        <UsageCount Value="4"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/lcl/customtimer.pas"/>
+        <UnitName Value="CustomTimer"/>
+        <CursorPos X="1" Y="182"/>
+        <TopLine Value="172"/>
+        <UsageCount Value="4"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/components/lnet/lazaruspackage/lnetcomponents.pas"/>
+        <UnitName Value="lNetComponents"/>
+        <CursorPos X="18" Y="64"/>
+        <TopLine Value="55"/>
+        <UsageCount Value="4"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/components/lnet/lib/lnet.pp"/>
+        <UnitName Value="lNet"/>
+        <CursorPos X="1" Y="856"/>
+        <TopLine Value="846"/>
+        <UsageCount Value="9"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="../../../../usr/share/fpcsrc/2.4.0/rtl/objpas/objpas.pp"/>
+        <UnitName Value="objpas"/>
+        <CursorPos X="15" Y="71"/>
+        <TopLine Value="61"/>
+        <UsageCount Value="4"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="WLan.pas"/>
+        <UnitName Value="WLan"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="12"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/lcl/include/custommemo.inc"/>
+        <CursorPos X="1" Y="68"/>
+        <TopLine Value="50"/>
+        <UsageCount Value="3"/>
+      </Unit33>
+      <Unit34>
+        <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/components/lnet/lazaruspackage/lclgtkeventer.inc"/>
+        <CursorPos X="1" Y="69"/>
+        <TopLine Value="51"/>
+        <UsageCount Value="3"/>
+      </Unit34>
+      <Unit35>
+        <Filename Value="fuzzy.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Fuzzy"/>
+        <CursorPos X="36" Y="139"/>
+        <TopLine Value="127"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="70"/>
+        <Loaded Value="True"/>
+      </Unit35>
+      <Unit36>
+        <Filename Value="log.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FLog"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Log"/>
+        <CursorPos X="93" Y="373"/>
+        <TopLine Value="373"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="38"/>
+        <Loaded Value="True"/>
+      </Unit36>
+      <Unit37>
+        <Filename Value="../../../../../usr/lib/lazarus/0.9.28.2/lcl/comctrls.pp"/>
+        <UnitName Value="ComCtrls"/>
+        <CursorPos X="14" Y="2090"/>
+        <TopLine Value="2072"/>
+        <UsageCount Value="10"/>
+      </Unit37>
+      <Unit38>
+        <Filename Value="../../../../../usr/lib/lazarus/0.9.28.2/lcl/include/customform.inc"/>
+        <CursorPos X="1" Y="773"/>
+        <TopLine Value="747"/>
+        <UsageCount Value="10"/>
+      </Unit38>
+      <Unit39>
+        <Filename Value="fclog.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FCLog"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="FCLog"/>
+        <CursorPos X="11" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="24"/>
+      </Unit39>
+      <Unit40>
+        <Filename Value="../../../../../usr/lib/lazarus/0.9.28.2/lcl/include/treeview.inc"/>
+        <CursorPos X="34" Y="1904"/>
+        <TopLine Value="1904"/>
+        <UsageCount Value="10"/>
+      </Unit40>
+      <Unit41>
+        <Filename Value="../../../../../usr/lib/lazarus/0.9.28.2/lcl/grids.pas"/>
+        <UnitName Value="Grids"/>
+        <CursorPos X="1" Y="7384"/>
+        <TopLine Value="7366"/>
+        <UsageCount Value="10"/>
+      </Unit41>
+    </Units>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="log.pas"/>
+        <Caret Line="179" Column="31" TopLine="163"/>
+      </Position1>
+      <Position2>
+        <Filename Value="log.pas"/>
+        <Caret Line="59" Column="23" TopLine="41"/>
+      </Position2>
+      <Position3>
+        <Filename Value="log.pas"/>
+        <Caret Line="248" Column="33" TopLine="239"/>
+      </Position3>
+      <Position4>
+        <Filename Value="log.pas"/>
+        <Caret Line="22" Column="23" TopLine="4"/>
+      </Position4>
+      <Position5>
+        <Filename Value="coach.pas"/>
+        <Caret Line="826" Column="9" TopLine="815"/>
+      </Position5>
+      <Position6>
+        <Filename Value="Tactic.pas"/>
+        <Caret Line="968" Column="14" TopLine="963"/>
+      </Position6>
+      <Position7>
+        <Filename Value="log.pas"/>
+        <Caret Line="372" Column="40" TopLine="356"/>
+      </Position7>
+      <Position8>
+        <Filename Value="log.pas"/>
+        <Caret Line="179" Column="26" TopLine="159"/>
+      </Position8>
+      <Position9>
+        <Filename Value="log.pas"/>
+        <Caret Line="159" Column="21" TopLine="140"/>
+      </Position9>
+      <Position10>
+        <Filename Value="log.pas"/>
+        <Caret Line="366" Column="36" TopLine="346"/>
+      </Position10>
+      <Position11>
+        <Filename Value="coach.pas"/>
+        <Caret Line="1361" Column="26" TopLine="1354"/>
+      </Position11>
+      <Position12>
+        <Filename Value="coach.pas"/>
+        <Caret Line="829" Column="13" TopLine="805"/>
+      </Position12>
+      <Position13>
+        <Filename Value="log.pas"/>
+        <Caret Line="258" Column="11" TopLine="246"/>
+      </Position13>
+      <Position14>
+        <Filename Value="log.pas"/>
+        <Caret Line="249" Column="18" TopLine="239"/>
+      </Position14>
+      <Position15>
+        <Filename Value="coach.pas"/>
+        <Caret Line="1058" Column="3" TopLine="1058"/>
+      </Position15>
+      <Position16>
+        <Filename Value="coach.pas"/>
+        <Caret Line="877" Column="27" TopLine="848"/>
+      </Position16>
+      <Position17>
+        <Filename Value="coach.pas"/>
+        <Caret Line="1081" Column="14" TopLine="1059"/>
+      </Position17>
+      <Position18>
+        <Filename Value="coach.pas"/>
+        <Caret Line="1060" Column="23" TopLine="1034"/>
+      </Position18>
+      <Position19>
+        <Filename Value="coach.pas"/>
+        <Caret Line="1141" Column="14" TopLine="1118"/>
+      </Position19>
+      <Position20>
+        <Filename Value="coach.pas"/>
+        <Caret Line="1140" Column="27" TopLine="1118"/>
+      </Position20>
+      <Position21>
+        <Filename Value="coach.pas"/>
+        <Caret Line="1061" Column="30" TopLine="1034"/>
+      </Position21>
+      <Position22>
+        <Filename Value="coach.pas"/>
+        <Caret Line="708" Column="19" TopLine="692"/>
+      </Position22>
+      <Position23>
+        <Filename Value="coach.pas"/>
+        <Caret Line="692" Column="21" TopLine="692"/>
+      </Position23>
+      <Position24>
+        <Filename Value="coach.pas"/>
+        <Caret Line="684" Column="11" TopLine="671"/>
+      </Position24>
+      <Position25>
+        <Filename Value="coach.pas"/>
+        <Caret Line="829" Column="8" TopLine="824"/>
+      </Position25>
+      <Position26>
+        <Filename Value="coach.pas"/>
+        <Caret Line="831" Column="7" TopLine="824"/>
+      </Position26>
+      <Position27>
+        <Filename Value="coach.pas"/>
+        <Caret Line="708" Column="17" TopLine="692"/>
+      </Position27>
+      <Position28>
+        <Filename Value="Robots.pas"/>
+        <Caret Line="276" Column="27" TopLine="249"/>
+      </Position28>
+      <Position29>
+        <Filename Value="coach.pas"/>
+        <Caret Line="687" Column="26" TopLine="678"/>
+      </Position29>
+      <Position30>
+        <Filename Value="coach.pas"/>
+        <Caret Line="1199" Column="26" TopLine="1173"/>
+      </Position30>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="8"/>
+    <SearchPaths>
+      <IncludeFiles Value="$(ProjOutDir)/"/>
+    </SearchPaths>
+    <Linking>
+      <Debugging>
+        <GenerateDebugInfo Value="True"/>
+        <GenerateDwarf Value="True"/>
+      </Debugging>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="3">
+      <Item1>
+        <Name Value="EAbort"/>
+      </Item1>
+      <Item2>
+        <Name Value="ECodetoolError"/>
+      </Item2>
+      <Item3>
+        <Name Value="EFOpenError"/>
+      </Item3>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

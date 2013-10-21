@@ -1,0 +1,17 @@
+{ This is an automatically generated lazarus resource file }
+
+LazarusResources.Add('TFJoy','FORMDATA',[
+  'TPF0'#5'TFJoy'#4'FJoy'#4'Left'#3#193#1#6'Height'#3#131#0#3'Top'#3#213#0#5'Wi'
+  +'dth'#3#133#1#18'HorzScrollBar.Page'#3#132#1#19'HorzScrollBar.Range'#3'y'#1
+  +#18'VertScrollBar.Page'#3#130#0#19'VertScrollBar.Range'#2'H'#13'ActiveContro'
+  +'l'#7#3'Bgo'#7'Caption'#6#8'Joystick'#12'ClientHeight'#3#131#0#11'ClientWidt'
+  +'h'#3#133#1#5'Color'#7#12'clBackground'#7'OnClose'#7#9'FormClose'#8'OnCreate'
+  +#7#10'FormCreate'#10'LCLVersion'#6#8'0.9.28.2'#0#5'TEdit'#11'EditJoyFile'#4
+  +'Left'#2#20#6'Height'#2#27#3'Top'#2#20#5'Width'#2'i'#8'TabOrder'#2#0#4'Text'
+  +#6#14'/dev/input/js0'#0#0#7'TButton'#3'Bgo'#4'Left'#3#136#0#6'Height'#2#21#3
+  +'Top'#2#20#5'Width'#2'9'#7'Caption'#6#2'Go'#7'OnClick'#7#8'BgoClick'#8'TabOr'
+  +'der'#2#1#0#0#5'TEdit'#12'EditJoyEvent'#4'Left'#2#20#6'Height'#2#27#3'Top'#2
+  +'4'#5'Width'#3'e'#1#8'TabOrder'#2#2#4'Text'#6#3'...'#0#0#15'TIniPropStorage'
+  +#11'FormStorage'#12'StoredValues'#14#0#10'IniSection'#6#3'JOY'#4'left'#3#231
+  +#0#3'top'#2#26#0#0#0
+]);

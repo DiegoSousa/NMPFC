@@ -1,0 +1,1 @@
+traj.count,idx,tx,ty,traj.pts[idx].teta,state.teta,dteta,teta_power,state.y,state.x,segteta,state.vx,state.vy,statev,statevn,traj.distance,speed_on_target,vmax,v,vn,state.w, pw,segteta, v, vn, statev, statevn,state.teta, statev, statevn, v, vn

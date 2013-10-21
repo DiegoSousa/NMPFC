@@ -1,0 +1,527 @@
+object FOmni3: TFOmni3
+  Left = 655
+  Height = 366
+  Top = 236
+  Width = 623
+  ActiveControl = CBRun
+  Caption = 'Omni3'
+  ClientHeight = 366
+  ClientWidth = 623
+  Font.CharSet = ANSI_CHARSET
+  Font.Height = -14
+  Font.Name = 'Sans'
+  Font.Pitch = fpVariable
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  LCLVersion = '0.9.28.2'
+  object Label4: TLabel
+    Left = 8
+    Height = 20
+    Top = 119
+    Width = 39
+    Caption = 'Vref:'
+    ParentColor = False
+  end
+  object Label1: TLabel
+    Left = 8
+    Height = 20
+    Top = 67
+    Width = 46
+    Caption = 'PWM:'
+    ParentColor = False
+  end
+  object Label12: TLabel
+    Left = 480
+    Height = 20
+    Top = 104
+    Width = 56
+    Caption = 'Period:'
+    ParentColor = False
+  end
+  object Label5: TLabel
+    Left = 492
+    Height = 20
+    Top = 184
+    Width = 48
+    Caption = 'FiltEV:'
+    ParentColor = False
+  end
+  object Label6: TLabel
+    Left = 492
+    Height = 20
+    Top = 208
+    Width = 17
+    Caption = 'K:'
+    ParentColor = False
+  end
+  object Label7: TLabel
+    Left = 492
+    Height = 20
+    Top = 232
+    Width = 44
+    Caption = 'invTI:'
+    ParentColor = False
+  end
+  object Label8: TLabel
+    Left = 492
+    Height = 20
+    Top = 256
+    Width = 51
+    Caption = 'Alpha:'
+    ParentColor = False
+  end
+  object Label9: TLabel
+    Left = 492
+    Height = 20
+    Top = 280
+    Width = 28
+    Caption = 'TD:'
+    ParentColor = False
+  end
+  object Label10: TLabel
+    Left = 492
+    Height = 20
+    Top = 304
+    Width = 53
+    Caption = 'FiltRef:'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 8
+    Height = 20
+    Top = 93
+    Width = 16
+    Caption = 'V:'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 108
+    Height = 20
+    Top = 93
+    Width = 46
+    Caption = 'delta:'
+    ParentColor = False
+  end
+  object Label11: TLabel
+    Left = 196
+    Height = 20
+    Top = 93
+    Width = 80
+    Caption = 'Out PWM:'
+    ParentColor = False
+  end
+  object Label13: TLabel
+    Left = 300
+    Height = 20
+    Top = 92
+    Width = 39
+    Caption = 'I (A):'
+    ParentColor = False
+  end
+  object Label14: TLabel
+    Left = 466
+    Height = 20
+    Top = 45
+    Width = 102
+    Caption = 'Reset Count:'
+    ParentColor = False
+  end
+  object Label15: TLabel
+    Left = 466
+    Height = 20
+    Top = 128
+    Width = 95
+    Caption = 'PWM Slope:'
+    ParentColor = False
+  end
+  object Label16: TLabel
+    Left = 498
+    Height = 20
+    Top = 148
+    Width = 46
+    Caption = 'Mot I:'
+    ParentColor = False
+  end
+  object EditDebug: TEdit
+    Left = 8
+    Height = 29
+    Top = 332
+    Width = 449
+    TabOrder = 0
+  end
+  object LBDebug: TListBox
+    Left = 4
+    Height = 180
+    Top = 144
+    Width = 449
+    ItemHeight = 0
+    OnClick = LBDebugClick
+    TabOrder = 1
+    TopIndex = -1
+  end
+  object CBRun: TCheckBox
+    Left = 281
+    Height = 24
+    Top = 1
+    Width = 56
+    Caption = 'Run'
+    OnClick = CBRunClick
+    TabOrder = 2
+  end
+  object BStop: TButton
+    Left = 396
+    Height = 25
+    Top = 8
+    Width = 59
+    Cancel = True
+    Caption = 'Stop'
+    OnClick = BStopClick
+    TabOrder = 3
+  end
+  object EditVRef: TEdit
+    Left = 396
+    Height = 29
+    Top = 112
+    Width = 57
+    TabOrder = 4
+    Text = '0'
+  end
+  object BWrite: TButton
+    Left = 560
+    Height = 25
+    Top = 332
+    Width = 49
+    Caption = 'Write'
+    OnClick = BWriteClick
+    TabOrder = 5
+  end
+  object BRead: TButton
+    Left = 504
+    Height = 25
+    Top = 332
+    Width = 49
+    Caption = 'Read'
+    OnClick = BReadClick
+    TabOrder = 6
+  end
+  object BSendNop: TButton
+    Left = 460
+    Height = 25
+    Top = 8
+    Width = 76
+    Caption = 'Send Nop'
+    OnClick = BSendNopClick
+    TabOrder = 7
+  end
+  object SBPWM: TScrollBar
+    Left = 40
+    Height = 15
+    Top = 64
+    Width = 333
+    LargeChange = 16
+    Max = 255
+    Min = -255
+    PageSize = 1
+    TabOrder = 8
+    OnChange = SBPWMChange
+  end
+  object EditPWM: TEdit
+    Left = 396
+    Height = 29
+    Top = 64
+    Width = 57
+    TabOrder = 9
+    Text = '0'
+  end
+  object BSend: TButton
+    Left = 458
+    Height = 25
+    Top = 60
+    Width = 75
+    Caption = 'Send'
+    OnClick = BSendClick
+    TabOrder = 10
+  end
+  object BReadID: TButton
+    Left = 540
+    Height = 25
+    Top = 8
+    Width = 75
+    Caption = 'Read ID'
+    OnClick = BReadIDClick
+    TabOrder = 11
+  end
+  object BMin: TButton
+    Left = 40
+    Height = 21
+    Top = 40
+    Width = 53
+    Caption = 'Min'
+    OnClick = BMinClick
+    TabOrder = 12
+  end
+  object BZero: TButton
+    Left = 184
+    Height = 21
+    Top = 40
+    Width = 53
+    Caption = 'Zero'
+    OnClick = BZeroClick
+    TabOrder = 13
+  end
+  object BMax: TButton
+    Left = 320
+    Height = 21
+    Top = 40
+    Width = 53
+    Caption = 'Max'
+    OnClick = BMaxClick
+    TabOrder = 14
+  end
+  object BSet: TButton
+    Left = 400
+    Height = 21
+    Top = 40
+    Width = 53
+    Caption = 'Set'
+    OnClick = BSetClick
+    TabOrder = 15
+  end
+  object EditPIDPeriod: TEdit
+    Left = 536
+    Height = 29
+    Top = 96
+    Width = 65
+    TabOrder = 16
+    Text = '0'
+  end
+  object EditPIDFiltEV: TEdit
+    Left = 536
+    Height = 29
+    Top = 176
+    Width = 65
+    TabOrder = 17
+    Text = '0'
+  end
+  object EditPIDK: TEdit
+    Left = 536
+    Height = 29
+    Top = 200
+    Width = 65
+    TabOrder = 19
+    Text = '0'
+  end
+  object EditPIDInvTI: TEdit
+    Left = 536
+    Height = 29
+    Top = 224
+    Width = 65
+    TabOrder = 21
+    Text = '0'
+  end
+  object EditPIDAlpha: TEdit
+    Left = 536
+    Height = 29
+    Top = 248
+    Width = 65
+    TabOrder = 25
+    Text = '0'
+  end
+  object EditPIDTD: TEdit
+    Left = 536
+    Height = 29
+    Top = 272
+    Width = 65
+    TabOrder = 27
+    Text = '0'
+  end
+  object EditPIDFiltRef: TEdit
+    Left = 536
+    Height = 29
+    Top = 296
+    Width = 65
+    TabOrder = 31
+    Text = '0'
+  end
+  object RGMotor: TRadioGroup
+    Left = 4
+    Height = 37
+    Top = 0
+    Width = 105
+    AutoFill = True
+    Caption = 'Motor Number'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 4
+    ClientHeight = 16
+    ClientWidth = 101
+    Columns = 4
+    ItemIndex = 0
+    Items.Strings = (
+      '1'
+      '2'
+      '3'
+    )
+    OnClick = RGMotorClick
+    ParentShowHint = False
+    TabOrder = 18
+  end
+  object RGMode: TRadioGroup
+    Left = 116
+    Height = 37
+    Top = 0
+    Width = 159
+    AutoFill = True
+    Caption = 'Mode'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 4
+    ClientHeight = 16
+    ClientWidth = 155
+    Columns = 4
+    ItemIndex = 0
+    Items.Strings = (
+      'PWM'
+      'PID+PWM'
+    )
+    ParentShowHint = False
+    TabOrder = 20
+  end
+  object SBPIDref: TScrollBar
+    Left = 40
+    Height = 15
+    Top = 116
+    Width = 333
+    LargeChange = 50
+    Max = 1000
+    Min = -1000
+    PageSize = 1
+    SmallChange = 5
+    TabOrder = 22
+    OnChange = SBPWMChange
+  end
+  object EditEnc: TEdit
+    Left = 396
+    Height = 29
+    Top = 88
+    Width = 57
+    TabOrder = 23
+    Text = '0'
+  end
+  object EditSpeed: TEdit
+    Left = 24
+    Height = 29
+    Top = 88
+    Width = 73
+    TabOrder = 24
+    Text = '0'
+  end
+  object EditDelta: TEdit
+    Left = 140
+    Height = 29
+    Top = 88
+    Width = 45
+    TabOrder = 26
+    Text = '0'
+  end
+  object EditOutPWM: TEdit
+    Left = 248
+    Height = 29
+    Top = 88
+    Width = 45
+    TabOrder = 28
+    Text = '0'
+  end
+  object EditActCurrent: TEdit
+    Left = 328
+    Height = 29
+    Top = 88
+    Width = 45
+    TabOrder = 29
+    Text = '0'
+  end
+  object EditResetCount: TEdit
+    Left = 568
+    Height = 29
+    Top = 36
+    Width = 45
+    TabOrder = 30
+    Text = '0'
+  end
+  object EditPWMMaxSlope: TEdit
+    Left = 536
+    Height = 29
+    Top = 120
+    Width = 65
+    TabOrder = 32
+    Text = '0'
+  end
+  object EditHardMotIMax: TEdit
+    Left = 536
+    Height = 29
+    Top = 144
+    Width = 65
+    TabOrder = 33
+    Text = '0'
+  end
+  object CBShow: TCheckBox
+    Left = 280
+    Height = 24
+    Top = 20
+    Width = 69
+    Caption = 'Show'
+    TabOrder = 34
+  end
+  object CBLan: TCheckBox
+    Left = 340
+    Height = 24
+    Top = 1
+    Width = 55
+    Caption = 'Lan'
+    TabOrder = 35
+  end
+  object EditRobotActive: TEdit
+    Left = 540
+    Height = 29
+    Top = 60
+    Width = 75
+    TabOrder = 36
+  end
+  object Timer: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = TimerTimer
+    left = 456
+    top = 204
+  end
+  object FormStorage: TIniPropStorage
+    StoredValues = <>
+    IniSection = 'MAIN'
+    left = 456
+    top = 260
+  end
+  object Comport: TSdpoSerial
+    Active = False
+    BaudRate = br115200
+    DataBits = db8bits
+    Parity = pNone
+    FlowControl = fcNone
+    StopBits = sbOne
+    Device = '/dev/ttyUSB0'
+    OnRxData = ComPortRxData
+    left = 456
+    top = 148
+  end
+end

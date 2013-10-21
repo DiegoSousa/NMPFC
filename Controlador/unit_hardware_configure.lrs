@@ -1,0 +1,12 @@
+LazarusResources.Add('TForm_Hardware_Configure','FORMDATA',[
+  'TPF0'#24'TForm_Hardware_Configure'#23'Form_Hardware_Configure'#4'Left'#3'}'#2
+  +#6'Height'#3#168#0#3'Top'#3#20#1#5'Width'#3#15#1#13'ActiveControl'#7#19'Edit'
+  +'_Timer_Interval'#7'Caption'#6#6'Things'#12'ClientHeight'#3#168#0#11'ClientW'
+  +'idth'#3#15#1#10'LCLVersion'#6#8'0.9.28.2'#0#6'TLabel'#6'Label1'#4'Left'#2#16
+  +#6'Height'#2#18#3'Top'#2#24#5'Width'#2'b'#7'Caption'#6#15'Timer Interval:'#11
+  +'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2#16#6'Height'#2#18#3'Top'#2
+  +'@'#5'Width'#3#137#0#7'Caption'#6#20'Timer Global Status:'#11'ParentColor'#8
+  +#0#0#5'TEdit'#19'Edit_Timer_Interval'#4'Left'#3#176#0#6'Height'#2#27#3'Top'#2
+  +#15#5'Width'#2'H'#8'TabOrder'#2#0#0#0#5'TEdit'#23'Edit_Timer_GlobalStatus'#4
+  +'Left'#3#176#0#6'Height'#2#27#3'Top'#2'7'#5'Width'#2'H'#8'TabOrder'#2#1#0#0#0
+]);

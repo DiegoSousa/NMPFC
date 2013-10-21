@@ -1,0 +1,17 @@
+[TApplication.FKicker]
+ComPort_BaudRate=br115200
+ComPort_Device=/dev/ttyS0
+Timer_Interval=100
+CBShow_Checked=1
+EditDaisyKickPosition_Text=3
+EditDutyCycle_Text=68
+EditMaxVCap_Text=33
+EditMaxVCapLv1_Text=50
+EditMaxVCapLv2_Text=70
+EditDutyCycleLv1_Text=50
+EditDutyCycleLv2_Text=70
+CBLan_Checked=0
+FKicker_Top=176
+FKicker_Left=0
+EditKickPulse_Text=10
+EditCompass_Text=24

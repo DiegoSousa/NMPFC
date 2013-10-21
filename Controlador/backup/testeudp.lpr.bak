@@ -1,0 +1,21 @@
+program testeudp;
+
+{$mode objfpc}{$H+}
+
+uses
+  {$IFDEF UNIX}{$IFDEF UseCThreads}
+  cthreads,
+  {$ENDIF}{$ENDIF}
+  Interfaces, // this includes the LCL widgetset
+  Forms, teste, LResources
+  { you can add units after this };
+
+{$IFDEF WINDOWS}{$R testeudp.rc}{$ENDIF}
+
+begin
+  {$I testeudp.lrs}
+  Application.Initialize;
+  Application.CreateForm(TFTeste, FTeste);
+  Application.Run;
+end.
+

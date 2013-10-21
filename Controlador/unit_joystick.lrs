@@ -1,0 +1,47 @@
+LazarusResources.Add('TForm_joystick','FORMDATA',[
+  'TPF0'#14'TForm_joystick'#13'Form_joystick'#4'Left'#3'"'#1#6'Height'#3#22#2#3
+  +'Top'#3#213#0#5'Width'#3'n'#1#13'ActiveControl'#7#16'CheckBox_Connect'#7'Cap'
+  +'tion'#6#8'Joystick'#12'ClientHeight'#3#22#2#11'ClientWidth'#3'n'#1#8'OnCrea'
+  +'te'#7#10'FormCreate'#10'LCLVersion'#6#8'0.9.28.2'#0#6'TLabel'#6'Label1'#4'L'
+  +'eft'#2#8#6'Height'#2#18#3'Top'#2'1'#5'Width'#2'2'#7'Caption'#6#7'Device:'#11
+  +'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2#9#6'Height'#2#18#3'Top'#3
+  +#144#0#5'Width'#2#15#7'Caption'#6#2'V:'#11'ParentColor'#8#0#0#6'TLabel'#6'La'
+  +'bel3'#4'Left'#2#9#6'Height'#2#18#3'Top'#3#171#0#5'Width'#2#23#7'Caption'#6#3
+  +'Vn:'#11'ParentColor'#8#0#0#6'TLabel'#6'Label4'#4'Left'#2#8#6'Height'#2#18#3
+  +'Top'#3#195#0#5'Width'#2#19#7'Caption'#6#2'W:'#11'ParentColor'#8#0#0#6'TLabe'
+  +'l'#6'Label5'#4'Left'#2#8#6'Height'#2#18#3'Top'#3#219#0#5'Width'#2'F'#7'Capt'
+  +'ion'#6#10'Kick Force'#11'ParentColor'#8#0#0#5'TEdit'#11'Edit_Device'#4'Left'
+  +#2'H'#6'Height'#2#27#3'Top'#2'('#5'Width'#2'p'#8'TabOrder'#2#0#4'Text'#6#14
+  +'/dev/input/js0'#0#0#9'TCheckBox'#16'CheckBox_Connect'#4'Left'#2#8#6'Height'
+  +#2#24#3'Top'#2#8#5'Width'#2'Q'#7'Caption'#6#7'Connect'#8'OnChange'#7#22'Chec'
+  +'kBox_ConnectChange'#8'TabOrder'#2#1#0#0#10'TScrollBar'#11'ScrollBar_V'#4'Le'
+  +'ft'#2'('#6'Height'#2#13#3'Top'#3#149#0#5'Width'#3'('#1#3'Max'#3#255#127#3'M'
+  +'in'#3#1#128#8'PageSize'#2#0#8'TabOrder'#2#2#0#0#10'TScrollBar'#12'ScrollBar'
+  +'_Vn'#4'Left'#2'('#6'Height'#2#13#3'Top'#3#176#0#5'Width'#3'('#1#3'Max'#3#255
+  +#127#3'Min'#3#1#128#8'PageSize'#2#0#8'TabOrder'#2#3#0#0#10'TScrollBar'#11'Sc'
+  +'rollBar_W'#4'Left'#2'('#6'Height'#2#13#3'Top'#3#200#0#5'Width'#3'('#1#3'Max'
+  +#3#255#127#3'Min'#3#1#128#8'PageSize'#2#0#8'TabOrder'#2#4#0#0#11'TStringGrid'
+  +#18'StringGrid_MaxVVnW'#4'Left'#2'w'#6'Height'#2'h'#3'Top'#3#144#1#5'Width'#3
+  +#176#0#15'AutoFillColumns'#9#8'ColCount'#2#2#7'Options'#11#15'goFixedVertLin'
+  +'e'#15'goFixedHorzLine'#10'goVertLine'#10'goHorzLine'#13'goRangeSelect'#9'go'
+  +'Editing'#14'goSmoothScroll'#0#8'RowCount'#2#4#8'TabOrder'#2#5#9'ColWidths'#1
+  +#2'K'#2'a'#0#5'Cells'#1#2#7#2#0#2#1#6#7'V (m/s)'#2#0#2#2#6#8'Vn (m/s)'#2#0#2
+  +#3#6#9'W (Rad/s)'#2#1#2#0#6#3'Max'#2#1#2#1#6#1'2'#2#1#2#2#6#1'2'#2#1#2#3#6#3
+  +'5.2'#0#0#0#5'TEdit'#14'Edit_LocalAxis'#4'Left'#2'H'#6'Height'#2#27#3'Top'#2
+  +'H'#5'Width'#3#223#0#8'TabOrder'#2#6#0#0#5'TEdit'#17'Edit_LocalButtons'#4'Le'
+  +'ft'#2'H'#6'Height'#2#27#3'Top'#2'h'#5'Width'#3#223#0#8'TabOrder'#2#7#0#0#9
+  +'TCheckBox'#13'Crasy_MF_Test'#4'Left'#3#240#0#6'Height'#2#24#3'Top'#2#8#5'Wi'
+  +'dth'#2'p'#7'Caption'#6#13'Crasy_MF_Test'#8'OnChange'#7#19'Crasy_MF_TestChan'
+  +'ge'#8'TabOrder'#2#8#0#0#10'TToggleBox'#14'ToggleBox_Kick'#4'Left'#3#152#0#6
+  +'Height'#2#23#3'Top'#3#16#1#5'Width'#2'C'#7'Caption'#6#4'Kick'#8'TabOrder'#2
+  +#9#0#0#10'TScrollBar'#19'ScrollBar_KickForce'#4'Left'#2'X'#6'Height'#2#13#3
+  +'Top'#3#224#0#5'Width'#3#248#0#3'Max'#2'('#8'PageSize'#2#0#8'Position'#2#10#8
+  +'TabOrder'#2#10#0#0#9'TCheckBox'#16'CheckBox_TestLoc'#4'Left'#2#8#6'Height'#2
+  +#24#3'Top'#3'@'#1#5'Width'#3#139#0#7'Caption'#6#17'Test Localization'#8'TabO'
+  +'rder'#2#11#0#0#13'TSdpoJoystick'#12'SdpoJoystick'#6'Active'#8#9'DeviceLin'#6
+  +#14'/dev/input/js0'#9'DeviceWin'#7#13'dwJoystickID1'#4'left'#2'0'#3'top'#3
+  +#216#1#0#0#6'TTimer'#5'Timer'#7'Enabled'#8#8'Interval'#2'd'#7'OnTimer'#7#10
+  +'TimerTimer'#4'left'#2'0'#3'top'#3#152#1#0#0#6'TTimer'#15'Timer_Crazy_MFT'#8
+  +'Interval'#3#244#1#7'OnTimer'#7#20'Timer_Crazy_MFTTimer'#4'left'#3' '#1#3'to'
+  +'p'#3#0#1#0#0#0
+]);

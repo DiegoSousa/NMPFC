@@ -1,0 +1,17 @@
+LazarusResources.Add('TForm_Hardware_Configure_UDP','FORMDATA',[
+  'TPF0'#28'TForm_Hardware_Configure_UDP'#27'Form_Hardware_Configure_UDP'#4'Lef'
+  +'t'#3#215#2#6'Height'#3#144#0#3'Top'#3#244#0#5'Width'#3#236#0#13'ActiveContr'
+  +'ol'#7#9'Edit_Port'#7'Caption'#6#13'Configure UDP'#12'ClientHeight'#3#144#0
+  +#11'ClientWidth'#3#236#0#8'Position'#7#17'poOwnerFormCenter'#10'LCLVersion'#6
+  +#8'0.9.28.2'#0#6'TLabel'#6'Label1'#4'Left'#2#8#6'Height'#2#18#3'Top'#2#16#5
+  +'Width'#2'@'#7'Caption'#6#9'Dec Port:'#11'ParentColor'#8#0#0#6'TLabel'#6'Lab'
+  +'el2'#4'Left'#2#8#6'Height'#2#18#3'Top'#2'8'#5'Width'#2'a'#7'Caption'#6#14'F'
+  +'lashbus Port:'#11'ParentColor'#8#0#0#6'TLabel'#6'Label3'#4'Left'#2#8#6'Heig'
+  +'ht'#2#18#3'Top'#2'a'#5'Width'#2'P'#7'Caption'#6#12'Flashbus IP:'#11'ParentC'
+  +'olor'#8#0#0#5'TEdit'#9'Edit_Port'#4'Left'#3#168#0#6'Height'#2#27#3'Top'#2#8
+  +#5'Width'#2'8'#8'TabOrder'#2#0#4'Text'#6#5'50000'#0#0#5'TEdit'#13'Edit_HostP'
+  +'ort'#4'Left'#3#168#0#6'Height'#2#27#3'Top'#2'/'#5'Width'#2'8'#8'TabOrder'#2
+  +#1#4'Text'#6#5'50000'#0#0#5'TEdit'#11'Edit_HostIP'#4'Left'#2'h'#6'Height'#2
+  +#27#3'Top'#2'X'#5'Width'#2'x'#8'TabOrder'#2#2#4'Text'#6#15'192.168.104.102'#0
+  +#0#0
+]);
