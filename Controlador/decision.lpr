@@ -15,7 +15,7 @@ uses
   Unit_Hardware, Unit_Hardware_Configure_UDP, unit_hardware_configure,
   Unit_FlashBus, Unit_joystick, SdpoJoystickLaz, unit_localizationAux,
   unit_Localization, KalmanBall, KalmanBall_Aux, unit_obstacles, Unit_RolesAux,
-  Unit1, MPC, rtdb;
+  Unit1, MPC;
 
 begin
   Application.Initialize;
