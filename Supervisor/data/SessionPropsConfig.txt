@@ -1,8 +1,0 @@
-EditSuperIP.Text
-EditVisionIP.Text
-EditCommand.Text
-RGRobotNumber.ItemIndex
-RGSide.ItemIndex
-RGTeamColor.ItemIndex
-FConfig.Top
-FConfig.Left

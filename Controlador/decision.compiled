@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<CONFIG>
-  <Compiler Value="/usr/bin/fpc" Date="1267861058"/>
-  <Params Value=" -MObjFPC -Sgi -g -gw -WG -vewnhi -l -Fu/usr/lib/lazarus/0.9.28.2/components/Sdpo/lib/i386-linux/ -Fu/home/tiago/.lazarus/lib/TAChartLazarusPkg/i386-linux/ -Fu/usr/lib/lazarus/0.9.28.2/components/lnet/lazaruspackage/lib/i386-linux/ -Fu/usr/lib/lazarus/0.9.28.2/components/synedit/units/i386-linux/ -Fu/usr/lib/lazarus/0.9.28.2/ideintf/units/i386-linux/ -Fu/usr/lib/lazarus/0.9.28.2/lcl/units/i386-linux/ -Fu/usr/lib/lazarus/0.9.28.2/lcl/units/i386-linux/gtk2/ -Fu/usr/lib/lazarus/0.9.28.2/packager/units/i386-linux/ -Fu/home/tiago/Desktop/Tese/Controlador/ -Fu. -FE/home/tiago/Desktop/Tese/Controlador/ -odecision -dUseCThreads -dLCL -dLCLgtk2 -dUseCThreads decision.lpr"/>
-</CONFIG>
