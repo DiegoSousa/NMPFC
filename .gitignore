@@ -1,4 +1,8 @@
 target
+Backup
 *.lrs
 *.ppu
 *.o
+*.bak
+*.orig
+
