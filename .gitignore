@@ -5,4 +5,11 @@ Backup
 *.o
 *.bak
 *.orig
-
+*~
+*.pdf
+*.dst
+*.dstgy
+*.dstgx
+*.log
+*.mat
+*.res

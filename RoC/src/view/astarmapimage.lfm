@@ -1,0 +1,80 @@
+object FAstarMap: TFAstarMap
+  Left = 211
+  Height = 517
+  Top = 139
+  Width = 696
+  ActiveControl = SpinEdit1
+  Caption = 'FAstarMap'
+  ClientHeight = 517
+  ClientWidth = 696
+  LCLVersion = '0.9.27'
+  Visible = True
+  object Image1: TImage
+    Left = 0
+    Height = 256
+    Top = 0
+    Width = 408
+  end
+  object CheckBox1: TCheckBox
+    Left = 160
+    Height = 23
+    Top = 256
+    Width = 105
+    Caption = 'CheckBox1'
+    TabOrder = 0
+  end
+  object SpinEdit1: TSpinEdit
+    Left = 0
+    Height = 23
+    Top = 256
+    Width = 154
+    MaxValue = 100000
+    TabOrder = 1
+  end
+  object Memo1: TMemo
+    Left = 416
+    Height = 376
+    Top = 0
+    Width = 272
+    Lines.Strings = (
+      'Memo1'
+    )
+    TabOrder = 2
+  end
+  object Edit1: TEdit
+    Left = 40
+    Height = 22
+    Top = 288
+    Width = 368
+    TabOrder = 3
+    Text = 'Edit1'
+  end
+  object Edit2: TEdit
+    Left = 40
+    Height = 22
+    Top = 311
+    Width = 368
+    TabOrder = 4
+    Text = 'Edit2'
+  end
+  object Edit3: TEdit
+    Left = 40
+    Height = 22
+    Top = 335
+    Width = 368
+    TabOrder = 5
+    Text = 'Edit3'
+  end
+  object Edit4: TEdit
+    Left = 40
+    Height = 22
+    Top = 359
+    Width = 368
+    TabOrder = 6
+    Text = 'Edit4'
+  end
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    left = 256
+  end
+end

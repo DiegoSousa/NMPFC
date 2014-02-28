@@ -1,0 +1,9 @@
+object Form_Obstacles: TForm_Obstacles
+  Left = 335
+  Height = 300
+  Top = 214
+  Width = 400
+  Caption = 'Form_Obstacles'
+  OnCreate = FormCreate
+  LCLVersion = '0.9.28.2'
+end
