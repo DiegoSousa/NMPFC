@@ -1,11 +1,10 @@
 object FCoach: TFCoach
-  Left = 1862
-  Height = 664
-  Top = 302
+  Left = 218
+  Height = 599
+  Top = 80
   Width = 917
-  ActiveControl = EditMessIP
   Caption = 'FCoach'
-  ClientHeight = 664
+  ClientHeight = 599
   ClientWidth = 917
   Menu = MainMenu
   OnClose = FormClose
@@ -15,121 +14,44 @@ object FCoach: TFCoach
   object ImageMap: TPaintBox
     Left = 8
     Height = 504
-    Top = 128
+    Top = 88
     Width = 720
     OnClick = ImageMapClick
     OnMouseDown = ImageMapMouseDown
     OnMouseUp = ImageMapMouseUp
   end
   object Label2: TLabel
-    Left = 320
+    Left = 288
     Height = 18
-    Top = 37
+    Top = 57
     Width = 119
     Caption = 'Robots Available:'
     ParentColor = False
   end
-  object MemoRefBox: TMemo
-    Left = 192
-    Height = 116
-    Top = 5
-    Width = 40
-    TabOrder = 0
-  end
-  object EditRefState: TEdit
-    Left = 488
-    Height = 27
-    Top = 0
-    Width = 128
-    TabOrder = 1
-    Text = 'EditRefState'
-  end
-  object EditMessIP: TEdit
-    Left = 320
-    Height = 27
-    Top = 0
-    Width = 164
-    TabOrder = 2
-    Text = 'EditMessIP'
-  end
-  object GBRefBox: TGroupBox
-    Left = 8
-    Height = 88
-    Top = 5
-    Width = 176
-    Caption = 'Referee Box'
-    ClientHeight = 69
-    ClientWidth = 172
-    TabOrder = 3
-    object Label1: TLabel
-      Left = 6
-      Height = 18
-      Top = 8
-      Width = 18
-      Caption = 'IP:'
-      ParentColor = False
-    end
-    object BRefBoxConnect: TButton
-      Left = 6
-      Height = 25
-      Top = 39
-      Width = 68
-      Caption = 'Connect'
-      OnClick = BRefBoxConnectClick
-      TabOrder = 0
-    end
-    object BRefBoxDisconnect: TButton
-      Left = 78
-      Height = 25
-      Top = 39
-      Width = 88
-      Caption = 'Disconnect'
-      OnClick = BRefBoxDisconnectClick
-      TabOrder = 1
-    end
-    object EditRefBoxIP: TEdit
-      Left = 38
-      Height = 27
-      Top = 2
-      Width = 128
-      TabOrder = 2
-      Text = '127.0.0.1'
-    end
-  end
-  object MemoRefBoxBad: TMemo
-    Left = 232
-    Height = 116
-    Top = 5
-    Width = 84
-    Lines.Strings = (
-      ''
-    )
-    TabOrder = 4
-  end
   object EditPlayState: TEdit
-    Left = 488
+    Left = 456
     Height = 27
-    Top = 28
+    Top = 48
     Width = 128
-    TabOrder = 5
+    TabOrder = 0
     Text = 'EditPlayState'
   end
   object EditRobotAvailableCount: TEdit
-    Left = 444
+    Left = 412
     Height = 27
-    Top = 28
+    Top = 48
     Width = 40
-    TabOrder = 6
+    TabOrder = 1
   end
   object GBRobotInfo1: TGroupBox
     Left = 736
-    Height = 105
+    Height = 89
     Top = 0
     Width = 172
     Caption = 'Robot 1'
-    ClientHeight = 86
+    ClientHeight = 70
     ClientWidth = 168
-    TabOrder = 7
+    TabOrder = 2
     object CBRobotActive1: TCheckBox
       Left = 6
       Height = 24
@@ -157,34 +79,23 @@ object FCoach: TFCoach
       Width = 80
       TabOrder = 2
     end
-    object CBKeeperActive: TCheckBox
-      Left = 14
-      Height = 24
-      Top = 57
-      Width = 119
-      Caption = 'Keeper Active'
-      Checked = True
-      OnChange = CBKeeperActiveChange
-      State = cbChecked
-      TabOrder = 3
-    end
     object EditVbatRobot1: TEdit
       Left = 90
       Height = 27
       Top = 25
       Width = 72
-      TabOrder = 4
+      TabOrder = 3
     end
   end
   object GBRobotInfo2: TGroupBox
     Left = 736
-    Height = 105
-    Top = 112
+    Height = 96
+    Top = 96
     Width = 172
     Caption = 'Robot 2'
-    ClientHeight = 86
+    ClientHeight = 77
     ClientWidth = 168
-    TabOrder = 8
+    TabOrder = 3
     object CBRobotActive2: TCheckBox
       Left = 6
       Height = 24
@@ -223,13 +134,13 @@ object FCoach: TFCoach
   end
   object GBRobotInfo3: TGroupBox
     Left = 736
-    Height = 96
-    Top = 224
+    Height = 88
+    Top = 200
     Width = 172
     Caption = 'Robot 3'
-    ClientHeight = 77
+    ClientHeight = 69
     ClientWidth = 168
-    TabOrder = 9
+    TabOrder = 4
     object CBRobotActive3: TCheckBox
       Left = 10
       Height = 24
@@ -268,13 +179,13 @@ object FCoach: TFCoach
   end
   object GBRobotInfo4: TGroupBox
     Left = 736
-    Height = 97
-    Top = 328
+    Height = 88
+    Top = 296
     Width = 172
     Caption = 'Robot 4'
-    ClientHeight = 78
+    ClientHeight = 69
     ClientWidth = 168
-    TabOrder = 10
+    TabOrder = 5
     object CBRobotActive4: TCheckBox
       Left = 6
       Height = 24
@@ -313,13 +224,13 @@ object FCoach: TFCoach
   end
   object GBRobotInfo5: TGroupBox
     Left = 736
-    Height = 96
-    Top = 432
+    Height = 88
+    Top = 392
     Width = 172
     Caption = 'Robot 5'
-    ClientHeight = 77
+    ClientHeight = 69
     ClientWidth = 168
-    TabOrder = 11
+    TabOrder = 6
     object CBRobotActive5: TCheckBox
       Left = 10
       Height = 24
@@ -357,9 +268,9 @@ object FCoach: TFCoach
     end
   end
   object RGDecision: TRadioGroup
-    Left = 616
+    Left = 600
     Height = 77
-    Top = 8
+    Top = 0
     Width = 112
     AutoFill = True
     Caption = 'Decision'
@@ -377,14 +288,13 @@ object FCoach: TFCoach
     Items.Strings = (
       'Local'
       'Net'
-      'Formation'
     )
-    TabOrder = 12
+    TabOrder = 7
   end
   object RGRobotSel: TRadioGroup
-    Left = 456
+    Left = 0
     Height = 36
-    Top = 88
+    Top = 40
     Width = 268
     AutoFill = True
     Caption = 'Selected Robot'
@@ -409,38 +319,12 @@ object FCoach: TFCoach
       '6'
       'Ball'
     )
-    TabOrder = 13
-  end
-  object ButtonStart: TButton
-    Left = 320
-    Height = 25
-    Top = 64
-    Width = 75
-    Caption = 'Start'
-    OnClick = ButtonStartClick
-    TabOrder = 14
-  end
-  object ButtonStop: TButton
-    Left = 320
-    Height = 25
-    Top = 96
-    Width = 75
-    Caption = 'Stop'
-    OnClick = ButtonStopClick
-    TabOrder = 15
-  end
-  object CheckBoxOtherTactic: TCheckBox
-    Left = 8
-    Height = 24
-    Top = 96
-    Width = 42
-    Caption = 'T1'
-    TabOrder = 16
+    TabOrder = 8
   end
   object RGBallSel: TRadioGroup
-    Left = 400
+    Left = 0
     Height = 36
-    Top = 53
+    Top = 0
     Width = 216
     AutoFill = True
     Caption = 'Selected Ball'
@@ -464,35 +348,25 @@ object FCoach: TFCoach
       '5'
       '6'
     )
-    TabOrder = 17
-  end
-  object CheckBoxOtherTactic2: TCheckBox
-    Left = 64
-    Height = 24
-    Top = 96
-    Width = 42
-    Caption = 'T2'
-    TabOrder = 18
+    TabOrder = 9
   end
   object CBFuzzy: TCheckBox
-    Left = 120
+    Left = 280
     Height = 24
-    Top = 96
+    Top = 8
     Width = 63
     Caption = 'Fuzzy'
-    Checked = True
-    State = cbChecked
-    TabOrder = 19
+    TabOrder = 10
   end
   object GBRobotInfo6: TGroupBox
     Left = 736
-    Height = 96
-    Top = 536
+    Height = 88
+    Top = 488
     Width = 172
     Caption = 'Robot 6'
-    ClientHeight = 77
+    ClientHeight = 69
     ClientWidth = 168
-    TabOrder = 20
+    TabOrder = 11
     object CBRobotActive6: TCheckBox
       Left = 6
       Height = 24
@@ -530,12 +404,12 @@ object FCoach: TFCoach
     end
   end
   object CBOn: TCheckBox
-    Left = 400
+    Left = 224
     Height = 24
-    Top = 96
+    Top = 8
     Width = 45
     Caption = 'On'
-    TabOrder = 21
+    TabOrder = 12
   end
   object MainMenu: TMainMenu
     left = 252
@@ -546,16 +420,26 @@ object FCoach: TFCoach
         Caption = '&About'
         OnClick = MenuAboutClick
       end
-      object N1: TMenuItem
-        Caption = '-'
-      end
       object MenuExit: TMenuItem
         Caption = 'E&xit'
         OnClick = MenuExitClick
       end
     end
-    object MenuWindows: TMenuItem
-      Caption = '&Windows'
+    object MenuWindow: TMenuItem
+      Caption = '&Window'
+      OnClick = MenuWindowClick
+      object MenuLog: TMenuItem
+        Caption = '&Log'
+        OnClick = MenuLogClick
+      end
+      object MenuField: TMenuItem
+        Caption = '&Field'
+        OnClick = MenuFieldClick
+      end
+      object MenuParam: TMenuItem
+        Caption = '&Parameters'
+        OnClick = MenuParamClick
+      end
     end
   end
   object FormStorage: TIniPropStorage
@@ -569,21 +453,6 @@ object FCoach: TFCoach
     Interval = 100
     OnTimer = TimerDoTacticTimer
     left = 68
-    top = 156
-  end
-  object TCPRefBox: TLTCPComponent
-    Port = 0
-    OnReceive = TCPRefBoxReceive
-    Timeout = 0
-    ReuseAddress = False
-    left = 164
-    top = 156
-  end
-  object UDPRefBox: TLUDPComponent
-    Port = 0
-    OnReceive = UDPRefBoxReceive
-    Timeout = 0
-    left = 334
     top = 156
   end
   object SdpoUDPSuper: TLUDPComponent

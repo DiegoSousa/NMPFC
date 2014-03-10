@@ -139,23 +139,7 @@ procedure DefenderAvoidAtacker(x_target: double; var y_target,y_cur: double);
 var at_num: integer;
     dist: double;
 begin
-  dist:=0.25;
 
-  at_num:=WhoIs(roleAtackerKicker);
-
-  if at_num>=0 then begin
-    if (Abs(RobotState[at_num].x - x_target) < 0.4) then begin
-      if Abs(RobotState[at_num].y - y_target) < dist+0.05 then begin
-        if RobotState[at_num].y < y_cur then begin
-          y_target:=RobotState[at_num].y+dist;
-          if y_target>MaxFieldY then y_target:=RobotState[at_num].y-0.25;
-        end else begin
-          y_target:=RobotState[at_num].y-dist;
-          if y_target<-MaxFieldY then y_target:=RobotState[at_num].y+0.25;
-        end;
-      end;
-    end;
-  end;
 end;
 
 
@@ -655,7 +639,7 @@ begin
 
   // TODO :TAC low_pri
   if Params[paramAtackerPassesOnTopLine] and BallIsInOponentCorner then begin
-    atacker2:=WhoIs(roleAtackerReceiver);
+    //atacker2:=WhoIs(roleAtackerReceiver);
     if atacker2<>-1 then begin
       teta:=ATan2(RobotState[atacker2].y-RobotState[num].y,RobotState[atacker2].x-RobotState[num].x);
       d:=Dist(RobotState[atacker2].x-RobotState[num].x,RobotState[atacker2].y-RobotState[num].y);
@@ -1096,43 +1080,7 @@ procedure taskScoreFreeKickRules(num: integer);
 var cx,cy,tgx,tgy,dgoal,rob_num: double;
     dummydist: double;
 begin
-  tgx := TaskPars[num].x1;
-  tgy := TaskPars[num].y1;
-  with ActionPars[num] do begin
-    RobotInfo[num].action:=acGoToXYTeta;
 
-    speed:=0.4;
-
-    cx:=tgx-BallState.x;
-    cy:=tgy-BallState.y;
-    dgoal:=Dist(cx,cy);
-    NormalizeVector(cx,cy);
-
-    x:=RobotState[num].x+cx*0.2;
-    y:=RobotState[num].y+cy*0.2;
-    teta:=ATan2(cy,cx);
-
-    with TacticCommands[num] do begin
-      chipkick_pulse:=0;
-      if (BallInFrontOfRobot(num,0)) then begin
-       if  RobotInfo[num].role=roleScorePenaltyKick then begin
-          chipkick_pulse:=MaxChipKickPulse;
-          Low_kick:=true;
-       end else begin
-          rob_num := WhoIs(roleAtackerReceiver);
-          if (rob_num<>-1) then begin
-           chipkick_pulse:=6;
-           Low_kick:=true;
-          end else begin
-           chipkick_pulse:=kickPulsFunc(num);
-           Low_kick:=false;
-          end;
-       end;
-      end;
-    end;
-
-    avoid:=[];
-  end;
 end;
 
 procedure taskFreeKickRules(num: integer);
@@ -1242,10 +1190,7 @@ begin
       end;
 
       taskPars[num].avoid_is_set:=true;
-      if ((RobotInfo[num].role=roleGoPosStart)or(RobotInfo[num].role=roleGoPosStart))then
-          avoid:=[avoidRobot,avoidOponent,avoidBall,avoidObstacles]
-      else
-          avoid:=[avoidRobot,avoidOponent,avoidOurArea,avoidBall,avoidObstacles];
+      avoid:=[avoidRobot,avoidOponent,avoidOurArea,avoidBall,avoidObstacles];
   end;
 end;
 

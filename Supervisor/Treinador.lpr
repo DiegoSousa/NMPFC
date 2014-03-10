@@ -7,9 +7,8 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, Coach, LResources, lnetvisual, TAChartLazarusPkg, Field, Param, Fuzzy,
-  Log
-  { you can add units after this };
+  Forms, Coach, LResources, lnetvisual, TAChartLazarusPkg, Field, Param2, Fuzzy,
+  Log;
 
 {$IFDEF WINDOWS}{$R Treinador.rc}{$ENDIF}
 
@@ -18,8 +17,8 @@ begin
   Application.Initialize;
   Application.CreateForm(TFCoach, FCoach);
   Application.CreateForm(TFField, FField);
-  Application.CreateForm(TFParam, FParam);
   Application.CreateForm(TFLog, FLog);
+  Application.CreateForm(TFParam2, FParam2);
   Application.Run;
 end.
 

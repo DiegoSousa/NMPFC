@@ -1,54 +1,38 @@
 object FormMPC: TFormMPC
-  Left = 2430
-  Height = 597
-  Top = 386
+  Left = 2145
+  Height = 636
+  Top = 87
   Width = 552
   ActiveControl = EditN1
   Caption = 'Formation Control'
-  ClientHeight = 597
+  ClientHeight = 636
   ClientWidth = 552
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   LCLVersion = '1.0.14.0'
   object Label1: TLabel
-    Left = 104
+    Left = 235
     Height = 18
-    Top = 448
+    Top = 601
     Width = 63
     Caption = 'Distance:'
     ParentColor = False
   end
   object Label24: TLabel
-    Left = 224
+    Left = 192
     Height = 18
-    Top = 448
+    Top = 568
     Width = 18
     Caption = 'K1'
     ParentColor = False
   end
   object Label25: TLabel
-    Left = 224
+    Left = 280
     Height = 18
-    Top = 476
+    Top = 567
     Width = 18
     Caption = 'K2'
-    ParentColor = False
-  end
-  object Label26: TLabel
-    Left = 312
-    Height = 18
-    Top = 448
-    Width = 18
-    Caption = 'K3'
-    ParentColor = False
-  end
-  object Label27: TLabel
-    Left = 312
-    Height = 18
-    Top = 476
-    Width = 18
-    Caption = 'K4'
     ParentColor = False
   end
   object GroupBoxDebug: TGroupBox
@@ -72,17 +56,17 @@ object FormMPC: TFormMPC
     end
   end
   object EditP1_badi: TEdit
-    Left = 176
+    Left = 312
     Height = 27
-    Top = 440
-    Width = 40
+    Top = 592
+    Width = 48
     TabOrder = 1
     Text = '1.2'
   end
   object ButtonSetBallAtDistanceInline: TButton
     Left = 128
     Height = 46
-    Top = 394
+    Top = 386
     Width = 104
     Caption = 'Set'
     OnClick = ButtonSetBallAtDistanceInlineClick
@@ -236,7 +220,7 @@ object FormMPC: TFormMPC
         Top = 71
         Width = 56
         TabOrder = 5
-        Text = '0.15'
+        Text = '0.1'
       end
     end
     object CheckBoxEnable: TCheckBox
@@ -264,7 +248,7 @@ object FormMPC: TFormMPC
       EditLabel.Caption = 'L1:'
       EditLabel.ParentColor = False
       TabOrder = 4
-      Text = '2'
+      Text = '200'
     end
     object EditL2: TLabeledEdit
       Left = 206
@@ -282,7 +266,7 @@ object FormMPC: TFormMPC
       EditLabel.Caption = 'L2:'
       EditLabel.ParentColor = False
       TabOrder = 5
-      Text = '1'
+      Text = '100'
     end
     object EditL3: TLabeledEdit
       Left = 254
@@ -300,7 +284,7 @@ object FormMPC: TFormMPC
       EditLabel.Caption = 'L3:'
       EditLabel.ParentColor = False
       TabOrder = 6
-      Text = '0.5'
+      Text = '5'
     end
     object EditN1: TLabeledEdit
       Left = 14
@@ -409,7 +393,7 @@ object FormMPC: TFormMPC
       Top = 7
       Width = 64
       TabOrder = 0
-      Text = '900'
+      Text = '918'
     end
     object EditW2_badi: TEdit
       Left = 94
@@ -417,7 +401,7 @@ object FormMPC: TFormMPC
       Top = 36
       Width = 64
       TabOrder = 1
-      Text = '300'
+      Text = '297'
     end
     object EditW3_badi: TEdit
       Left = 94
@@ -425,7 +409,7 @@ object FormMPC: TFormMPC
       Top = 64
       Width = 64
       TabOrder = 2
-      Text = '200'
+      Text = '510'
     end
     object EditW4_badi: TEdit
       Left = 94
@@ -473,7 +457,7 @@ object FormMPC: TFormMPC
       Top = 150
       Width = 64
       TabOrder = 8
-      Text = '500'
+      Text = '505'
     end
   end
   object difCB: TCheckBox
@@ -486,12 +470,12 @@ object FormMPC: TFormMPC
   end
   object GroupBoxModelParams: TGroupBox
     Left = 8
-    Height = 120
-    Top = 472
-    Width = 154
+    Height = 112
+    Top = 439
+    Width = 160
     Caption = 'Model Parameters '
-    ClientHeight = 101
-    ClientWidth = 150
+    ClientHeight = 93
+    ClientWidth = 156
     TabOrder = 6
     object Label8: TLabel
       Left = 6
@@ -523,7 +507,7 @@ object FormMPC: TFormMPC
       Top = 2
       Width = 73
       TabOrder = 0
-      Text = '0.4'
+      Text = '0.1'
     end
     object EditVMax: TEdit
       Left = 48
@@ -531,7 +515,7 @@ object FormMPC: TFormMPC
       Top = 63
       Width = 86
       TabOrder = 1
-      Text = '0.7'
+      Text = '1.2'
     end
     object EditTauLineK: TEdit
       Left = 46
@@ -539,7 +523,7 @@ object FormMPC: TFormMPC
       Top = 31
       Width = 49
       TabOrder = 2
-      Text = '0.55'
+      Text = '1'
     end
     object EditTauLineB: TEdit
       Left = 94
@@ -547,26 +531,24 @@ object FormMPC: TFormMPC
       Top = 31
       Width = 40
       TabOrder = 3
-      Text = '-0.1'
+      Text = '-0.7'
     end
     object CheckBoxTauLine: TCheckBox
       Left = 126
       Height = 24
       Top = 2
       Width = 24
-      Checked = True
-      State = cbChecked
       TabOrder = 4
     end
   end
   object GroupBoxOtherPars: TGroupBox
-    Left = 168
-    Height = 80
-    Top = 512
-    Width = 144
+    Left = 176
+    Height = 112
+    Top = 439
+    Width = 200
     Caption = 'Simulation Options '
-    ClientHeight = 61
-    ClientWidth = 140
+    ClientHeight = 93
+    ClientWidth = 196
     TabOrder = 7
     object CheckBoxPropSat: TCheckBox
       Left = 7
@@ -578,23 +560,31 @@ object FormMPC: TFormMPC
       State = cbChecked
       TabOrder = 0
     end
-    object CheckBoxSimDynamics: TCheckBox
+    object CheckBoxSimDynamicsR: TCheckBox
       Left = 6
       Height = 24
       Top = 31
-      Width = 122
-      Caption = 'Sim. Dynamics'
+      Width = 167
+      Caption = 'Sim. Dynamics Robot'
       TabOrder = 1
+    end
+    object CheckBoxSimDynamicsM: TCheckBox
+      Left = 7
+      Height = 24
+      Top = 57
+      Width = 167
+      Caption = 'Sim. Dynamics Mates'
+      TabOrder = 2
     end
   end
   object GroupBox2: TGroupBox
-    Left = 400
+    Left = 384
     Height = 144
-    Top = 448
-    Width = 144
+    Top = 439
+    Width = 160
     Caption = 'Mates'
     ClientHeight = 125
-    ClientWidth = 140
+    ClientWidth = 156
     TabOrder = 8
     object Label18: TLabel
       Left = 9
@@ -666,36 +656,20 @@ object FormMPC: TFormMPC
     end
   end
   object edk1: TEdit
-    Left = 256
+    Left = 224
     Height = 27
-    Top = 440
+    Top = 560
     Width = 48
     TabOrder = 9
     Text = '1.5'
   end
   object edk2: TEdit
-    Left = 256
+    Left = 312
     Height = 27
-    Top = 472
+    Top = 560
     Width = 48
     TabOrder = 10
     Text = '0.5'
-  end
-  object edk3: TEdit
-    Left = 344
-    Height = 27
-    Top = 440
-    Width = 48
-    TabOrder = 11
-    Text = '1'
-  end
-  object edk4: TEdit
-    Left = 344
-    Height = 27
-    Top = 472
-    Width = 48
-    TabOrder = 12
-    Text = '1'
   end
   object FEUPCB: TCheckBox
     Left = 8
@@ -703,11 +677,37 @@ object FormMPC: TFormMPC
     Top = 416
     Width = 61
     Caption = 'FEUP'
-    TabOrder = 13
+    Checked = True
+    State = cbChecked
+    TabOrder = 11
+  end
+  object RadioGroupOptimizer: TRadioGroup
+    Left = 8
+    Height = 72
+    Top = 560
+    Width = 170
+    AutoFill = True
+    Caption = 'Optimizer Selection'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 53
+    ClientWidth = 166
+    ItemIndex = 1
+    Items.Strings = (
+      'Steepest Descent'
+      'RPROP'
+    )
+    TabOrder = 12
   end
   object FormStorage: TIniPropStorage
     StoredValues = <>
-    left = 336
-    top = 536
+    left = 80
+    top = 168
   end
 end

@@ -119,16 +119,8 @@ begin
   end;
   FormStorage.IniFileName:=FCoach.FormStorage.IniFileName;
   FormStorage.Restore;
-  FCoach.InsertAuxForms(FField,'Field');
 end;
 
-procedure TFField.FormClose(Sender: TObject);
-begin
-  FCoach.AuxFormClosed('Field');
-end;
-
-
-//------------------------------------------------------------------------------------------
 
 procedure TFField.BRefreshClick(Sender: TObject);
 begin
@@ -213,6 +205,11 @@ begin
     end;
   except
   end;
+end;
+
+procedure TFField.FormClose(Sender: TObject);
+begin
+
 end;
 
 initialization

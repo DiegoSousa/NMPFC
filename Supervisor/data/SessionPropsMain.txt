@@ -12,6 +12,5 @@ CBForceRobotActive3.Checked
 CBForceRobotActive4.Checked
 CBForceRobotActive5.Checked
 CBForceRobotActive6.Checked
-EditRefBoxIP.Text
 RGDecision.ItemIndex
 

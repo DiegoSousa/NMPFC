@@ -1,11 +1,11 @@
 object FMain: TFMain
-  Left = 2166
-  Height = 688
-  Top = 189
+  Left = 1820
+  Height = 614
+  Top = 87
   Width = 823
   ActiveControl = CBSimTwo
-  Caption = 'Mdec 07_07_2011 - Omni 3'
-  ClientHeight = 688
+  Caption = 'RoC 2013 T7Br'
+  ClientHeight = 614
   ClientWidth = 823
   Font.CharSet = ANSI_CHARSET
   Font.Color = clText
@@ -584,7 +584,6 @@ object FMain: TFMain
     Top = 500
     Width = 288
     TabOrder = 6
-    Text = 'Edit1'
   end
   object EditRoleName: TEdit
     Left = 316
@@ -666,64 +665,41 @@ object FMain: TFMain
     ParentFont = False
     TabOrder = 10
   end
-  object CBLocalization: TCheckBox
-    Left = 316
-    Height = 24
-    Top = 584
-    Width = 108
-    Caption = 'Localization'
-    TabOrder = 11
-  end
   object CBUseCompass: TCheckBox
-    Left = 448
+    Left = 125
     Height = 24
-    Top = 584
+    Top = 568
     Width = 133
     Caption = 'Active Compass'
     Checked = True
     State = cbChecked
-    TabOrder = 12
-  end
-  object EditPlayName: TEdit
-    Left = 506
-    Height = 25
-    Top = 528
-    Width = 135
-    TabOrder = 13
+    TabOrder = 11
   end
   object CheckBox_NoCamera: TCheckBox
-    Left = 724
+    Left = 8
     Height = 24
-    Top = 600
+    Top = 568
     Width = 101
     Caption = 'No Camera'
-    TabOrder = 14
+    TabOrder = 12
   end
   object CBUisGK: TCheckBox
-    Left = 316
+    Left = 8
     Height = 24
-    Top = 602
+    Top = 586
     Width = 122
     Caption = 'Is Goal Keeper'
-    TabOrder = 15
+    TabOrder = 13
   end
   object CheckBoxKickBehindMidField: TCheckBox
-    Left = 448
+    Left = 125
     Height = 24
-    Top = 602
+    Top = 586
     Width = 159
     Caption = 'KickBehindMidField'
     Color = clBtnFace
     ParentColor = False
-    TabOrder = 16
-  end
-  object Button_ShowLocalization: TButton
-    Left = 8
-    Height = 25
-    Top = 568
-    Width = 168
-    Caption = 'Show Localization Panel'
-    TabOrder = 17
+    TabOrder = 14
   end
   object MainMenu: TMainMenu
     left = 232
@@ -805,7 +781,7 @@ object FMain: TFMain
     Enabled = False
     Interval = 40
     OnTimer = Timer_NoCameraTimer
-    left = 688
-    top = 592
+    left = 224
+    top = 192
   end
 end

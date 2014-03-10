@@ -337,17 +337,12 @@ type
   { TFCoach }
 
   TFCoach = class(TForm)
-    BRefBoxConnect: TButton;
-    BRefBoxDisconnect: TButton;
-    ButtonStart: TButton;
-    ButtonStop: TButton;
     CBForceRobotActive1: TCheckBox;
     CBForceRobotActive2: TCheckBox;
     CBForceRobotActive3: TCheckBox;
     CBForceRobotActive4: TCheckBox;
     CBForceRobotActive5: TCheckBox;
     CBForceRobotActive6: TCheckBox;
-    CBKeeperActive: TCheckBox;
     CBRobotActive1: TCheckBox;
     CBRobotActive2: TCheckBox;
     CBRobotActive3: TCheckBox;
@@ -355,13 +350,8 @@ type
     CBRobotActive5: TCheckBox;
     CBRobotActive6: TCheckBox;
     CBOn: TCheckBox;
-    CheckBoxOtherTactic: TCheckBox;
-    CheckBoxOtherTactic2: TCheckBox;
     CBFuzzy: TCheckBox;
-    EditMessIP: TEdit;
     EditPlayState: TEdit;
-    EditRefBoxIP: TEdit;
-    EditRefState: TEdit;
     EditRobotAvailableCount: TEdit;
     EditRobotState1: TEdit;
     EditRobotState2: TEdit;
@@ -376,7 +366,6 @@ type
     EditVbatRobot5: TEdit;
     EditVbatRobot6: TEdit;
     FormStorage: TIniPropStorage;
-    GBRefBox: TGroupBox;
     GBRobotInfo1: TGroupBox;
     GBRobotInfo2: TGroupBox;
     GBRobotInfo3: TGroupBox;
@@ -384,34 +373,31 @@ type
     GBRobotInfo5: TGroupBox;
     GBRobotInfo6: TGroupBox;
     ImageMap: TPaintBox;
-    Label1: TLabel;
     Label2: TLabel;
     MainMenu: TMainMenu;
-    MemoRefBox: TMemo;
-    MemoRefBoxBad: TMemo;
     MenuAbout: TMenuItem;
     MenuExit: TMenuItem;
     MenuFile: TMenuItem;
-    MenuWindows: TMenuItem;
-    N1: TMenuItem;
+    MenuWindow: TMenuItem;
+    MenuLog: TMenuItem;
+    MenuField: TMenuItem;
+    MenuParam: TMenuItem;
     RGDecision: TRadioGroup;
     RGRobotSel: TRadioGroup;
     RGBallSel: TRadioGroup;
     SdpoUDPSuper: TLUDPComponent;
-    TCPRefBox: TLTCPComponent;
     TimerDoTactic: TTimer;
-    UDPRefBox: TLUDPComponent;
-    procedure BRefBoxConnectClick(Sender: TObject);
-    procedure BRefBoxDisconnectClick(Sender: TObject);
-    procedure ButtonStartClick(Sender: TObject);
-    procedure ButtonStopClick(Sender: TObject);
+//    procedure BRefBoxConnectClick(Sender: TObject);
+//    procedure BRefBoxDisconnectClick(Sender: TObject);
+//    procedure ButtonStartClick(Sender: TObject);
+//    procedure ButtonStopClick(Sender: TObject);
     procedure CBForceRobotActive1Change(Sender: TObject);
     procedure CBForceRobotActive2Change(Sender: TObject);
     procedure CBForceRobotActive3Change(Sender: TObject);
     procedure CBForceRobotActive4Change(Sender: TObject);
     procedure CBForceRobotActive5Change(Sender: TObject);
     procedure CBForceRobotActive6Change(Sender: TObject);
-    procedure CBKeeperActiveChange(Sender: TObject);
+ //   procedure CBKeeperActiveChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
 
@@ -423,25 +409,28 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure MenuAboutClick(Sender: TObject);
     procedure MenuExitClick(Sender: TObject);
-    procedure MenuWinDefaultClick(Sender: TObject);
+    procedure MenuFieldClick(Sender: TObject);
+    procedure MenuLogClick(Sender: TObject);
+    procedure MenuParamClick(Sender: TObject);
 
     procedure SdpoUDPCoachReceive(aSocket: TLSocket);
     procedure SdpoUDPSuperError(const msg: string; aSocket: TLSocket);
     procedure SdpoUDPSuperReceive(aSocket: TLSocket);
     procedure ShowAll;
     procedure MainLoop;
-    procedure TCPRefBoxReceive(aSocket: TLSocket);
+ //   procedure TCPRefBoxReceive(aSocket: TLSocket);
     procedure TimerDoTacticTimer(Sender: TObject);
 
-    procedure ParseRefBoxData(data: String);
-    procedure ParseRefBoxUDPData(data: String);
-    procedure ParseRefBoxUDPData(data, attr: String);
-    procedure ParseXmlData(xmldata: string);
+//    procedure ParseRefBoxData(data: String);
+//    procedure ParseRefBoxUDPData(data: String);
+//    procedure ParseRefBoxUDPData(data, attr: String);
+//    procedure ParseXmlData(xmldata: string);
     procedure ShowRobotTimes(var RS: TRobotstate; var RSF: TRobotStateForm; robnum:integer);
     procedure MergeBallState;
     procedure MergeBallState2;
+    procedure MenuWindowClick(Sender: TObject);
 
-    procedure UDPRefBoxReceive(aSocket: TLSocket);
+//    procedure UDPRefBoxReceive(aSocket: TLSocket);
   private
     { private declarations }
   public
@@ -455,12 +444,6 @@ type
 
     procedure ProcessPlayerPacket(packet_str: string);
     procedure SendCoachInfo;
-
-    procedure InsertAuxForms(Fm: TForm; cap: string);
-    procedure AuxFormClosed(cap: string);
-    procedure SaveAuxForms;
-    procedure CloseAuxForms;
-    procedure RestoreAuxForms;
 
     procedure SetRobotStateForm;
 
@@ -558,18 +541,19 @@ ControlTimeStamp:LongWord;
 
 implementation
 
-uses Field, Robots, Utils, Tactic, Param, Log;
+uses Field, Robots, Utils, Tactic, Param2, Log;
 
 { TFCoach }
 
 procedure TFCoach.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
-  SaveAuxForms;
-  CloseAuxForms;
-  TCPRefBox.Disconnect;
+  //SaveAuxForms;
+  //CloseAuxForms;
+//  TCPRefBox.Disconnect;
+  Close;
 end;
 
-procedure TFCoach.CBKeeperActiveChange(Sender: TObject);
+{procedure TFCoach.CBKeeperActiveChange(Sender: TObject);
 begin
   if CBKeeperActive.Checked then begin
      KeeperWay:=roleKeeper;
@@ -580,10 +564,10 @@ end;
 
 procedure TFCoach.ButtonStartClick(Sender: TObject);
 begin
-  //RefereeState:=rsStartPos;
-  //if (RGDecision.ItemIndex=2) then begin
+  RefereeState:=rsStartPos;
+  if (RGDecision.ItemIndex=2) then begin
     RefereeState:=rsFormation;
-  //end;
+  end;
 end;
 
 procedure TFCoach.BRefBoxDisconnectClick(Sender: TObject);
@@ -601,7 +585,7 @@ end;
 procedure TFCoach.ButtonStopClick(Sender: TObject);
 begin
   RefereeState:=rsStopPos;
-end;
+end;    }
 
 procedure TFCoach.CBForceRobotActive1Change(Sender: TObject);
 begin
@@ -679,7 +663,7 @@ begin
   FieldImageWidth := ImageMap.Width;
   FieldImageHeight := ImageMap.Height;
 
-  RestoreAuxForms;
+  //RestoreAuxForms;
   UpdateFieldDims;
   TimerDoTactic.Enabled := true;
 end;
@@ -761,13 +745,20 @@ begin
   Close;
 end;
 
-procedure TFCoach.MenuWinDefaultClick(Sender: TObject);
-var MenuItem: TMenuItem;
+procedure TFCoach.MenuFieldClick(Sender: TObject);
 begin
-    MenuItem:=Sender as TMenuItem;
-    MenuItem.Checked:=true;
-    AuxForms[MenuItem.Tag].Show;
-    AuxForms[MenuItem.Tag].BringToFront;
+  FField.Show;
+end;
+
+
+procedure TFCoach.MenuLogClick(Sender: TObject);
+begin
+   FLog.Show;
+end;
+
+procedure TFCoach.MenuParamClick(Sender: TObject);
+begin
+   FParam2.Show;
 end;
 
 procedure TFCoach.SdpoUDPCoachReceive(aSocket: TLSocket);
@@ -784,7 +775,7 @@ begin
     copymemory(@PlayerInfo, @(packet_str[1]), sizeof(PlayerInfo));
 
     if PlayerInfo.Magic <> PACKET_PLAYER_MAGIC then exit;
-    EditMessIP.Text:= aSocket.PeerAddress;
+    //EditMessIP.Text:= aSocket.PeerAddress;
   except
   end;
 end;
@@ -818,12 +809,12 @@ begin
   deb_txt:=deb_txt+format(',%3d',[getTickcount()-NetTime]);
 end;
 
-procedure TFCoach.TCPRefBoxReceive(aSocket: TLSocket);
+{procedure TFCoach.TCPRefBoxReceive(aSocket: TLSocket);
 var data: string;
 begin
   TCPRefBox.GetMessage(data);
   ParseRefBoxData(data);
-end;
+end;   }
 
 procedure TFCoach.TimerDoTacticTimer(Sender: TObject);
 begin
@@ -840,7 +831,7 @@ begin
   end;
 end;
 
-procedure TFCoach.ParseRefBoxData(data: String);
+{procedure TFCoach.ParseRefBoxData(data: String);
 var i: integer;
     command,s: string;
     c: char;
@@ -957,7 +948,7 @@ begin
   finally
     s.Free;
   end;
-end;
+end;   }
 
 procedure TFCoach.ShowRobotTimes(var RS: TRobotstate; var RSF: TRobotStateForm;
   robnum: integer);
@@ -1054,13 +1045,18 @@ begin
   end;
 end;
 
-procedure TFCoach.UDPRefBoxReceive(aSocket: TLSocket);
+procedure TFCoach.MenuWindowClick(Sender: TObject);
+begin
+
+end;
+
+{procedure TFCoach.UDPRefBoxReceive(aSocket: TLSocket);
 var
   xmldata: string;
 begin
   UDPRefBox.GetMessage(xmldata);
   ParseXmlData(xmldata);
-end;
+end; }
 
 procedure TFCoach.ProcessPlayerPacket(packet_str: string);
 var PlayerInfo: TPlayerInfo;
@@ -1148,7 +1144,8 @@ begin
       end;
 
       if (CBOn.Checked=true) then begin
-          CoachInfo.RobotState[i].role := RobotInfo[i].role;
+          //CoachInfo.RobotState[i].role := RobotInfo[i].role;
+          CoachInfo.RobotState[i].role := roleIdle;
 
           //A SELEÇÃO DAS ROLES DEVE SER FEITA PELO ALGORITMO FUZZY A SER FEITO NA ITALIA!!!
           //if (FCoach.RGDecision.ItemIndex=2) then begin
@@ -1213,7 +1210,7 @@ begin
       CoachInfo.BallState.coachQuality:=quality;
       CoachInfo.BallState.votes:=votes;
     end;
-    CoachInfo.Play:=Play;
+    //CoachInfo.Play:=Play;
 
     packet_str := StringOfChar(#0, sizeof(CoachInfo));
     copymemory(@(packet_str[1]), @CoachInfo, sizeof(CoachInfo));
@@ -1223,74 +1220,9 @@ begin
       if RGDecision.ItemIndex=0 then  //Local Host
         SdpoUDPSuper.SendMessage(packet_str, '127.0.0.1:'+inttostr(7271 + i))
       else   //Net
-        SdpoUDPSuper.SendMessage(packet_str, FParam.EditIPBase.Text +'.'+IntToStr(101 + i)+ ':'+inttostr(7272 + i));
+        SdpoUDPSuper.SendMessage(packet_str, FParam2.EditIPBase.Text +'.'+IntToStr(101 + i)+ ':'+inttostr(7272 + i));
     end;
   except
-  end;
-end;
-
-procedure TFCoach.InsertAuxForms(Fm: TForm; cap: string);
-var NewItem: TMenuItem;
-begin
-  NewItem := TMenuItem.Create(Self); //first create the separator
-  NewItem.Caption := cap;
-  NewItem.tag := NumAuxForms;
-  NewItem.OnClick := @MenuWinDefaultClick;
-  MenuWindows.Add(NewItem); //add the new item to the Windows menu
-  if NumAuxForms<MaxAuxForms-1 then begin
-    AuxForms[NumAuxForms]:=Fm;
-    inc(NumAuxForms);
-  end;
-end;
-
-procedure TFCoach.AuxFormClosed(cap: string);
-var i: integer;
-begin
-  for i := 0 to NumAuxForms - 1 do begin
-    if MenuWindows.Items[i].Caption = cap then begin
-      MenuWindows.Items[i].Checked := false;
-      exit;
-    end;
-  end;
-end;
-
-procedure TFCoach.SaveAuxForms;
-var i: integer;
-    Ini: TIniFile;
-begin
-  Ini := TIniFile.Create(FormStorage.IniFileName);
-  try
-    for i:=0 to MenuWindows.Count-1 do begin
-      Ini.WriteInteger('WINDOWS',MenuWindows.items[i].Caption+'_Visible',ord(MenuWindows.items[i].Checked));
-    end;
-  finally
-    Ini.Free;
-  end;
-end;
-
-procedure TFCoach.CloseAuxForms;
-var
-  i: integer;
-begin
-  for i:=0 to MenuWindows.Count-1 do begin
-    AuxForms[MenuWindows.items[i].tag].Close;
-  end;
-end;
-
-procedure TFCoach.RestoreAuxForms;
-var i: integer;
-    Ini: TIniFile;
-begin
-  Ini := TIniFile.Create(FormStorage.IniFileName);
-  try
-    for i:=0 to MenuWindows.Count-1 do begin
-      if Ini.readInteger('WINDOWS',MenuWindows.items[i].Caption+'_Visible',0)<>0 then begin
-        MenuWindows.items[i].Checked:=true;
-        AuxForms[MenuWindows.items[i].tag].Show;
-      end;
-    end;
-  finally
-    Ini.Free;
   end;
 end;
 

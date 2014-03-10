@@ -252,10 +252,8 @@ type
   TFMain = class(TForm)
     BSetRole: TButton;
     BStopReference: TButton;
-    Button_ShowLocalization: TButton;
  //===>   Button_ShowLocalization: TButton;
     CBDefRole: TComboBox;
-    CBLocalization: TCheckBox;
     CBStartRole: TComboBox;
     CBKick: TCheckBox;
 //===>    CBLocalization: TCheckBox;
@@ -265,7 +263,6 @@ type
     CheckBoxKickBehindMidField: TCheckBox;
     CheckBox_NoCamera: TCheckBox;
     Edit1: TEdit;
-    EditPlayName: TEdit;
     EditRoleName: TEdit;
     EditDebugPosition: TEdit;
     EditTaskName: TEdit;
@@ -375,12 +372,10 @@ type
     procedure Timer_NoCameraTimer(Sender: TObject);
 
   private
-//// por Scolari   16/11/04
     procedure Omin_pwm(pwm1,pwm2,pwm3: integer);
     procedure Omin_Ticks(v,vn,w: double; pwm1,pwm2,pwm3: integer);
     procedure Omin_Ticks2(v,vn,w: double; out w1,w2,w3: double);//Heber função provisoria de adaptação da nova estrutura
     procedure ParseLanEdges;
-////////////////
     procedure FillShowValuesItem(GT: Tstrings; itemName, formatString: string; value: double);
     procedure ResetView;
 
@@ -512,9 +507,6 @@ var
   bigball: double = 0;
   flagForm: boolean=false;
 
-  // true if the program is running in "Coach Mode"
-  CoachMode: boolean;
-  
   ControlTimeStamp:LongWord;
   TacticCommands: array[0..MaxRobots-1] of TTacticCommand;
   RobotState: array[0..MaxRobots-1] of TRobotState;
@@ -1201,7 +1193,7 @@ begin
   end;
 end;
 
-procedure TFMain.NewMainControl;//heber
+procedure TFMain.NewMainControl;
 var
   V,Vn,W,k: double;
   w1,w2,w3: double;
@@ -2171,13 +2163,13 @@ begin
   cu:=196;
   cv:=144;
   for c:=0 to cTrackColors-1 do begin
-    //pix:=colorcolor[c];
+
     with View.Centers[c] do begin
       for i:=0 to Count-1 do begin
         with Cnv, data[i] do begin
           Pen.Color:=colorcolor24[c];
 
-          //FCamera.CamRoTetaZToXYD(roMin,teta,zw: double; var d,xw,yw: double);
+
           dMin:=1.5/pi*180*roMin;
           dMax:=1.5/pi*180*romax;
           xi:=round(cu+dMin*cos(tetaMin));
@@ -2213,7 +2205,7 @@ begin
         ct:=cos(RS.teta);
         st:=sin(RS.teta);
         WorldToMap(RS.x+xw*ct+yw*-st,RS.y+xw*st+yw*ct,x2,y2);
-        //        moveto(x1,y1);
+
         if i=0 then moveto(x2,y2)
         else lineto(x2,y2);
       end;
@@ -2713,7 +2705,7 @@ begin
         kapa:=(-x1*(x1-x3)-y1*(y1-y3))/((x1-x3)*(x1-x3)+(y1-y3)*(y1-y3));
         xr:=kapa*(x1-x3)+x1;
         yr:=kapa*(y1-y3)+y1;
-        odist:=sqrt(xr*xr+yr*yr);//+0.05;
+        odist:=sqrt(xr*xr+yr*yr);;
       end;
     end;
   end;
@@ -2789,7 +2781,7 @@ end;
 
 procedure TFMain.MenuAboutClick(Sender: TObject);
 begin
-  Showmessage('5dpo2000 Decision'+#$0d+'(c)2000-2008 5dpo');
+  Showmessage('RoC 2013 T7Br');
 end;
 
 procedure TFMain.SdpoUDPSimTwoError(const msg: string; aSocket: TLSocket);
@@ -2969,7 +2961,6 @@ begin
     end;
   end;
 
-  //Era isso q tava fudendo o merging da bola na formação!!!
      BallState.x:=CoachInfo.BallState.x;
      BallState.y:=CoachInfo.BallState.y;
      BallState.vx:=CoachInfo.BallState.vx;
@@ -2980,7 +2971,7 @@ begin
 
 
   Play:=CoachInfo.Play;
-  EditPlayName.Text:= CPlayString[Play];
+
 end;
 
 procedure TFMain.btnrunudplogsClick(Sender: TObject);
@@ -2990,38 +2981,9 @@ NumRead,i: integer;
 filename,data: string;
 NumberBytes,Tam,count: integer;
 Buf: array[1..1024] of Char;
-
 begin
 
   SdpoUDP.Disconnect;
-
-{  filename:=EditFileudplog.Text;
-  AssignFile(F, filename);
-  if not FileExists(filename)
-    then Memoudp.lines.add('Error -> File not found')
-    else Reset(F,1);
-
-  Count:=0;
-  while not Eof(F) do
-  begin
-    Inc(Count);
-    BlockRead(F,Tam,sizeof(Tam),NumRead);  // le tamanho bloco
-    BlockRead(F,Buf,Tam,NumRead);   // le bloco
-    memoudp.lines.Add(inttostr(Count));
-    data:=Buf;
-    zeromemory(@(NetBuffer.data[0]),UDPBufSize);
-    NumberBytes:= NumRead;
-    if NumberBytes<UDPBufSize then begin
-      NetBuffer.MessSize:=NumberBytes;
-      NetBuffer.ReadDisp:=0;
-      copymemory(@(NetBuffer.data[0]),@(data[1]),NumberBytes);
-      MainLoop;
-    end;
-
-    sleep(20);
-  end;
-
-  Closefile(F);}
   SdpoUDP.Listen(7171);
 end;
 
@@ -3047,7 +3009,6 @@ begin
   end;
 
   Inc(CountUdp);
-//  memoudp.lines.Add(inttostr(CountUdp));
 
   BlockRead(Flogs,Tam,sizeof(Tam),NumRead);  // le tamanho bloco
   BlockRead(Flogs,Buf,Tam,NumRead);   // le bloco
@@ -3108,6 +3069,7 @@ begin
 
   WB:=strtointDef(gData[9], 0);
 
+//===>
   //Obstacles.Centers[0].x:=strtofloatDef(gData[10], 0);
   //Obstacles.Centers[1].x:=strtofloatDef(gData[11], 0);
   //Obstacles.Centers[2].x:=strtofloatDef(gData[12], 0);

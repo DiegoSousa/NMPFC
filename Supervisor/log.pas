@@ -93,13 +93,11 @@ uses Robots;
 procedure TFLog.FormCreate(Sender: TObject);
 begin
   FormStorage.IniFileName:=FCoach.FormStorage.IniFileName;
-  FCoach.InsertAuxForms(FLog,'Log');
 end;
 
 procedure TFLog.FormClose(Sender: TObject);
 begin
   SaveTree(TreeView);
-  FCoach.AuxFormClosed('Log');
 end;
 
 procedure TFLog.FormDestroy(Sender: TObject);
@@ -130,7 +128,6 @@ begin
   for i:=0 to tree.Items.Count-1 do begin
     if tree.Items[i].data=nil then def:=2
     else def:=0;
-//    tree.Items[i].ImageIndex:=ini.ReadInteger(tree.Name,'item'+inttostr(i),def);
     tree.Items[i].SelectedIndex:=ini.ReadInteger(tree.Name,'item'+inttostr(i),def);
     tree.Items[i].Expanded:=ini.ReadBool(tree.Name,'expand'+inttostr(i),false);
   end;
@@ -247,7 +244,6 @@ function TFLog.LogFrame(par_frame_timestamp,par_camera,increment: integer): inte
 begin
 
   LogBuffer[LogBufferIn].BallState:=BallState;
-  //LogBuffer[LogBufferIn].RobotState[myNumber]:=RobotState[myNumber];
   LogBuffer[LogBufferIn].RobotState[0]:=RobotState[0];
   LogBuffer[LogBufferIn].RobotState[1]:=RobotState[1];
   LogBuffer[LogBufferIn].RobotState[2]:=RobotState[2];
@@ -262,8 +258,6 @@ begin
 
     if LogBufferCount<LogFrames then Inc(LogBufferCount);
   end;
-  //if FMain.CBShowLogGraph.Checked then
-  //  RefreshGrid(TreeView);
 end;
 
 

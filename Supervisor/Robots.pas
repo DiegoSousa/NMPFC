@@ -4,8 +4,8 @@ unit Robots;
 
 interface
 
-uses SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Tactic,
-     Types, dynmatrix, Coach, DecConsts, Roles, obsavoid;
+uses SysUtils, Classes, Graphics, Controls, Forms, Dialogs,Tactic,
+     Types, dynmatrix, Coach, DecConsts, Roles;
 
 const
 
@@ -44,24 +44,17 @@ var
   RobotStatus: array[0..MaxRobots-1] of TRobotStatus;
 
 
-procedure PropagateXYTeta(var RS: TRobotstate);
-procedure PropagateXYTetaOthers(var RS: TRobotstate);
 procedure RobotStateDoublesToMatrix(var Robot: TRobotState);
 procedure RobotStateMatrixToDoubles(var Robot: TRobotState);
-
 procedure SaturateRobotXY(var RS: TRobotstate);
-
 procedure DrawRobotText(var RS: TRobotState; extraColor: Tcolor; CNV: TCanvas);
 procedure DrawRobot(var RS: TRobotState; extraColor: Tcolor; CNV: TCanvas);
 procedure DrawRobotInfo(var RS: TRobotState; var RI: TRobotInfo; CNV: TCanvas);
-procedure DrawTraj(var Traj: TTrajectory; CNV: TCanvas);
 
 
 implementation
 
-uses Utils, Param, Field;
-
-//,Actions,LocMap
+uses Utils, Param2, Field;
 
 procedure RobotStateMatrixToDoubles(var Robot: TRobotState);
 begin
@@ -89,98 +82,6 @@ begin
     Pk.setv(0,1,cov_xy);
     Pk.setv(1,0,cov_xy);
     Pk.setv(2,2,cov_teta);
-  end;
-end;
-
-
-procedure PropagateXYTeta(var RS: TRobotstate);
-var i: integer;
-    act_v,act_vn,act_w: double;
-    dv, dvn,dteta, dt:double;
-    cov_pos_noise,cov_teta_noise: double;
-    ce,se, cde, sde:double;
-    dx,dy: double;
-begin
-  act_v:=0;
-  act_vn:=0;
-  act_w:=0;
-  dt:=0;
-  cov_pos_noise:=1e-3;
-  cov_teta_noise:=1e-6;
-
-  with RS do begin
-    Phik:=MEye(3);
-    Qk.SetSize(3,3);
-
-    dv:=0.5774*View.Odos[0].dwheel[0] -0.5774*View.Odos[0].dwheel[1];
-    dvn:= 0.3333*View.Odos[0].dwheel[0] + 0.3333*View.Odos[0].dwheel[1] -0.6667*View.Odos[0].dwheel[2];
-    dteta:= (0.3333/wheeltoCenterdist)*View.Odos[0].dwheel[0] + (0.3333/wheeltoCenterdist)*View.Odos[0].dwheel[1] + (0.3333/wheeltoCenterdist)*View.Odos[0].dwheel[2];
-
-
-    NormalizeAngle(dteta);
-    ce:=cos(teta);
-    se:=sin(teta);
-    cde:=cos(dteta);
-    sde:=sin(dteta);
-    if abs(dteta)= 0 then begin
-      x:=x+(dv*ce-dvn*se);
-      y:=y+(dv*se+dvn*ce);
-    end else begin
-      x:=x+(dv*sde+dvn*(cde-1))*cos(teta+dteta/2)/dteta-(dv*(1-cde)+dvn*sde)*sin(teta+dteta/2)/dteta;
-      y:=y+(dv*sde+dvn*(cde-1))*sin(teta+dteta/2)/dteta+(dv*(1-cde)+dvn*sde)*cos(teta+dteta/2)/dteta;
-      teta:=NormalizeAngle(teta+dteta);
-    end;
-
-    View.dOdos.x:=x-dx;
-    View.DOdos.y:=y-dy;
-    View.DOdos.teta:=dteta;
-
-    act_v:=act_v+dv;
-    act_vn:=act_vn+dvn;
-    act_w:=act_w+dteta;
-    dt:=dt+View.Odos[0].count/10000;
-    RobotStateDoublesToMatrix(RS);
-
-    SaturateRobotXY(RS);
-    // TODO (ainda não entra em conta com vnt)
-
-    Phik.setv(0,2,-act_v*se*0.04);
-    Phik.setv(1,2,act_v*ce*0.04);
-    Qk.setv(0,0,cov_pos_noise);
-    Qk.setv(1,1,cov_pos_noise);
-    Qk.setv(2,2,cov_teta_noise);
-    Pk:=Qk + (Phik* Pk * MTran(Phik));
-    RobotStateMatrixToDoubles(RS);
-
-    v:=act_v;
-    vn:=act_vn;
-    w:=act_w;
-    //temp code!!!!!!!!! Remendo!!!!!
-    v:=0.5774*View.Odos[0].speedw[0]*(Wheel1Diameter/2)-0.5774*View.Odos[0].speedw[1]*(Wheel1Diameter/2);
-    vn:=0.3333*View.Odos[0].speedw[0]*(Wheel1Diameter/2)+0.3333*View.Odos[0].speedw[1]*(Wheel1Diameter/2)-0.6667*View.Odos[0].speedw[2]*(Wheel1Diameter/2);
-    w:=(0.3333/wheeltoCenterdist)*View.Odos[0].speedw[0]*(Wheel1Diameter/2)+(0.3333/wheeltoCenterdist)*View.Odos[0].speedw[1]*(Wheel1Diameter/2)+(0.3333/wheeltoCenterdist)*View.Odos[0].speedw[2]*(Wheel1Diameter/2);
-
-
-    FCoach.VVnToVxy(teta, v,vn, vx, vy);
-
-    RobotStateDoublesToMatrix(RS);
-  end;
-end;
-
-
-procedure PropagateXYTetaOthers(var RS: TRobotstate);
-var cov_xy_noise,cov_teta_noise: double;
-begin
-  cov_xy_noise:=0.01;
-  cov_teta_noise:=0.001;
-  // TODO
-  with RS do begin
-    x:=x+0.04*v*cos(teta);
-    y:=y+0.04*v*sin(teta);
-    teta:=teta+0.04*w*pi/180;
-    cov_x:=cov_x+cov_xy_noise;
-    cov_y:=cov_y+cov_xy_noise;
-    cov_teta:=cov_teta+cov_teta_noise;
   end;
 end;
 
@@ -274,25 +175,6 @@ begin
     RotateAndTranslate(xr,yr,0,0,RS.x,RS.y,RS.teta);
     FCoach.WorldToMap(xr,yr,x1,y1);
     TextOut(x1-14,y1-23,RoleDefs[RI.role].name);
-  end;
-end;
-
-procedure DrawTraj(var Traj: TTrajectory; CNV: TCanvas);
-var i,x1,y1: integer;
-begin
-  with CNV do begin //tcanvas
-    pen.color:=clyellow;
-    brush.color:=clBlack;
-    brush.style:=bsSolid;
-    
-    FCoach.WorldToMap(RobotState[myNumber].x,RobotState[myNumber].y,x1,y1);
-    moveto(x1,y1);
-    for i := 0 to traj.count-1 do begin
-      with traj.pts[i] do begin
-        FCoach.WorldToMap(x,y,x1,y1);
-        lineto(x1,y1);
-      end;
-    end;
   end;
 end;
 

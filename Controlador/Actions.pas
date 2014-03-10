@@ -20,7 +20,6 @@ const
 
 const
   GoToXYTetaPrecision=0.025;
-  //Tese Tiago
   minNextPointDistance=0.05;
 
 procedure ActionStop(num: integer);
@@ -29,7 +28,6 @@ procedure ActionAdvisedSpeed(num: integer);
 procedure ActionDesiredSpeed(num: integer);
 procedure VVnToVxy(teta,v,vn: double; var Vx,Vy: double);
 procedure VxyToVVn(teta,vx,vy: double; var V,Vn: double);
-//Tese Tiago
 procedure ActionDoFormation(num:integer);
 procedure ActionDoFormationFollower(num:integer);
 
@@ -285,7 +283,6 @@ begin
   idx := Min(3, traj.count-1);
   tx := traj.pts[idx].x;
   ty := traj.pts[idx].y;
-  //dteta := DiffAngle(traj.pts[idx].teta, state.teta);
 
   segteta := ATan2(ty-state.y,tx-state.x);
 

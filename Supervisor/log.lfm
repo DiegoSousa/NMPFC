@@ -1,7 +1,7 @@
 object FLog: TFLog
-  Left = 1431
+  Left = 268
   Height = 536
-  Top = 138
+  Top = 150
   Width = 866
   ActiveControl = TreeView
   Caption = 'Coach Log'

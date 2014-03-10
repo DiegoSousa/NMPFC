@@ -67,8 +67,6 @@ procedure loadParameters(vmax,tao : double);
 procedure resetModel();
 //simulate Robot (vref,vnref,vwref -> v,vn,w)
 procedure simRobotComplete(var Robot : TSimRobot; v_ref,vn_ref,w_ref : double; var v,vn,w : double);
-//simulate Diferential Robot (vref,vnref,vwref -> v,vn,w)
-//procedure simRobotComplete2(var Robot : TSimRobot; v_ref,vn_ref,w_ref : double; var v,vn,w : double);
 //simulate motors (motor ref speeds -> motor actual speeds)
 procedure simMotors(var Robot : TSimRobot; var v1,v2,v3 : double);
 //inverse kinematic (v,vn,w->v1,v2,v3)
@@ -83,9 +81,6 @@ procedure simRobotMovement(var Robot : TSimRobot; var v,vn,w : double);
 function SimCovariance(Robot : TSimRobot; Ball: TSimBall; val,k1,k2: double):TDMatrix;
 //updates covariance matrix
 function SimCovariance2(MyRobot : TSimRobot; Robot : TSimRobot; Ball: TSimBall; val,k1,k2: double):TDMatrix;
-//updates covariance matrix IST
-function SimCovarianceIST(Robot : TSimRobot; Ball: TSimBall; val,k1,k2,k3,k4: double):TDMatrix;
-function SimCovarianceIST2(MyRobot : TSimRobot; Robot : TSimRobot; Ball: TSimBall; val,k1,k2,k3,k4: double):TDMatrix;
 //Sum the covariance matrixes
 function SimCovarianceSUM(sgt1, sgt2: TDMatrix):TDMatrix;
 //updates ball position
@@ -111,6 +106,7 @@ const
 
 implementation
 
+Uses MPC;
 
 //----------------------------------------------------------------------------
 //
@@ -221,6 +217,7 @@ end;
 procedure simRobotMovement(var Robot : TSimRobot; var v,vn,w : double);
 var
    cteta,steta : double;
+   v1,v2,v3 : double;
 begin
           cteta := cos(Robot.RobotState.teta);
           steta := sin(Robot.RobotState.teta);
@@ -231,6 +228,18 @@ begin
           Robot.RobotState.teta := Robot.RobotState.teta + simTimeStep*w;
           Robot.RobotState.x := Robot.RobotState.x + simTimeStep*(v*cteta-vn*steta);
           Robot.RobotState.y := Robot.RobotState.y + simTimeStep*(v*steta+vn*cteta);
+
+          if (FormMPC.CheckBoxSimDynamicsM.Checked) then begin
+            //v,vn,w -> v1,v2,v3
+            IK(Robot.RobotState.v,Robot.RobotState.vn,Robot.RobotState.w,v1,v2,v3);
+
+            //simulate motors
+            simMotors(Robot,v1,v2,v3);
+
+            //v1,v2,v3 -> v,vn,w
+            DK(v1,v2,v3,v,vn,w);
+
+          end;
 
 end;
 
@@ -262,29 +271,6 @@ begin
   result:=sgt;
 end;
 
-function SimCovarianceIST(Robot : TSimRobot; Ball: TSimBall; val,k1,k2,k3,k4: double):TDMatrix;
-var sgt,sgt2: TDMatrix;
-    v,d,r,sigphi,sigr,sigy,tetao: double;
-begin
-  sgt.SetSize(2,2);
-  sgt:=Mzeros(2,2);
-
-  d:=(sqrt(power((Robot.RobotState.x-Ball.BallState.x),2)+power((Robot.RobotState.y-Ball.BallState.y),2)));
-  r:=(sqrt(power((Robot.RobotState.x-Ball.BallState.x),2)+power((Robot.RobotState.y-Ball.BallState.y),2)+0.4225));
-  tetao:=arctan(0.65/d);
-
-  sigr:=k1*(power(d,2)/0.02)+k2*(0.4225/(2*(power(r,2)-0.01)))+k3*(0.4225/(0.04*(power(r,2)-0.01)));
-  sigphi:=k4/(2*(power(r,2)-(0.01*power((sin(tetao)),2))));
-  sigy:=(power(r,2)+sigr)*sigphi;
-
-  sgt.setv(0,0,sigr);
-  sgt.setv(0,1,0);
-  sgt.setv(1,0,0);
-  sgt.setv(1,1,sigy);
-
-  result:=sgt;
-end;
-
 function SimCovariance2(MyRobot : TSimRobot; Robot : TSimRobot; Ball: TSimBall; val,k1,k2: double):TDMatrix;
 var sgt,sgt2: TDMatrix;
     dist,alfa,sigX,sigY,v,a,aa,b,bb,c,cc,d,temp: double;
@@ -303,47 +289,6 @@ begin
   b:=(cos(alfa)*sigX*sin(alfa))-(sin(alfa)*sigY*cos(alfa));
   c:=(sin(alfa)*sigX*cos(alfa))-(cos(alfa)*sigY*sin(alfa));
   d:=(sin(alfa)*sigX*sin(alfa))+(cos(alfa)*sigY*cos(alfa));
-
-  sgt.setv(0,0,a);
-  sgt.setv(0,1,b);
-  sgt.setv(1,0,c);
-  sgt.setv(1,1,d);
-
-  result:=sgt;
-end;
-
-function SimCovarianceIST2(MyRobot : TSimRobot; Robot : TSimRobot; Ball: TSimBall; val,k1,k2,k3,k4: double):TDMatrix;
-var sgt,sgt2: TDMatrix;
-    dist,alfa,sigy,v,r,sigphi,sigr,tetao,a,b,c,d,aa,bb,cc,temp: double;
-begin
-  sgt.SetSize(2,2);
-  sgt:=Mzeros(2,2);
-
-  //distance of Robot from Ball      = a
-  aa:=sqrt(power((Robot.RobotState.x - Ball.BallState.x),2)+power((Robot.RobotState.y - Ball.BallState.y),2));
-  //distance of MyRobot from Ball    = b
-  bb:=sqrt(power((MyRobot.RobotState.x - Ball.BallState.x),2)+power((MyRobot.RobotState.y - Ball.BallState.y),2));
-  //distance of MyRobot from Robot   = c
-  cc:=sqrt(power((Robot.RobotState.x - MyRobot.RobotState.x),2)+power((Robot.RobotState.y - MyRobot.RobotState.y),2));
-
-  //angle between robots
-  temp:=(power(aa,2)+power(bb,2)-power(cc,2))/(2*aa*bb);
-
-  alfa:=arccos(temp);
-
-  dist:=(sqrt(power((Robot.RobotState.x-Ball.BallState.x),2)+power((Robot.RobotState.y-Ball.BallState.y),2)));
-  r:=(sqrt(power((Robot.RobotState.x-Ball.BallState.x),2)+power((Robot.RobotState.y-Ball.BallState.y),2)+0.4225));
-  tetao:=arctan(0.65/dist);
-
-  sigr:=k1*(power(dist,2)/0.02)+k2*(0.4225/(2*(power(r,2)-0.01)))+k3*(0.4225/(0.04*(power(r,2)-0.01)));
-  sigphi:=k4/(2*(power(r,2)-(0.01*power((sin(tetao)),2))));
-  sigy:=(power(r,2)+sigr)*sigphi;
-
-  //Rt(a)*Cl*R(a)
-  a:=(cos(alfa)*sigr*cos(alfa))+(sin(alfa)*sigY*sin(alfa));
-  b:=(cos(alfa)*sigr*sin(alfa))-(sin(alfa)*sigY*cos(alfa));
-  c:=(sin(alfa)*sigr*cos(alfa))-(cos(alfa)*sigY*sin(alfa));
-  d:=(sin(alfa)*sigr*sin(alfa))+(cos(alfa)*sigY*cos(alfa));
 
   sgt.setv(0,0,a);
   sgt.setv(0,1,b);

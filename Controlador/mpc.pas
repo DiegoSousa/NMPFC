@@ -143,6 +143,8 @@ type
     CheckBoxEnable: TCheckBox;
     CheckBoxPropSat: TCheckBox;
     CheckBoxSimDynamics: TCheckBox;
+    CheckBoxSimDynamicsM: TCheckBox;
+    CheckBoxSimDynamicsR: TCheckBox;
     CheckBoxTauLine: TCheckBox;
     ComboBoxMate1: TComboBox;
     ComboBoxMate2: TComboBox;
@@ -151,8 +153,6 @@ type
     difCB: TCheckBox;
     edk1: TEdit;
     edk2: TEdit;
-    edk3: TEdit;
-    edk4: TEdit;
     EditJStop: TEdit;
     EditL1: TLabeledEdit;
     EditL2: TLabeledEdit;
@@ -206,8 +206,6 @@ type
     Label23: TLabel;
     Label24: TLabel;
     Label25: TLabel;
-    Label26: TLabel;
-    Label27: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
@@ -216,6 +214,7 @@ type
     Label8: TLabel;
     Label9: TLabel;
     MemoDebug: TMemo;
+    RadioGroupOptimizer: TRadioGroup;
     procedure ButtonSetBallAtDistanceInlineClick(Sender: TObject);
     procedure CheckBoxEnableChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -381,11 +380,9 @@ begin
   FormationSettings.parameters[0]:=EditToFloatDef(EditP1_badi,0);
   FormationSettings.pvalue:=EditToFloatDef(EditPValue,2);
   FormationSettings.dvalue:=EditToFloatDef(EditDValue,2);
-  //parameters for IST model
+  //parameters for Observation model
   FormationSettings.k1:=EditToFloatDef(edk1,2);
   FormationSettings.k2:=EditToFloatDef(edk2,2);
-  FormationSettings.k3:=EditToFloatDef(edk3,2);
-  FormationSettings.k4:=EditToFloatDef(edk4,2);
 
 end;
 
@@ -417,29 +414,19 @@ begin
                                                    FormationSettings.formationMates[1],
                                                    FormationSettings.formationMates[2],
                                                    FormationSettings.formationMates[3]]));
-     {MemoDebug.Append(Format('dRobotRobot: %.2f %.2f %.2f %.2f',[FormationState.RobotFormationDistance[FormationSettings.formationMates[0]],
-                                                                 FormationState.RobotFormationDistance[FormationSettings.formationMates[1]],
-                                                                 FormationState.RobotFormationDistance[FormationSettings.formationMates[2]],
-                                                                 FormationState.RobotFormationDistance[FormationSettings.formationMates[3]]
-                                                                 ]));  }
      MemoDebug.Append(Format('dRobotObstacle: %.2f %.2f',[FormationState.RobotFormationDistance[4],
                                                           FormationState.RobotFormationDistance[5]
                                                           ]));
 
      MemoDebug.Append(Format('Matriz: %.2f %.2f',[sigver.getv(0,0),sigver.getv(0,1)]));
      MemoDebug.Append(Format('Matriz: %.2f %.2f',[sigver.getv(1,0),sigver.getv(1,1)]));
-
-     //DEBUG DEBUG DEBUG DEBUG DEBUG
-     //--------------------------------------------------------------------------------------------
      MemoDebug.Append(format(' > It %d ----------------------',[OptData.iterationCount]));
      addDebug(' J:',JcurrentG);
      addDebug(' Jbest:',JbestG);
      MemoDebug.Append('--------------------------');
-
      MemoDebug.Append(format(' Ref U_ref: %.2f %.2f %.2f',[U_refG.getv(0,0),U_refG.getv(1,0),U_refG.getv(2,0)]));
      MemoDebug.Append(format(' Ref U_best: %.2f %.2f %.2f',[UbestG.getv(0,0),UbestG.getv(1,0),UbestG.getv(2,0)]));
      MemoDebug.Append('');
-     //-------------------------------------------------------------------------------------
 
 end;
 
@@ -697,11 +684,7 @@ begin
         scaleForSaturation(Uref);
 
      //Base cost values
-     if RobotInfo[myNumber].role = roleDoFormation then begin
-        //Jcurrent := FormationDefs[FormationSettings.formation].func(SimRobot,SimBall,ThisRobotState,Uref)
-        Jcurrent := FormationDefs[FormationSettings.formation].func(SimRobot,SimBall,obs,nobs,ThisRobotState,Uref)
-     end else
-        Jcurrent := predSimulator(SimRobot,Uref,refTraj);
+     Jcurrent := FormationDefs[FormationSettings.formation].func(SimRobot,SimBall,obs,nobs,ThisRobotState,Uref);
 
      Jprev := Jcurrent + 1;
      Jbest := Jcurrent;
@@ -755,11 +738,7 @@ begin
 
                  //Do simulation with current Uaux and add to Jsteps vector
                  //Switches between trajectory controller and formation controller
-                 if RobotInfo[myNumber].role = roleDoFormation then begin
-                    //J := FormationDefs[FormationSettings.formation].func(SimRobot,SimBall,ThisRobotState,Uaux)
-                    J := FormationDefs[FormationSettings.formation].func(SimRobot,SimBall,obs,nobs,ThisRobotState,Uaux)
-                 end else
-                    J := predSimulator(SimRobot,Uaux,refTraj);
+                 J := FormationDefs[FormationSettings.formation].func(SimRobot,SimBall,obs,nobs,ThisRobotState,Uaux);
 
                  //Add J to Jsteps
                  OptData.Jsteps.setv(i,0,J);
@@ -771,7 +750,10 @@ begin
            calcGradient(OptData.Jsteps, OptData.Jgradient, OptData.Jgradient_prev);
 
            //Minimization algorithm
-           calcRPROPStep(OptData,Uref);
+           if RadioGroupOptimizer.ItemIndex=0 then
+               calcSteepestDescentStep(OptData.Jgradient,Uref)
+           else
+               calcRPROPStep(OptData,Uref);
 
            //previous costs and inputs
            Jprev := Jcurrent;
@@ -799,11 +781,8 @@ begin
               scaleForSaturation(Uref);
 
            //Calculate new current cost (do simulation)
-           if RobotInfo[myNumber].role = roleDoFormation then begin
-              //Jcurrent := FormationDefs[FormationSettings.formation].func(SimRobot,SimBall,ThisRobotState,Uref)
-               Jcurrent := FormationDefs[FormationSettings.formation].func(SimRobot,SimBall,obs,nobs,ThisRobotState,Uref)
-           end else
-              Jcurrent := predSimulator(SimRobot,Uref,refTraj);
+           Jcurrent := FormationDefs[FormationSettings.formation].func(SimRobot,SimBall,obs,nobs,ThisRobotState,Uref);
+
 
            //Update JBest
            if Jcurrent < Jbest then begin
@@ -1038,8 +1017,11 @@ begin
            //Compute gradient of J from Jsteps
            calcGradient(OptData.Jsteps, OptData.Jgradient, OptData.Jgradient_prev);
 
-           //Minimization algorithm
-           calcRPROPStep(OptData,Uref);
+           //Minimization algorithmo
+           if RadioGroupOptimizer.ItemIndex=0 then
+               calcSteepestDescentStep(OptData.Jgradient,Uref)
+           else
+               calcRPROPStep(OptData,Uref);
 
            //previous costs and inputs
            Jprev := Jcurrent;
@@ -1520,7 +1502,7 @@ var
    temp, temp1: double;
    lambtest: array[1..10] of double;
    lambA,lamb0,lamb1,lamb2,lamb3,lamb4,lamb5,vv,v1,vf,segteta,alfa,distancia,newteta,wnew,vnew,vnnew: double;
-   i,j,m,k1,k2,k3,k4,t : integer;
+   i,j,m,k1,k2,k3,k4,t,mate : integer;
    v_ref,vn_ref,w_ref : double;
    v_real,vn_real,w_real,d,dettemp,aa,bb,cc,dd : double;
    U_limit,sgtemp,sgtemp1: TDMatrix;
@@ -1555,7 +1537,7 @@ begin
          for j:= 0 to 3 do begin
 
              //Dynamics simulation (v references -> v real)
-             if FormMPC.CheckBoxSimDynamics.Checked then begin
+             if FormMPC.CheckBoxSimDynamicsR.Checked then begin
                  simRobotComplete(Robot,v_ref,vn_ref,w_ref,v_real,vn_real,w_real);
              end else begin
                  v_real := v_ref;
@@ -1670,11 +1652,22 @@ begin
          end;
 
          //distance from the other bot in the formation
-         if k1>=0 then FormationState.RobotFormationDistance[k1]:=sqrt(power((Robot.RobotState.x - SimFormationRobots[k1].RobotState.x),2)+power((Robot.RobotState.y - SimFormationRobots[k1].RobotState.y),2));
-         if k2>=0 then FormationState.RobotFormationDistance[k2]:=sqrt(power((Robot.RobotState.x - SimFormationRobots[k2].RobotState.x),2)+power((Robot.RobotState.y - SimFormationRobots[k2].RobotState.y),2));
-         if k3>=0 then FormationState.RobotFormationDistance[k3]:=sqrt(power((Robot.RobotState.x - SimFormationRobots[k3].RobotState.x),2)+power((Robot.RobotState.y - SimFormationRobots[k3].RobotState.y),2));
-         if k4>=0 then FormationState.RobotFormationDistance[k4]:=sqrt(power((Robot.RobotState.x - SimFormationRobots[k4].RobotState.x),2)+power((Robot.RobotState.y - SimFormationRobots[k4].RobotState.y),2));
-
+         if k1>=0 then begin
+                FormationState.RobotFormationDistance[k1]:=sqrt(power((Robot.RobotState.x - SimFormationRobots[k1].RobotState.x),2)+power((Robot.RobotState.y - SimFormationRobots[k1].RobotState.y),2));
+                mate:=mate+1;
+         end;
+         if k2>=0 then begin
+                FormationState.RobotFormationDistance[k2]:=sqrt(power((Robot.RobotState.x - SimFormationRobots[k2].RobotState.x),2)+power((Robot.RobotState.y - SimFormationRobots[k2].RobotState.y),2));
+                mate:=mate+1;
+         end;
+         if k3>=0 then begin
+                FormationState.RobotFormationDistance[k3]:=sqrt(power((Robot.RobotState.x - SimFormationRobots[k3].RobotState.x),2)+power((Robot.RobotState.y - SimFormationRobots[k3].RobotState.y),2));
+                mate:=mate+1;
+         end;
+         if k4>=0 then begin
+                FormationState.RobotFormationDistance[k4]:=sqrt(power((Robot.RobotState.x - SimFormationRobots[k4].RobotState.x),2)+power((Robot.RobotState.y - SimFormationRobots[k4].RobotState.y),2));
+                mate:=mate+1;
+         end;
  //-->        //distance from the obstacles  - MODIFICAR PARA N OBSTÁCULOS
          for m:=0 to num_obs-1 do begin
              FormationState.RobotObstacleDistance[m]:=sqrt(power((Robot.RobotState.x - Obstacles.Centers[m].x),2)+power((Robot.RobotState.y - Obstacles.Centers[m].y),2))-0.5;
@@ -1698,7 +1691,6 @@ begin
               lamb2:=-(80*FormationState.RobotBallDist)+320;
          end;
 
-
          for m:=0 to num_obs-1 do begin
              if (FormationState.RobotObstacleDistance[m]<0.6) then begin
                lamb0:=7000;                          //distancia    8000
@@ -1717,24 +1709,10 @@ begin
              end;
          end;
 
-  {       if ((FormationState.RobotFormationDistance[k1]<0.6)and(FormationState.RobotFormationDistance[k1]>0.1)and(k1>=0)) or
-            ((FormationState.RobotFormationDistance[k2]<0.6)and(FormationState.RobotFormationDistance[k2]>0.1)and(k2>=0)) or
-            ((FormationState.RobotFormationDistance[k3]<0.6)and(FormationState.RobotFormationDistance[k3]>0.1)and(k3>=0)) or
-            ((FormationState.RobotFormationDistance[k4]<0.6)and(FormationState.RobotFormationDistance[k4]>0.1)and(k4>=0)) then begin
-           lamb0:=7000;                         //distancia    8000
-           lamb1:=10;                           //orientacao
-           lamb2:=10;                          //posicionamento
-           lamb3:=0.1;                          //esforço de controle
-           lamb4:=15000;                         //colegas
-           lamb5:=15000;                       //obstáculo  15000
-         end else begin
-           lamb0:=FormationSettings.weights[0];
-           lamb1:=FormationSettings.weights[1];
-           lamb2:=FormationSettings.weights[2];
-           lamb3:=FormationSettings.weights[3];
-           lamb4:=FormationSettings.weights[4];
-           lamb5:=FormationSettings.weights[5];
-         end; }
+
+         if (mate=0) then begin
+            lambA:=0;
+         end;
 
          //SUM COST
          sum_cost := sum_cost + lambA*abs(Ball.detsigma);
@@ -1809,7 +1787,7 @@ begin
          for j:= 0 to 3 do begin
 
              //Dynamics simulation (v references -> v real)
-             if FormMPC.CheckBoxSimDynamics.Checked then begin
+             if FormMPC.CheckBoxSimDynamicsR.Checked then begin
                  simRobotComplete(Robot,v_ref,vn_ref,w_ref,v_real,vn_real,w_real);
              end else begin
                  v_real := v_ref;
@@ -1870,7 +1848,7 @@ begin
          lamb4:=FormationSettings.weights[4];
          lamb5:=FormationSettings.weights[5];
 
-//-->         // - MODIFICAR PARA N OBSTÁCULOS
+//-->         // PARA N OBSTÁCULOS
          for m:=0 to num_obs-1 do begin
              if (FormationState.RobotObstacleDistance[m]<0.6) then begin
                lamb0:=7000;                         //distancia    8000
@@ -1887,24 +1865,6 @@ begin
                lamb4:=FormationSettings.weights[4];
                lamb5:=FormationSettings.weights[5];
              end;
-         end;
-
-         if ((FormationState.RobotFormationDistance[k2]<0.6)and(FormationState.RobotFormationDistance[k2]>0.1)and(k2>=0)) or
-            ((FormationState.RobotFormationDistance[k3]<0.6)and(FormationState.RobotFormationDistance[k3]>0.1)and(k3>=0)) or
-            ((FormationState.RobotFormationDistance[k4]<0.6)and(FormationState.RobotFormationDistance[k4]>0.1)and(k4>=0)) then begin
-           lamb0:=7000;                         //distancia    8000
-           lamb1:=10;                           //orientacao
-           lamb2:=10;                          //posicionamento
-           lamb3:=0.1;                          //esforço de controle
-           lamb4:=15000;                         //colegas
-           lamb5:=15000;                       //obstáculo  15000
-         end else begin
-           lamb0:=FormationSettings.weights[0];
-           lamb1:=FormationSettings.weights[1];
-           lamb2:=FormationSettings.weights[2];
-           lamb3:=FormationSettings.weights[3];
-           lamb4:=FormationSettings.weights[4];
-           lamb5:=FormationSettings.weights[5];
          end;
 
          //SUM COST

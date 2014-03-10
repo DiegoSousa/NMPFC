@@ -81,7 +81,6 @@ var
   iterChangeRoles:integer=0;
   RobotInfo: array [0..MaxRobots-1] of TRobotInfo;
   RobotCalcData: array[0..MaxRobots-1] of TRobotCalcData;
-  KeeperWay:TRole=roleKeeper;
   Play, last_Play: TPlay;
   PlayChangeTimeStamp: LongWord;
 
@@ -423,241 +422,15 @@ var i:integer;
 begin
 
   // default roles
-  //if (FCoach.CheckBoxOtherTactic2.Checked=true) then begin
-  //  pri_role[0]:=roleFurtiveAtackerKicker;
-  //end else begin
-    pri_role[0]:=roleAtackerKicker;
-  //end;
-  pri_role[1]:=roleLastDefender;
-  pri_role[2]:=roleMidfield;
-  pri_role[3]:=roleMamao;
-  pri_role[4]:=roleKeeper;
-
   case Play of
     playHalt: begin
       for i:=0 to 4 do pri_role[i]:=roleIdle;
     end;
 
     playNormal: begin
-      // use default roles
-      //
-      //
+
     end;
 
-    playSearch: begin
-      pri_role[0]:=roleGoSearch4;
-      pri_role[1]:=roleGoSearch2;
-      pri_role[2]:=roleGoSearch3;
-      pri_role[3]:=roleGoSearch1;
-      pri_role[4]:=roleKeeper;
-    end;
-
-    playBarrierAtackSide: begin
-      pri_role[0]:=roleBarrierMain;
-      pri_role[1]:=roleLastDefender;
-      pri_role[2]:=roleMamao;
-      pri_role[3]:=roleMidfield;
-      pri_role[4]:=roleKeeper;
-    end;
-
-    playBarrierDefenseSide: begin
-      pri_role[0]:=roleBarrierMain;
-      pri_role[1]:=roleLastDefender;
-      pri_role[2]:=roleMidfield;
-      pri_role[3]:=roleMamao;
-      pri_role[4]:=roleKeeper;
-    end;
-
-   playWaitOtherStart:begin
-      pri_role[0]:=roleBarrierMain;
-      pri_role[1]:=roleLastDefender;
-      pri_role[2]:=roleMidOfMidfieldLeft;
-      pri_role[3]:=roleMidOfMidfieldRight;
-      pri_role[4]:=roleKeeper;
-   end;
-
-    playWaitOurStart: begin
-      pri_role[0]:=roleWaitForFreeKick;
-      pri_role[1]:=roleLastDefender;
-      pri_role[2]:=roleAtackerReceiver;
-      pri_role[3]:=roleMidOfMidfield;
-      pri_role[4]:=roleKeeper;
-    end;
-
-    playOurStart:begin
-     //if (FCoach.CheckBoxOtherTactic.Checked=true) then begin
-     // pri_role[0]:=roleFreeKick;
-     // pri_role[1]:=roleLastDefender;
-     // pri_role[2]:=roleMidfield;
-     // pri_role[3]:=roleAtackerReceiver;
-     // pri_role[4]:=roleKeeper;
-     //end else begin
-      pri_role[0]:=roleFreeKick;
-      pri_role[1]:=roleLastDefender;
-      pri_role[2]:=roleAtackerReceiver;
-      pri_role[3]:=roleMidfield;
-      pri_role[4]:=roleKeeper;
-     //end;
-    end;
-
-    playOurFreeKickDefenseSide: begin
-     //if (FCoach.CheckBoxOtherTactic.Checked=true) then begin
-     // pri_role[0]:=roleWaitForFreeKick;
-     // pri_role[1]:=roleLastDefender;
-     // pri_role[2]:=roleMidfield;
-     // pri_role[3]:=roleMamao;
-     // pri_role[4]:=roleKeeper;
-     //end else begin
-      pri_role[0]:=roleWaitForFreeKick;
-      pri_role[1]:=roleLastDefender;
-      pri_role[2]:=roleAtackerReceiver;
-      pri_role[3]:=roleMidfield;
-      pri_role[4]:=roleKeeper;
-     //end;
-    end;
-
-    playOurFreeKickAtackSide: begin
-     //if (FCoach.CheckBoxOtherTactic.Checked=true) then begin
-     // pri_role[0]:=roleWaitForFreeKick;
-     // pri_role[1]:=roleLastDefender;
-     // pri_role[2]:=roleMidfield;
-     // pri_role[3]:=roleMamao;
-     // pri_role[4]:=roleKeeper;
-     //end else begin
-      pri_role[0]:=roleWaitForFreeKick;
-      pri_role[1]:=roleLastDefender;
-      pri_role[2]:=roleAtackerReceiver;
-      pri_role[3]:=roleMidfield;
-      pri_role[4]:=roleKeeper;
-     //end;
-    end;
-
-    playOurFreeKick: begin
-     //if (FCoach.CheckBoxOtherTactic.Checked=true) then begin
-     // pri_role[0]:=roleFreeKick;
-     // pri_role[1]:=roleLastDefender;
-     // pri_role[2]:=roleMidfield;
-     // pri_role[3]:=roleMamao;
-     // pri_role[4]:=roleKeeper;
-     //end else begin
-      pri_role[0]:=roleFreeKick;
-      pri_role[1]:=roleLastDefender;
-      pri_role[2]:=roleAtackerReceiver;
-      pri_role[3]:=roleMidfield;
-      pri_role[4]:=roleKeeper;
-     //end;
-    end;
-
-    playWaitOurThrowIn: begin
-     //if (FCoach.CheckBoxOtherTactic.Checked=true) then begin
-     // pri_role[0]:=roleWaitToThrowIn;
-     // pri_role[1]:=roleLastDefender;
-     // pri_role[2]:=roleMidfield;
-     // pri_role[3]:=roleMamao;
-     // pri_role[4]:=roleKeeper;
-     //end else begin
-      pri_role[0]:=roleWaitToThrowIn;
-      pri_role[1]:=roleLastDefender;
-      pri_role[2]:=roleAtackerReceiver;
-      pri_role[3]:=roleMidfield;
-      pri_role[4]:=roleKeeper;
-     //end;
-    end;
-    //
-    playOurThrowIn: begin
-     //if (FCoach.CheckBoxOtherTactic.Checked=true) then begin
-     // pri_role[0]:=roleThrowIn;
-     // pri_role[1]:=roleLastDefender;
-     // pri_role[2]:=roleMidfield;
-     // pri_role[3]:=roleMamao;
-     // pri_role[4]:=roleKeeper;
-     //end else begin
-      pri_role[0]:=roleThrowIn;
-      pri_role[1]:=roleLastDefender;
-      pri_role[2]:=roleAtackerReceiver;
-      pri_role[3]:=roleMidfield;
-      pri_role[4]:=roleKeeper;
-     //end;
-    end;
-
-    playWaitOurGoalKick: begin
-      pri_role[0]:=roleWaitOurGoalKick;
-      pri_role[1]:=roleLastDefender;
-      pri_role[2]:=roleMidfield;
-      pri_role[3]:=roleMamao;
-      pri_role[4]:=roleKeeper;
-    end;
-    //
-    playOurGoalKick: begin
-      pri_role[0]:=roleFreeKick;
-      pri_role[1]:=roleLastDefender;
-      pri_role[2]:=roleMidfield;
-      pri_role[3]:=roleMamao;
-      pri_role[4]:=roleKeeper;
-    end;
-    //
-    playWaitOurCornerKick: begin
-      pri_role[0]:=roleWaitForCornerKick;
-      pri_role[1]:=roleLastDefender;
-      pri_role[2]:=roleMamao;
-      pri_role[3]:=roleMidfield;
-      pri_role[4]:=roleKeeper;
-    end;
-    //
-    playOurCornerKick: begin
-      pri_role[0]:=RoleCornerKick;
-      pri_role[1]:=roleLastDefender;
-      pri_role[2]:=roleMamao;
-      pri_role[3]:=roleMidfield;
-      pri_role[4]:=roleKeeper;
-    end;
-
-    playDefendPenalty: begin
-      pri_role[0]:=roleStayBack;
-      pri_role[1]:=roleStayBack;
-      pri_role[2]:=roleStayBack;
-      pri_role[3]:=roleStayBack;
-      pri_role[4]:=roleKeeperDefendPenalty;
-    end;
-
-    playWaitToScorePenalty: begin
-      pri_role[0]:=rolePenaltyKick;
-      pri_role[1]:=roleStayBack;
-      pri_role[2]:=roleStayBack;
-      pri_role[3]:=roleStayBack;
-      pri_role[4]:=roleKeeper;
-    end;
-
-    playScorePenalty: begin
-      pri_role[0]:=roleScorePenaltyKick;
-      pri_role[1]:=roleStayBack;
-      pri_role[2]:=roleStayBack;
-      pri_role[3]:=roleStayBack;
-      pri_role[4]:=roleKeeper;
-    end;
-
-    playWaitDroppedBall: begin
-      pri_role[0]:=roleWaitDroppedBall;
-      pri_role[1]:=roleLastDefender;
-      pri_role[2]:=roleMidfield;
-      pri_role[3]:=roleMamao;
-      pri_role[4]:=roleKeeper;
-    end;
-
-    playDroppedBall: begin
-      pri_role[0]:=roleFreeKick;
-      pri_role[1]:=roleLastDefender;
-      pri_role[2]:=roleMidfield;
-      pri_role[3]:=roleMamao;
-      pri_role[4]:=roleKeeper;
-    end;
-    playStartPos: begin
-      pri_role[0]:=roleGoPosStart;
-      pri_role[1]:=roleGoPosStart;
-      pri_role[2]:=roleGoPosStart;
-      pri_role[3]:=roleGoPosStart;
-      pri_role[4]:=roleGoPosStart;
-    end;
     playFormation: begin
       //Por condição pra mudar o role
       pri_role[0]:=roleDoFormation;
@@ -668,13 +441,6 @@ begin
       pri_role[2]:=roleDoFormation;
       pri_role[3]:=roleDoFormation;
       pri_role[4]:=roleDoFormation;
-    end;
-    playStopPos: begin
-      pri_role[0]:=roleGoPosStop;
-      pri_role[1]:=roleGoPosStop;
-      pri_role[2]:=roleGoPosStop;
-      pri_role[3]:=roleGoPosStop;
-      pri_role[4]:=roleGoPosStop;
     end;
   end;
 end;
@@ -729,12 +495,6 @@ begin
   // give a bonus to keep the current roles
   if RobotInfo[num].role=role then begin
     result:=result-0.12;
-    //result:=result-0.20;
-  end;
-
-  // try to use the assigned "free kicker" robots
-  if (role = roleFreeKick) and (RobotStatus[num].default_role = roleFreeKick) then begin
-    result := result - 10.0;
   end;
 end;
 
@@ -774,88 +534,6 @@ begin
   if RobotAvailableCount>=1 then begin
     RobotInfo[0].role:=RolePri[4];
   end;
-
-  if((play=playStartPos) or (play=PlayStopPos))then begin
-    iterChangeRoles:=0;
-    for i:=1 to MaxRobots-1 do
-        RobotInfo[i].role:=RolePri[i-1];
-  end else if(((play=playWaitDroppedBall) or (play=playWaitOtherStart) or (play=playWaitOurCornerKick)
-  or (play=playWaitOurGoalKick)or (play=playWaitOurStart)or (play=playWaitOurThrowIn)
-  or (play=playBarrierAtackSide)or (play=playBarrierDefenseSide))and(oldPlay<>Play)) then begin
-    //evaluate best fitness for each role
-      for act_role:=0 to MaxRobots-2 do begin
-        best:=-1;
-        best_value:=1e6;
-        for i:=1 to MaxRobots-1 do begin
-          if RobotAvailable[i] then begin
-            // there is no point in evaluating the last robot
-            if RobotAvailableCount <= 1 then begin
-              val := 0;
-            end else begin
-              val := EvaluateRobotRole(i, RolePri[act_role]);
-            end;
-            if val < best_value then begin
-              best_value:=val;
-              best:=i;
-            end;
-          end;
-        end;
-        if best<>-1 then begin
-          newRoles[best]:=RolePri[act_role];
-          RobotAvailable[best]:=false;
-          Dec(RobotAvailableCount);
-        end;
-        for i:=1 to MaxRobots-1 do begin
-         if RobotStatus[i].active then
-          RobotInfo[i].role:=newRoles[i]
-         else begin
-          if Play=playNormal then begin
-           RobotInfo[i].role:=roleNavigateToLocalize;
-          end else begin // para navegar e localizar-se
-           RobotInfo[i].role:=roleIdle;
-          end;
-         end;
-       end;
-      end;
-    end else if((play<>playWaitDroppedBall) and (play<>playWaitOtherStart) and (play<>playWaitOurCornerKick)
-     and (play<>playWaitOurGoalKick) and (play<>playWaitOurStart) and (play<>playWaitOurThrowIn)
-     and (play<>playBarrierAtackSide) and (play<>playBarrierDefenseSide)) then begin
-    //evaluate best fitness for each role
-      for act_role:=0 to MaxRobots-2 do begin
-        best:=-1;
-        best_value:=1e6;
-        for i:=1 to MaxRobots-1 do begin
-          if RobotAvailable[i] then begin
-            // there is no point in evaluating the last robot
-            if RobotAvailableCount <= 1 then begin
-              val := 0;
-            end else begin
-              val := EvaluateRobotRole(i, RolePri[act_role]);
-            end;
-            if val < best_value then begin
-              best_value:=val;
-              best:=i;
-            end;
-          end;
-        end;
-        if best<>-1 then begin
-          newRoles[best]:=RolePri[act_role];
-          RobotAvailable[best]:=false;
-          Dec(RobotAvailableCount);
-        end;
-      end;
-      for i:=1 to MaxRobots-1 do begin
-         if RobotStatus[i].active then
-          RobotInfo[i].role:=newRoles[i]
-         else begin
-          if Play=playNormal then begin
-           RobotInfo[i].role:=roleNavigateToLocalize;
-          end else begin // para navegar e localizar-se
-           RobotInfo[i].role:=roleIdle;
-          end;
-         end;
-      end;
-   end;
 
 end;
 
