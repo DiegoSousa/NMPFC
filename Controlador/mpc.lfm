@@ -1,7 +1,7 @@
 object FormMPC: TFormMPC
-  Left = 728
+  Left = 2430
   Height = 597
-  Top = 113
+  Top = 386
   Width = 552
   ActiveControl = EditN1
   Caption = 'Formation Control'
@@ -10,12 +10,12 @@ object FormMPC: TFormMPC
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '0.9.28.2'
+  LCLVersion = '1.0.14.0'
   object Label1: TLabel
     Left = 104
     Height = 18
     Top = 448
-    Width = 62
+    Width = 63
     Caption = 'Distance:'
     ParentColor = False
   end
@@ -57,7 +57,7 @@ object FormMPC: TFormMPC
     Top = 0
     Width = 225
     Caption = 'Debug'
-    ClientHeight = 380
+    ClientHeight = 365
     ClientWidth = 221
     TabOrder = 0
     object MemoDebug: TMemo
@@ -80,7 +80,7 @@ object FormMPC: TFormMPC
     Text = '1.2'
   end
   object ButtonSetBallAtDistanceInline: TButton
-    Left = 129
+    Left = 128
     Height = 46
     Top = 394
     Width = 104
@@ -103,11 +103,13 @@ object FormMPC: TFormMPC
       Top = 23
       Width = 40
       EditLabel.AnchorSideLeft.Control = EditN2
+      EditLabel.AnchorSideRight.Control = EditN2
+      EditLabel.AnchorSideRight.Side = asrBottom
       EditLabel.AnchorSideBottom.Control = EditN2
       EditLabel.Left = 62
       EditLabel.Height = 18
       EditLabel.Top = 2
-      EditLabel.Width = 23
+      EditLabel.Width = 40
       EditLabel.Caption = 'N2:'
       EditLabel.ParentColor = False
       TabOrder = 0
@@ -119,11 +121,13 @@ object FormMPC: TFormMPC
       Top = 23
       Width = 40
       EditLabel.AnchorSideLeft.Control = EditNu
+      EditLabel.AnchorSideRight.Control = EditNu
+      EditLabel.AnchorSideRight.Side = asrBottom
       EditLabel.AnchorSideBottom.Control = EditNu
       EditLabel.Left = 108
       EditLabel.Height = 18
       EditLabel.Top = 2
-      EditLabel.Width = 23
+      EditLabel.Width = 40
       EditLabel.Caption = 'Nu:'
       EditLabel.ParentColor = False
       TabOrder = 1
@@ -150,7 +154,7 @@ object FormMPC: TFormMPC
         Left = 14
         Height = 18
         Top = 48
-        Width = 38
+        Width = 40
         Caption = 'delta:'
         ParentColor = False
       end
@@ -158,7 +162,7 @@ object FormMPC: TFormMPC
         Left = 128
         Height = 18
         Top = 18
-        Width = 37
+        Width = 35
         Caption = 'Eta+:'
         ParentColor = False
       end
@@ -174,7 +178,7 @@ object FormMPC: TFormMPC
         Left = 14
         Height = 18
         Top = 79
-        Width = 42
+        Width = 47
         Caption = 'J Stop:'
         ParentColor = False
       end
@@ -182,7 +186,7 @@ object FormMPC: TFormMPC
         Left = 130
         Height = 18
         Top = 79
-        Width = 41
+        Width = 42
         Caption = 'alpha:'
         ParentColor = False
       end
@@ -237,9 +241,9 @@ object FormMPC: TFormMPC
     end
     object CheckBoxEnable: TCheckBox
       Left = 14
-      Height = 22
+      Height = 24
       Top = 183
-      Width = 68
+      Width = 71
       Caption = 'Enable'
       OnChange = CheckBoxEnableChange
       TabOrder = 3
@@ -250,11 +254,13 @@ object FormMPC: TFormMPC
       Top = 23
       Width = 40
       EditLabel.AnchorSideLeft.Control = EditL1
+      EditLabel.AnchorSideRight.Control = EditL1
+      EditLabel.AnchorSideRight.Side = asrBottom
       EditLabel.AnchorSideBottom.Control = EditL1
       EditLabel.Left = 158
       EditLabel.Height = 18
       EditLabel.Top = 2
-      EditLabel.Width = 20
+      EditLabel.Width = 40
       EditLabel.Caption = 'L1:'
       EditLabel.ParentColor = False
       TabOrder = 4
@@ -266,11 +272,13 @@ object FormMPC: TFormMPC
       Top = 23
       Width = 40
       EditLabel.AnchorSideLeft.Control = EditL2
+      EditLabel.AnchorSideRight.Control = EditL2
+      EditLabel.AnchorSideRight.Side = asrBottom
       EditLabel.AnchorSideBottom.Control = EditL2
       EditLabel.Left = 206
       EditLabel.Height = 18
       EditLabel.Top = 2
-      EditLabel.Width = 20
+      EditLabel.Width = 40
       EditLabel.Caption = 'L2:'
       EditLabel.ParentColor = False
       TabOrder = 5
@@ -282,11 +290,13 @@ object FormMPC: TFormMPC
       Top = 23
       Width = 40
       EditLabel.AnchorSideLeft.Control = EditL3
+      EditLabel.AnchorSideRight.Control = EditL3
+      EditLabel.AnchorSideRight.Side = asrBottom
       EditLabel.AnchorSideBottom.Control = EditL3
       EditLabel.Left = 254
       EditLabel.Height = 18
       EditLabel.Top = 2
-      EditLabel.Width = 20
+      EditLabel.Width = 40
       EditLabel.Caption = 'L3:'
       EditLabel.ParentColor = False
       TabOrder = 6
@@ -299,11 +309,13 @@ object FormMPC: TFormMPC
       Width = 40
       Color = clNone
       EditLabel.AnchorSideLeft.Control = EditN1
+      EditLabel.AnchorSideRight.Control = EditN1
+      EditLabel.AnchorSideRight.Side = asrBottom
       EditLabel.AnchorSideBottom.Control = EditN1
       EditLabel.Left = 14
       EditLabel.Height = 18
       EditLabel.Top = 2
-      EditLabel.Width = 23
+      EditLabel.Width = 40
       EditLabel.Caption = 'N1:'
       EditLabel.ParentColor = False
       TabOrder = 7
@@ -323,7 +335,7 @@ object FormMPC: TFormMPC
       Left = 6
       Height = 18
       Top = 15
-      Width = 62
+      Width = 63
       Caption = 'Distance:'
       ParentColor = False
     end
@@ -331,7 +343,7 @@ object FormMPC: TFormMPC
       Left = 6
       Height = 18
       Top = 43
-      Width = 78
+      Width = 83
       Caption = 'Orientation:'
       ParentColor = False
     end
@@ -339,7 +351,7 @@ object FormMPC: TFormMPC
       Left = 6
       Height = 18
       Top = 71
-      Width = 57
+      Width = 61
       Caption = 'Position:'
       ParentColor = False
     end
@@ -347,7 +359,7 @@ object FormMPC: TFormMPC
       Left = 6
       Height = 18
       Top = 99
-      Width = 40
+      Width = 45
       Caption = 'Effort:'
       ParentColor = False
     end
@@ -355,7 +367,7 @@ object FormMPC: TFormMPC
       Left = 6
       Height = 18
       Top = 159
-      Width = 69
+      Width = 72
       Caption = 'Obstacles:'
       ParentColor = False
     end
@@ -363,7 +375,7 @@ object FormMPC: TFormMPC
       Left = 166
       Height = 18
       Top = 71
-      Width = 53
+      Width = 55
       Caption = 'P Value:'
       ParentColor = False
     end
@@ -371,7 +383,7 @@ object FormMPC: TFormMPC
       Left = 6
       Height = 18
       Top = 128
-      Width = 45
+      Width = 47
       Caption = 'Mates:'
       ParentColor = False
     end
@@ -379,7 +391,7 @@ object FormMPC: TFormMPC
       Left = 166
       Height = 18
       Top = 38
-      Width = 55
+      Width = 56
       Caption = 'D Value:'
       ParentColor = False
     end
@@ -387,7 +399,7 @@ object FormMPC: TFormMPC
       Left = 206
       Height = 18
       Top = 127
-      Width = 85
+      Width = 86
       Caption = 'Covariances:'
       ParentColor = False
     end
@@ -466,9 +478,9 @@ object FormMPC: TFormMPC
   end
   object difCB: TCheckBox
     Left = 8
-    Height = 22
+    Height = 24
     Top = 392
-    Width = 97
+    Width = 103
     Caption = 'Differential'
     TabOrder = 5
   end
@@ -485,7 +497,7 @@ object FormMPC: TFormMPC
       Left = 6
       Height = 18
       Top = 10
-      Width = 27
+      Width = 29
       Caption = 'Tao:'
       ParentColor = False
     end
@@ -493,7 +505,7 @@ object FormMPC: TFormMPC
       Left = 6
       Height = 18
       Top = 67
-      Width = 43
+      Width = 44
       Caption = 'Vmax:'
       ParentColor = False
     end
@@ -539,7 +551,7 @@ object FormMPC: TFormMPC
     end
     object CheckBoxTauLine: TCheckBox
       Left = 126
-      Height = 22
+      Height = 24
       Top = 2
       Width = 24
       Checked = True
@@ -558,9 +570,9 @@ object FormMPC: TFormMPC
     TabOrder = 7
     object CheckBoxPropSat: TCheckBox
       Left = 7
-      Height = 22
+      Height = 24
       Top = 7
-      Width = 128
+      Width = 137
       Caption = 'Prop. Saturation'
       Checked = True
       State = cbChecked
@@ -568,7 +580,7 @@ object FormMPC: TFormMPC
     end
     object CheckBoxSimDynamics: TCheckBox
       Left = 6
-      Height = 22
+      Height = 24
       Top = 31
       Width = 122
       Caption = 'Sim. Dynamics'
@@ -588,7 +600,7 @@ object FormMPC: TFormMPC
       Left = 9
       Height = 18
       Top = -1
-      Width = 50
+      Width = 51
       Caption = 'Mate 1:'
       ParentColor = False
     end
@@ -596,7 +608,7 @@ object FormMPC: TFormMPC
       Left = 81
       Height = 18
       Top = -1
-      Width = 50
+      Width = 51
       Caption = 'Mate 2:'
       ParentColor = False
     end
@@ -604,7 +616,7 @@ object FormMPC: TFormMPC
       Left = 9
       Height = 18
       Top = 63
-      Width = 50
+      Width = 51
       Caption = 'Mate 3:'
       ParentColor = False
     end
@@ -612,7 +624,7 @@ object FormMPC: TFormMPC
       Left = 81
       Height = 18
       Top = 63
-      Width = 50
+      Width = 51
       Caption = 'Mate 4:'
       ParentColor = False
     end
@@ -653,20 +665,12 @@ object FormMPC: TFormMPC
       Text = '0'
     end
   end
-  object ISTCB: TCheckBox
-    Left = 8
-    Height = 22
-    Top = 416
-    Width = 44
-    Caption = 'IST'
-    TabOrder = 9
-  end
   object edk1: TEdit
     Left = 256
     Height = 27
     Top = 440
     Width = 48
-    TabOrder = 10
+    TabOrder = 9
     Text = '1.5'
   end
   object edk2: TEdit
@@ -674,7 +678,7 @@ object FormMPC: TFormMPC
     Height = 27
     Top = 472
     Width = 48
-    TabOrder = 11
+    TabOrder = 10
     Text = '0.5'
   end
   object edk3: TEdit
@@ -682,7 +686,7 @@ object FormMPC: TFormMPC
     Height = 27
     Top = 440
     Width = 48
-    TabOrder = 12
+    TabOrder = 11
     Text = '1'
   end
   object edk4: TEdit
@@ -690,16 +694,16 @@ object FormMPC: TFormMPC
     Height = 27
     Top = 472
     Width = 48
-    TabOrder = 13
+    TabOrder = 12
     Text = '1'
   end
   object FEUPCB: TCheckBox
     Left = 8
-    Height = 22
-    Top = 440
-    Width = 58
+    Height = 24
+    Top = 416
+    Width = 61
     Caption = 'FEUP'
-    TabOrder = 14
+    TabOrder = 13
   end
   object FormStorage: TIniPropStorage
     StoredValues = <>

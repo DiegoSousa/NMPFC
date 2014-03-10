@@ -366,7 +366,7 @@ var
 
 implementation
 
-uses  Utils,StrUtils, Field{, omni3}, CoachMain;
+uses  Utils,StrUtils, Field;
 
 
 function FToStr(f: double): string;
@@ -398,7 +398,7 @@ begin
   FormStorage.Restore;
   ComponentsToParameters;
   FMain.InsertAuxForms(FParam,'Parameters');
-  FCoachMain.InsertAuxForms(FParam,'Parameters');
+  //===>  FCoachMain.InsertAuxForms(FParam,'Parameters');
 
   LoadArray;
   FillListNames;
@@ -545,7 +545,7 @@ begin
   SaveArray;
 
   FMain.AuxFormClosed('Parameters');
-  FCoachMain.AuxFormClosed('Parameters');
+  //===>  FCoachMain.AuxFormClosed('Parameters');
 end;
 
 function EditToFloatDef(edit: TEdit; default: double): double;

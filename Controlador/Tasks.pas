@@ -1285,7 +1285,7 @@ begin
 
     with ActionPars[num] do begin
 
-        if ((flagForm=True))and(d>strtofloat(FormMPC.EditP1_badi.Text)+0.8) and
+        if ((flagForm=True))and(d>strtofloatdef(FormMPC.EditP1_badi.Text,0)+0.8) and
            (FormMPC.ObstacleInSegment(RobotState[num].x,RobotState[num].y,BallState.x,BallState.y,obs,nobs)) then begin
                 RobotInfo[num].action:=acGoToXYTeta;
                 speed:=1;

@@ -379,7 +379,7 @@ begin
   end;
  end;
  for i:=1 to 9 do begin
-  valArray[i]:=StrToFloat(Copy(data,id[(i-1)*2+1],id[(i-1)*2+2]+1-id[(i-1)*2+1]));
+  valArray[i]:=StrToFloatdef(Copy(data,id[(i-1)*2+1],id[(i-1)*2+2]+1-id[(i-1)*2+1]),0);
  end;
  v:=valArray[1];
  vn:=valArray[2];
@@ -403,37 +403,12 @@ begin
     PB_BallMap.Canvas.Clear;
     drawBallEllipse(x,y,estBall.ballCovX,estBall.ballCovY,estBall.ballCovXY,PB_BallMap,clGreen);
 
-
-    //if FMain.CBISTScenario.Checked=true then begin
-    //  d:=(sqrt(power((RobotState[myNumber].x-BallState.x),2)+power((RobotState[myNumber].y-BallState.y),2)));
-    //  r:=(sqrt(power((RobotState[myNumber].x-BallState.x),2)+power((RobotState[myNumber].y-BallState.y),2)+0.4225));
-    //  tetao:=arctan(0.65/d);
-    //  k1:=(0.02);
-    //  sigr:=k1*(power(d,2)/0.02)+(0.4225/(2*(power(r,2)-0.01)))+(0.4225/(0.04*(power(r,2)-0.01)));
-    //  sigphi:=1/(2*(power(r,2)-(0.01*power((sin(tetao)),2))));
-    //  sigtemp.setv(0,0,sigr);
-    //  sigtemp.setv(0,1,0);
-    //  sigtemp.setv(1,0,0);
-    //  sigtemp.setv(1,1,sigphi);
-    //  sigmaT:=sigtemp;
-    //end else
-    //if FormMPC.FEUPCB.Checked=true then begin
       d:=(sqrt(power((RobotState[myNumber].x-BallState.x),2)+power((RobotState[myNumber].y-BallState.y),2)));
       sigtemp.setv(0,0,power((d),2));
       sigtemp.setv(0,1,0);
       sigtemp.setv(1,0,0);
       sigtemp.setv(1,1,d);
       sigmaT:=sigtemp;
-    //end;
-    if FMain.CBISTScenario.Checked=true then begin
-      sigr:=Sr;
-      sigphi:=Sphi;
-      sigtemp.setv(0,0,sigr);
-      sigtemp.setv(0,1,0);
-      sigtemp.setv(1,0,0);
-      sigtemp.setv(1,1,sigphi);
-      sigmaT:=sigtemp;
-    end;
 
     drawBallPose(x,y,Vx,Vy,PB_BallMap,clGreen);
     drawPose(PB_BallMap,clRed);

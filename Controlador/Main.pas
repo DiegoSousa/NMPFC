@@ -34,7 +34,6 @@ const
   MaxMessRobots=8;
   MaxVSensors=MaxRegions;
 
-  //MaxObstacles=32;
   MaxObstacles=61; //numero de raios do Ovis!!!! Heber
   MaxWorldStripes=16;
 
@@ -134,7 +133,6 @@ type
 
   TRadar= record
     lineNum: integer;
-    //x,y: integer;
     color: integer;
     size: integer;
     teta,ro: double;
@@ -142,7 +140,6 @@ type
   end;
 
   TOdo= record
-//    speed: array[0..2] of integer;
     speedw: array[0..2] of double;
     dwheel: array[0..2] of double;
     RobotDelU, RobotDelUn, RobotDelTeta:double;
@@ -205,7 +202,7 @@ type
   TRobotState=record
     valid:boolean;
     x,y,teta: double;
-    LocalizationAvailable: boolean; //indica se o robô está perdido
+//===>    LocalizationAvailable: boolean; //indica se o robô está perdido
     LocAdvV, LocAdvVn, LocAdvW: double; //indica para onde a localizacao quer mandar o robô
     cov_x,cov_y,cov_xy,cov_teta: double;
     v,vn,w: double;
@@ -256,15 +253,14 @@ type
     BSetRole: TButton;
     BStopReference: TButton;
     Button_ShowLocalization: TButton;
+ //===>   Button_ShowLocalization: TButton;
     CBDefRole: TComboBox;
-    CBISTScenario: TCheckBox;
-    CBDrone: TCheckBox;
+    CBLocalization: TCheckBox;
     CBStartRole: TComboBox;
     CBKick: TCheckBox;
-    CBLocalization: TCheckBox;
+//===>    CBLocalization: TCheckBox;
     CBUseCompass: TCheckBox;
     CBSimTwo: TCheckBox;
-    CBShowLogGraph: TCheckBox;
     CBUisGK: TCheckBox;
     CheckBoxKickBehindMidField: TCheckBox;
     CheckBox_NoCamera: TCheckBox;
@@ -282,8 +278,6 @@ type
     MI_BallEst: TMenuItem;
     MenuItem_Joystick: TMenuItem;
     MenuItem_Hardware: TMenuItem;
-    RG_BallSelection: TRadioGroup;
-    RadioGroup_temp: TRadioGroup;
     SdpoUDPSimTwo: TLUDPComponent;
     MemoActionPars: TMemo;
     SdpoUDP: TLUDPComponent;
@@ -331,32 +325,8 @@ type
     CBTraj: TCheckBox;
     CBGoalLines: TCheckBox;
     CLBShowValues: TCheckListBox;
-    Info: TTabSheet;
-    MemoRegions: TMemo;
-    EditStresses: TEdit;
-    Label7: TLabel;
-    EditGameState: TEdit;
-    LblStress: TLabel;
-    EditInfo: TEdit;
-    Editinfo2: TEdit;
-    Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    Label13: TLabel;
-    Editdrivereset: TEdit;
-    Memo1: TMemo;
-    Btnradar: TButton;
-    Tablogs: TTabSheet;
-    GroupBox1: TGroupBox;
-    EditFileudplog: TEdit;
-    Label2: TLabel;
-    CBsavelogs: TCheckBox;
-    Memoudp: TMemo;
     TimerUdplog: TTimer;
     CBudp: TCheckBox;
-    Editinfo3: TEdit;
-    Label15: TLabel;
-    lblpack: TLabel;
     Editpwm1: TEdit;
     Editpwm2: TEdit;
     Editpwm3: TEdit;
@@ -368,7 +338,7 @@ type
     CBShowGoodStripes: TCheckBox;
     procedure BSetRoleClick(Sender: TObject);
     procedure BStopReferenceClick(Sender: TObject);
-    procedure Button_ShowLocalizationClick(Sender: TObject);
+//===>    procedure Button_ShowLocalizationClick(Sender: TObject);
     procedure CBDefRoleClick(Sender: TObject);
     procedure CBSimTwoClick(Sender: TObject);
     procedure CheckBox_NoCameraChange(Sender: TObject);
@@ -377,7 +347,6 @@ type
     procedure MenuItem_HardwareClick(Sender: TObject);
     procedure MenuItem_JoystickClick(Sender: TObject);
     procedure MI_BallEstClick(Sender: TObject);
-    procedure RGRobotSelClick(Sender: TObject);
     procedure SdpoUDPReceive(aSocket: TLSocket);
     procedure FormDestroy(Sender: TObject);
     procedure ImageMapMouseDown(Sender: TObject; Button: TMouseButton;
@@ -392,8 +361,8 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure CBSimulatorClick(Sender: TObject);
     procedure MenuAboutClick(Sender: TObject);
-    procedure SdpoUDPSimTwoError(const msg: string; aSocket: TLSocket);
     procedure SdpoUDPSimTwoReceive(aSocket: TLSocket);
+    procedure SdpoUDPSimTwoError(const msg: string; aSocket: TLSocket);
     procedure SdpoUDPSuperError(const msg: string; aSocket: TLSocket);
     procedure SdpoUDPSuperReceive(aSocket: TLSocket);
     procedure TimerSimulatorTimer(Sender: TObject);
@@ -426,10 +395,8 @@ type
     procedure SendPlayerInfo;
     procedure SimMainLoop;
     procedure SimTwoMainLoop;
-    procedure ISTMainLoop;
     procedure udpmainloop;
     procedure ManualControl(var V, Vn, W: double; var Kick: boolean);
-    procedure saveudplogs(filename,s: string);
 
   public
 
@@ -475,7 +442,6 @@ type
 
     procedure ProcessCoachPacket(packet_str: string);
     procedure ProcessSimTwoMsg(Data: string);
-    procedure ProcessMermaidMsg(Data: string);
     procedure InsertAuxForms(Fm: TForm; cap: string);
     procedure AuxFormClosed(cap: string);
     procedure SaveAuxForms;
@@ -491,8 +457,7 @@ type
     procedure ShowRadar;
     procedure ShowRegions;
     procedure FillShowValues(GT: TStrings; var RS: TRobotState; var BS: TBallState; var View: TView);
-    procedure MemoRegionsToArray;
-    procedure LoadRegions;
+
     procedure DrawFieldMap(field_canvas: TCanvas);
     procedure DrawBall(field_canvas: TCanvas; var BS: TBallState; BallColor: Tcolor);
     procedure DrawObstacles(var Obs: TObstacles);
@@ -520,8 +485,8 @@ type
     procedure ExtractCenterBallFromCenters(var ObsBallCenter: Tcenter);
 
     procedure MergeBallState(var BS,OBS: TBallState);
-    procedure Localize(var RS: TRobotState);
-    procedure UpdateLocalizationData(NewView: TView; var RS: TRobotState);
+//===>    procedure Localize(var RS: TRobotState);
+//===>    procedure UpdateLocalizationData(NewView: TView; var RS: TRobotState);
     procedure getTacticComand(var v,w,vn:double);
 
     procedure ControlAccelerationNLTMD(out V:double;out Vn:double;out W:double);
@@ -611,9 +576,9 @@ procedure ShowWorldClusters(Cnv: TCanvas);
 
 implementation
 
-uses Utils, Camera, Param, Log, Robots, kicker,
-     Joy,Field, LCLType, omni3, Tactic, Actions, Tasks, CoachMain, localization,
-     LocMap, Unit_Hardware, Unit_joystick, unit_Localization;
+uses Utils, Camera, Param, Robots, kicker,
+     Joy,Field, LCLType, omni3, Tactic, Actions, Tasks,  //===>localization, CoachMain,
+     LocMap, Unit_Hardware, Unit_joystick;//===>, unit_Localization;
 
 //--------------------------------------------------------------------------------------------
 // LAN
@@ -762,13 +727,8 @@ begin
       MainLoop;
     end;
 
-//////// UDP Logs //////
-   if CBsavelogs.Checked = true then
-   begin
-     saveudplogs(EditFileudplog.text,data);
-   end;
-     except
-      on E: Exception do Editinfo3.text:=E.message;
+  except
+
   end;
 
 end;
@@ -819,7 +779,8 @@ begin
   View.Compass:=NormalizeAngle(View.Compass);
 end;
 
-procedure TFMain.Localize(var RS: TRobotState);
+//===>
+{procedure TFMain.Localize(var RS: TRobotState);
 var  i,j: integer;
     CurLocalization: TRLocState;
     FiltLocalization: double;
@@ -932,7 +893,7 @@ begin
   Rs.LocAdvV:=NewOutputData.LocAdvV;
   Rs.LocAdvVn:=NewOutputData.LocAdvVn;
   Rs.LocAdvW:=NewOutputData.LocAdvW;
-end;
+end;  }
 
 procedure TFMain.getTacticComand(var v, w, vn: double);
 begin
@@ -950,87 +911,13 @@ end;
 
 procedure TFMain.MainLoop;
 var  i,j: integer;
-    CurLocalization: TRLocState;
+ //===>   CurLocalization: TRLocState;
     FiltLocalization,vxltemp,vyltemp,vpropx,vpropy: double;
-    VPointList: TPointList;
+ //===>   VPointList: TPointList;
     filterIter:boolean;
     qualTemp:double;
 begin
-  if RadioGroup_temp.ItemIndex=0 then begin
-    NetTime:=getTickcount();
-    deb_txt:='';
 
-    ResetView;
-    ParseLanMess;
-    UpdateEdges;
-    UpdateOdos;
-
-    UpdateCenters([iBallColor,iPurpleTeam,iCyanTeam]);
-    UpdateObstacles;
-    PropagateObstacles;
-
-    for i:=0 to MaxRobots-1 do begin
-      if i=mynumber then begin
-        PropagateXYTeta(RobotState[i]);
-        //PropagateXYTetaBoa(RobotState[i]);
-      end else begin
-        PropagateXYTetaOthers(RobotState[i]);
-      end;
-    end;
-
-    ltimebegin:=getTickcount();
-    if CBLocalization.Checked then
-      Localize(RobotState[myNumber]);
-
-    UpdateRadar;
-
-    if (CBUseCompass.Checked) then
-      UpdateCompass(RobotState[myNumber]);
-
-    FLocMap.CBMShow.Caption:=format('Show %3d',[getTickcount()-ltimebegin]);
-
-    // ultimo estado da bola
-    LastBallState:=BallState;
-    // ultima bola observada
-    LastObsBallState:=ObsBallState;
-    // Quality decay
-    PropagateXYBall(BallState);
-    ExtractBallFromCenters(ObsBallState);
-    //Depois de extraída só é boa se          //MUDAR CONFORME ABAIXO!!!
-
-
-    if ObsBallState.quality>=400 then begin
-      BallState.vx:=(BallState.x-LastBallState.x)/0.04;
-      BallState.vy:=(BallState.y-LastBallState.y)/0.04;
-
-      vpropx:=calcvprop(BallState.vxl);
-      vpropy:=calcvprop(BallState.vyl);
-
-      vxltemp:=((ObsBallState.xl-LastObsBallState.xl)/0.04);//*vpropx;
-      vyltemp:=((ObsBallState.yl-LastObsBallState.yl)/0.04);//*vpropy;
-
-      RotateAndTranslate(BallState.vxl,BallState.vyl,vxltemp,vyltemp,0,0,RobotState[myNumber].teta);
-
-      BallState.vxl:=BallState.vxl-RobotState[mynumber].vx;
-      BallState.vyl:=BallState.vyl-RobotState[mynumber].vy;
-
-      BallState.estx:=LowPassFilterV(BallState.x,LastBallState.estx, 0.1);
-      BallState.esty:=LowPassFilterV(BallState.y,LastBallState.esty, 0.1);
-      BallState.vxl:=LowPassFilterV(BallState.vxl,LastBallState.vxl, 0.05);
-      BallState.vyl:=LowPassFilterV(BallState.vyl,LastBallState.vyl, 0.05);
-
-      MergeBallState(BallState,ObsBallState);
-    end else begin
-      BallState.vxl:=0;
-      BallState.vyl:=0;
-    end;
-
-    timebegin:=getTickcount();
-
-    NewMainControl;
-    deb_txt:=deb_txt+format('%3d',[getTickcount()-NetTime]);
-
-  end else begin
     NetTime:=getTickcount();
     deb_txt:='';
 
@@ -1047,49 +934,11 @@ begin
 
     PropagateXYTetaboa(RobotState[myNumber]);
 
-    UpdateLocalizationData(View, RobotState[myNumber]);
+ //===>   UpdateLocalizationData(View, RobotState[myNumber]);
 
     UpdateRadar;
 
     // BOLA
-    if RG_BallSelection.ItemIndex=0 then begin
-      // ultimo estado da bola
-      LastBallState:=BallState;
-      // ultima bola observada
-      LastObsBallState:=ObsBallState;
-      // Quality decay
-      PropagateXYBall(BallState);
-      ExtractBallFromCenters(ObsBallState);
-      //Depois de extraída só é boa se
-      if ObsBallState.quality>=400 then begin
-
-        BallState.vx:=(BallState.x-LastBallState.x)/0.04;
-        BallState.vy:=(BallState.y-LastBallState.y)/0.04;
-
-        //Martelada para correcao da escala do vx e vy local
-        vpropx:=calcvprop(BallState.vxl);
-        vpropy:=calcvprop(BallState.vyl);
-
-        vxltemp:=((ObsBallState.xl-LastObsBallState.xl)/0.04);//*vpropx;
-        vyltemp:=((ObsBallState.yl-LastObsBallState.yl)/0.04);//*vpropy;
-
-        RotateAndTranslate(BallState.vxl,BallState.vyl,vxltemp,vyltemp,0,0,RobotState[myNumber].teta);
-
-        BallState.vxl:=BallState.vxl+RobotState[mynumber].vx;
-        BallState.vyl:=BallState.vyl+RobotState[mynumber].vy;
-
-        BallState.estx:=LowPassFilterV(BallState.x,LastBallState.estx, 0.1);
-        BallState.esty:=LowPassFilterV(BallState.y,LastBallState.esty, 0.1);
-
-        BallState.vxl:=LowPassFilterV(BallState.vxl,LastBallState.vxl, 0.01);
-        BallState.vyl:=LowPassFilterV(BallState.vyl,LastBallState.vyl, 0.01);
-
-        MergeBallState(BallState,ObsBallState);
-      end else begin
-        BallState.vxl:=0;
-        BallState.vyl:=0;
-      end;
-    end else if RG_BallSelection.ItemIndex=1 then begin
       // ultimo estado da bola
       LastBallState:=BallState;
       // ultima bola observada
@@ -1122,23 +971,16 @@ begin
          BallState.quality:=-1;
         end;
       end;
-    end;
+
 
     timebegin:=getTickcount();
 
     NewMainControl;
     deb_txt:=deb_txt+format('%3d',[getTickcount()-NetTime]);
-  end;
 
   sleep(1);
 
   SendPlayerInfo;
-  deb_txt:=deb_txt+format(',%3d',[getTickcount()-NetTime]);
-
-  if RGController.ItemIndex=0 then  // freeze
-    FLog.LogFrame(GetTickCount,0,0)
-  else
-    FLog.LogFrame(GetTickCount,0,1);
   deb_txt:=deb_txt+format(',%3d',[getTickcount()-NetTime]);
 
   ShowAll;
@@ -1158,7 +1000,6 @@ begin
 
   ResetView;
 
-//  UpdateOdos;
   view.OdosCount:=1;
   view.Odos[0].speedw[0]:=RobotState[mynumber].v1;
   view.Odos[0].speedw[1]:=RobotState[mynumber].v2;
@@ -1214,10 +1055,6 @@ begin
   NewMainControl;
   sleep(1);
   SendPlayerInfo;
-  if RGController.ItemIndex=0 then  // freeze
-    FLog.LogFrame(GetTickCount,0,0)
-  else
-    FLog.LogFrame(GetTickCount,0,1);
 
   ShowAll;
   LastView:=View;
@@ -1302,95 +1139,11 @@ begin
   NewMainControl;
   sleep(1);
   SendPlayerInfo;
-  if RGController.ItemIndex=0 then  // freeze
-    FLog.LogFrame(GetTickCount,0,0)
-  else
-    FLog.LogFrame(GetTickCount,0,1);
 
   ShowAll;
   LastView:=View;
   inc(cycleCount);
 end;
-
-procedure TFMain.ISTMainLoop;
-var  i: integer;
-     brdist, minBRdist, vbo,vbox,vboy: double;
-begin
-  deb_txt:='';
-
-  PropagateObstacles;
-
-  if RGController.ItemIndex<>0 then begin
-    for i:=0 to MaxRobots-1 do begin
-      if i=mynumber then PropagateXYTeta(RobotState[i])
-      else PropagateXYTetaOthers(RobotState[i]);
-    end;
-  end;
-
-  LastBallState:=BallState;
-  //Quality Decay
-  PropagateXYBall(BallState);
-  CalcBallSpeed(ObsBallState,LastObsBallState);
-  if ObsBallState.quality>=0 then begin
-    MergeBallState(LastObsBallState,ObsBallState);
-    MergeBallState(BallState,ObsBallState);
-  end;
-
-  RobotState[mynumber].vx:=(RobotState[mynumber].x-LRState[myNumber].x)/0.04;
-  RobotState[mynumber].vy:=(RobotState[mynumber].y-LRState[myNumber].y)/0.04;
-  LRState:=RobotState;
-
-  minBRdist:=0.25+0.1;
-  brdist:=sqrt(sqr(RobotState[mynumber].x-BallState.x)+sqr(RobotState[mynumber].y-BallState.y));
-  if brdist<minBRdist then begin //TODO
-    vbox:=BallState.x-RobotState[mynumber].x;
-    vboy:=BallState.y-RobotState[mynumber].y;
-    vbo:=sqrt(sqr(vbox)+sqr(vboy));
-    if vbo<1e-6 then vbo:=1e-6;
-    vbox:=vbox/vbo;
-    vboy:=vboy/vbo;
-    BallState.x:=BallState.x+vbox*(minBRdist-brdist);
-    BallState.y:=BallState.y+vboy*(minBRdist-brdist);
-
-    if TacticCommands[myNumber].chipkick_pulse > 0 then begin
-      BallState.vx := BallState.vx + cos(RobotState[myNumber].teta) * 10;
-      BallState.vy := BallState.vy + sin(RobotState[myNumber].teta) * 10;
-    end;
-  end;
-
-  //propagacao da bola
-  LastBallState:=BallState;
-  LastObsBallState:=ObsBallState;
-  PropagateXYBall(BallState);
-
-  //if Dist(BallState.x-RobotState[mynumber].x,BallState.y-RobotState[mynumber].y)<4 then begin
-    ObsBallState:=BallState;
-    ObsBallState.quality:=1000;
-    RelocateAbsCoordItem(ObsBallState.x,ObsBallState.y,
-                         RobotState[mynumber].x,RobotState[mynumber].y,RobotState[mynumber].teta,
-                         RobotState[mynumber].x,RobotState[mynumber].y,RobotState[mynumber].teta);
-  //end else begin
-  //  ObsBallState.quality:=-1000;
-  //end;
-
-  if ObsBallState.quality>=0 then begin
-    MergeBallState(LastObsBallState,ObsBallState);
-    BallState:=LastObsBallState;
-  end;
-    //Aqui entra o newmaincontrol
-  NewMainControl;
-  sleep(1);
-  //SendPlayerInfo;
-  //if RGController.ItemIndex=0 then  // freeze
-  //  FLog.LogFrame(GetTickCount,0,0)
-  //else
-  //  FLog.LogFrame(GetTickCount,0,1);
-
-  ShowAll;
-  LastView:=View;
-  inc(cycleCount);
-end;
-
 
 procedure TFMain.ControlAccelerationNLTMD(out V:double;out Vn:double;out W:double);
 var
@@ -1584,28 +1337,6 @@ begin
 
   if CBSimulator.Checked=true then begin
     OminSim(v,vn,w,RobotState[myNumber]);
-    if CBISTScenario.Checked=true then begin
-      SdpoUDPSimTwo.SendMessage(IntToStr(myNumber)+' '+
-                floatToStr(RobotState[myNumber].v)+' '+
-                floatToStr(RobotState[myNumber].vn)+' '+
-                floatToStr(RobotState[myNumber].w)+' '+
-                floatToStr(siga)+' '+
-                floatToStr(sigb)+' '+
-                floatToStr(sigc)+' '+
-                floatToStr(sigd),
-                FParam.EditSimTwoIP.Text+':'+FParam.EditSimTwoPort.Text);
-      if RGController.ItemIndex=0 then begin
-        SdpoUDPSimTwo.SendMessage(IntToStr(myNumber)+' '+
-                  floatToStr(0)+' '+
-                  floatToStr(0)+' '+
-                  floatToStr(0)+' '+
-                  floatToStr(0)+' '+
-                  floatToStr(0)+' '+
-                  floatToStr(0)+' '+
-                  floatToStr(0),
-                  FParam.EditSimTwoIP.Text+':'+FParam.EditSimTwoPort.Text);
-      end;
-    end;
   end else if CBSimTwo.Checked=true then begin
     Omin_Ticks(v,vn,w,pwm11,pwm22,pwm33);
     SendPID_PWM;
@@ -1613,16 +1344,14 @@ begin
      SdpoUDPSimTwo.SendMessage(chr(35)+chr(13)+IntToStr(myNumber)+chr(13)+
                  IntToStr(round(100*DStates[0].ref*Ktic_rad_out))+chr(13)+
                  IntToStr(100*round(DStates[1].ref*Ktic_rad_out))+chr(13)+
-                 IntToStr(100*round(DStates[2].ref*Ktic_rad_out))+chr(13),//+
-                 //IntToStr(kickPulse)+chr(13),
+                 IntToStr(100*round(DStates[2].ref*Ktic_rad_out))+chr(13),
                  FParam.EditSimTwoIP.Text+':'+FParam.EditSimTwoPort.Text);
     end else begin
      SdpoUDPSimTwo.SendMessage(chr(35)+chr(13)+IntToStr(myNumber+5)+chr(13)+
                    IntToStr(round(100*DStates[0].ref*Ktic_rad_out))+chr(13)+
                    IntToStr(round(100*DStates[1].ref*Ktic_rad_out))+chr(13)+
-                   IntToStr(round(100*DStates[2].ref*Ktic_rad_out))+chr(13),//+
-                 //IntToStr(kickPulse)+chr(13),
-                 FParam.EditSimTwoIP.Text+':'+FParam.EditSimTwoPort.Text);
+                   IntToStr(round(100*DStates[2].ref*Ktic_rad_out))+chr(13),
+                   FParam.EditSimTwoIP.Text+':'+FParam.EditSimTwoPort.Text);
     end;
   end;
 
@@ -1661,7 +1390,7 @@ begin
       PlayerInfo.RobotState.w := sw;
 
       PlayerInfo.RobotState.conf := count;
-      PlayerInfo.RobotState.Active:=((not Form_Hardware.Failure)and(Form_Localization.ok));
+      PlayerInfo.RobotState.Active:=((not Form_Hardware.Failure));//===>and(Form_Localization.ok));
       PlayerInfo.Batery:=KickerState.Vbat;
       PlayerInfo.RobotState.WithBall:=withball;
     end;
@@ -1674,9 +1403,6 @@ begin
     PlayerInfo.BallState.x_next := BallState.x_next;
     PlayerInfo.BallState.y_next := BallState.y_next;
     PlayerInfo.BallState.quality := BallState.quality;
-
-    // send the obstacles
-    // TODO: actually send the obstacles
 
     PlayerInfo.num := myNumber;
 
@@ -1730,7 +1456,6 @@ begin
 
     Gtext.Clear;
     FillShowValues(Gtext,RobotState[myNumber], BallState, View);
-    if CBShowLog.Checked then FLog.LogToStrings(GText,FLog.TreeView,LogBufferIn);
 
     tx:=draw_x;
     ty:=draw_y;
@@ -2050,15 +1775,10 @@ var
 begin
   // parse command line parameters
   DataDir := 'data';
-  CoachMode := false;
 
   for i := 1 to paramcount do begin
-    if paramstr(i) = '-coach' then begin
-      CoachMode := true;
-    end else begin
       DataDir:=paramstr(i);
       if not directoryExists(extractfilepath(application.ExeName)+dataDir) then dataDir:='data';
-    end;
   end;
 
   WindowState := wsNormal;
@@ -2129,12 +1849,12 @@ begin
 
   cycleCount:=0;
   with View do begin
-    for i:=0 to cTrackColors-1 do begin   //  CentersCount:array[0..cTrackColors-1] of integer;
+    for i:=0 to cTrackColors-1 do begin
      Centers[i].Count:=0;
     end;
     EdgesCount:=0;
     RegionsCount:=0;
-    LoadRegions;
+
     OdosCount:=0;
     OdosTotalCount:=0;
   end;
@@ -2197,11 +1917,11 @@ begin
   EditVn.Text:='0';
   EditW.Text:='0';
 end;
-
-procedure TFMain.Button_ShowLocalizationClick(Sender: TObject);
+//===>
+{procedure TFMain.Button_ShowLocalizationClick(Sender: TObject);
 begin
   Form_Localization.Show;
-end;
+end; }
 
 procedure TFMain.BSetRoleClick(Sender: TObject);
 begin
@@ -2242,9 +1962,6 @@ begin
   FillShowValues(Gtext,RobotState[0],BallState,View); // just to fill the box
 
   // TODO Log crash
-  FLog.FillTreeView(FLog.TreeView);
-  FLog.LoadTree(FLog.TreeView);
-  FLog.RefreshGrid(FLog.TreeView);
   draw_x:= 120;
   draw_y:=2;
 
@@ -2259,27 +1976,26 @@ begin
   RobotStatus[myNumber].default_role:=TRole(CBDefRole.ItemIndex);
   RobotInfo[myNumber].role:=RobotStatus[myNumber].default_role;
 
-  if CoachMode then begin
-    SdpoUDPSuper.Listen(7373);
-  end else begin
-    SdpoUDP.Listen(7171);
-    SdpoUDPSuper.Listen(7272+myNumber);
-    SdpoUDPSimTwo.Listen(StrToInt(FParam.EditSimTwoListenPort.Text));
+  SdpoUDP.Listen(7171);
+  SdpoUDPSuper.Listen(7272+myNumber);
+
+  SdpoUDPSimTwo.Listen(StrToInt(FParam.EditSimTwoListenPort.Text));
+
+  try
+    SdpoUDPSimTwo.Listen(StrToInt(FParam.EditSimTwoListenPort.text)+RGRobotSel.ItemIndex+1);
+  except
+    SdpoUDPSuper.Disconnect;
+    SdpoUDPSuper.Listen(7272+RGRobotSel.ItemIndex);
   end;
 
-  if CoachMode then begin
-    FieldImageWidth := FCoachMain.ImageMap.Width;
-    FieldImageHeight := FCoachMain.ImageMap.Height;
-    Hide;
-    FCoachMain.Show;
-  end else begin
-    FieldImageWidth := FMain.ImageMap.Width;
-    FieldImageHeight := FMain.ImageMap.Height;
-  end;
 
-  LoadMap(ExtractFilePath(Application.ExeName)+DataDir+'/maps/'+FLocMap.EditMapLoadName.Text+'.dst');
-  DrawArrayDist(MapDist, MapAreaW, MapAreaH, FLocMap.ImageLocMap);
-  MapLoaded:=true;
+  FieldImageWidth := FMain.ImageMap.Width;
+  FieldImageHeight := FMain.ImageMap.Height;
+
+
+  //===>  LoadMap(ExtractFilePath(Application.ExeName)+DataDir+'/maps/'+FLocMap.EditMapLoadName.Text+'.dst');
+//===>  DrawArrayDist(MapDist, MapAreaW, MapAreaH, FLocMap.ImageLocMap);
+//===>  MapLoaded:=true;
 
   Xstart:=strtofloatDef(FParam.EditXstart.text,0);
   Ystart:=strtofloatDef(FParam.EditYstart.text,0);
@@ -2300,14 +2016,6 @@ end;
 procedure TFMain.MI_BallEstClick(Sender: TObject);
 begin
   FBall.Show;
-end;
-
-procedure TFMain.RGRobotSelClick(Sender: TObject);
-begin
-  SdpoUDPSimTwo.Disconnect;
-  SdpoUDPSimTwo.Listen(StrToInt(FParam.EditSimTwoListenPort.text)+RGRobotSel.ItemIndex+1);
-  SdpoUDPSuper.Disconnect;
-  SdpoUDPSuper.Listen(7272+RGRobotSel.ItemIndex);
 end;
 
 procedure TFMain.FormDestroy(Sender: TObject);
@@ -2549,42 +2257,6 @@ begin
   end;
 end;
 
-procedure TFmain.MemoRegionsToArray;
-var i,tmp: integer;
-    txt: string;
-    ERegion: TRegion;
-begin
-  gtext.Clear;
-  View.RegionsCount:=0;
-  for i:=0 to MemoRegions.lines.count-1 do begin
-    txt:=MemoRegions.lines[i];
-    ParseString(txt,', ',gtext);
-    if gtext.count<>4 then continue;
-    tmp:=strtointdef(gtext[0],-1);
-    if tmp=-1 then continue;
-    ERegion.x1:=tmp;
-    tmp:=strtointdef(gtext[1],-1);
-    if tmp=-1 then continue;
-    ERegion.y1:=tmp;
-    tmp:=strtointdef(gtext[2],-1);
-    if tmp=-1 then continue;
-    ERegion.x2:=tmp;
-    tmp:=strtointdef(gtext[3],-1);
-    if tmp=-1 then continue;
-    ERegion.y2:=tmp;
-
-    ERegion.BestColor:=255;
-    ERegion.BestColorPer:=0;
-    View.Regions[View.RegionsCount]:=ERegion;
-    inc(View.regionsCount);
-  end;
-end;
-
-procedure TFmain.LoadRegions;
-begin
-  MemoRegions.Lines.LoadFromFile(extractfilepath(application.ExeName)+DataDir+'/regions.lst');
-  MemoRegionsToArray;
-end;
 
 procedure TFmain.ShowRegions;
 var i: integer;
@@ -2772,12 +2444,12 @@ procedure TFMain.BSetXYTetaClick(Sender: TObject);
 var nx,ny,nteta: double;
 begin
   try
-    RobotState[myNumber].x:=strtofloat(EditRobotX.text);
-    RobotState[myNumber].y:=strtofloat(EditRobotY.text);
-    RobotState[myNumber].teta:=strtofloat(EditRobotTeta.text);
-    nx:=strtofloat(EditRobotX.text);
-    ny:=strtofloat(EditRobotY.text);
-    nteta:=strtofloat(EditRobotTeta.text);
+    RobotState[myNumber].x:=strtofloatdef(EditRobotX.text,0);
+    RobotState[myNumber].y:=strtofloatdef(EditRobotY.text,0);
+    RobotState[myNumber].teta:=strtofloatdef(EditRobotTeta.text,0);
+    nx:=strtofloatdef(EditRobotX.text,0);
+    ny:=strtofloatdef(EditRobotY.text,0);
+    nteta:=strtofloatdef(EditRobotTeta.text,0);
   except
     EditRobotX.text:='0';
     EditRobotY.text:='0';
@@ -2786,7 +2458,6 @@ begin
     RobotState[myNumber].teta:=0;
   end;
 end;
-
 
 procedure TFMain.MergeBallState(var BS,OBS: TBallState);
 var lbd,lbdv: double;
@@ -3123,28 +2794,32 @@ end;
 
 procedure TFMain.SdpoUDPSimTwoError(const msg: string; aSocket: TLSocket);
 begin
-
+  try
+    SdpoUDPSuper.Disconnect;
+    SdpoUDPSuper.Listen(7272+RGRobotSel.ItemIndex);
+  except
+  end;
 end;
 
 procedure TFMain.SdpoUDPSimTwoReceive(aSocket: TLSocket);
 var
   msg: string;
 begin
-  SdpoUDPSimTwo.GetMessage(msg);
-  if CBSimTwo.Checked=true then begin
-    ProcessSimTwoMsg(msg);
-    SimTwoMainLoop;
-  end else if CBISTScenario.Checked=true then begin
-    ProcessMermaidMsg(msg);
-    ISTMainLoop;
-    //SimMainLoop;
-  end
+    SdpoUDPSimTwo.GetMessage(msg);
+
+    if CBSimTwo.Checked=true then begin
+      ProcessSimTwoMsg(msg);
+      SimTwoMainLoop;
+    end
 end;
 
 procedure TFMain.SdpoUDPSuperError(const msg: string; aSocket: TLSocket);
 begin
-  SdpoUDPSuper.Disconnect(true);
-  SdpoUDPSuper.Listen(7272+RGRobotSel.ItemIndex);
+  try
+    SdpoUDPSuper.Disconnect(true);
+    SdpoUDPSuper.Listen(7272+RGRobotSel.ItemIndex);
+  except
+  end;
 end;
 
 procedure TFMain.SdpoUDPSuperReceive(aSocket: TLSocket);
@@ -3152,11 +2827,7 @@ var packet_str: string;
 begin
   try
     aSocket.GetMessage(packet_str);
-    if CoachMode then begin  // se for treinador recebendo um packet de um jogador
-      FCoachMain.ProcessPlayerPacket(packet_str);
-    end else begin   // se o packet for do coach
-      ProcessCoachPacket(packet_str);
-    end;
+    ProcessCoachPacket(packet_str);
   except
   end;
 end;
@@ -3254,27 +2925,7 @@ begin
   end;
 end;
 
-procedure TFMain.saveudplogs(filename,s: string);
-var
-F: file;
-ToWrite,NumWritten: integer;
-begin
-  AssignFile(F, filename);
-  if not FileExists(filename)
-    then Rewrite(F,1)
-    else Reset(F,1);
-  Seek(F,filesize(F));
-  ToWrite:=length(s);
 
-  Blockwrite(F,ToWrite,sizeof(ToWrite),NumWritten);
-  if sizeof(ToWrite)<>NumWritten then Memoudp.lines.add('Error -> Save UDP logs');
-
-  Blockwrite(F,s[1],towrite,NumWritten);
-  Memoudp.lines.add(inttostr(NumWritten));
-  if ToWrite<>NumWritten then Memoudp.lines.add('Error -> Save UDP logs');
-
-  CloseFile(F);
-end;
 
 procedure TFMain.ProcessCoachPacket(packet_str: string);
 var CoachInfo: TCoachInfo;
@@ -3312,9 +2963,6 @@ begin
       RobotState[i].vy := vy;
       RobotState[i].w := w;
 
-//      VxyToVVn(teta, vx, vy, RobotState[i].v, RobotState[i].vn);
-
-
       RobotStatus[i].active := active;
       EditRoleName.Text:=EditRoleName.Text;
 
@@ -3322,7 +2970,6 @@ begin
   end;
 
   //Era isso q tava fudendo o merging da bola na formação!!!
-//  if ((BallState.quality < CoachInfo.BallState.coachQuality)and(BallState.quality < 500)and(Dist(BallState.x-RobotState[i].x,BallState.y-RobotState[i].y)>1.5)) then begin
      BallState.x:=CoachInfo.BallState.x;
      BallState.y:=CoachInfo.BallState.y;
      BallState.vx:=CoachInfo.BallState.vx;
@@ -3330,7 +2977,7 @@ begin
      BallState.x_next:=CoachInfo.BallState.x_next;
      BallState.y_next:=CoachInfo.BallState.y_next;
      BallState.quality:=CoachInfo.BallState.coachQuality;
-//  end;
+
 
   Play:=CoachInfo.Play;
   EditPlayName.Text:= CPlayString[Play];
@@ -3345,10 +2992,10 @@ NumberBytes,Tam,count: integer;
 Buf: array[1..1024] of Char;
 
 begin
-  //SdpoUDP.Active:=false;
+
   SdpoUDP.Disconnect;
 
-  filename:=EditFileudplog.Text;
+{  filename:=EditFileudplog.Text;
   AssignFile(F, filename);
   if not FileExists(filename)
     then Memoudp.lines.add('Error -> File not found')
@@ -3374,7 +3021,7 @@ begin
     sleep(20);
   end;
 
-  Closefile(F);
+  Closefile(F);}
   SdpoUDP.Listen(7171);
 end;
 
@@ -3400,7 +3047,7 @@ begin
   end;
 
   Inc(CountUdp);
-  memoudp.lines.Add(inttostr(CountUdp));
+//  memoudp.lines.Add(inttostr(CountUdp));
 
   BlockRead(Flogs,Tam,sizeof(Tam),NumRead);  // le tamanho bloco
   BlockRead(Flogs,Buf,Tam,NumRead);   // le bloco
@@ -3420,24 +3067,11 @@ end;
 
 procedure TFMain.CBudpClick(Sender: TObject);
 begin
-  if CBudp.Checked then begin
-    SdpoUDP.disconnect;
-    CountUdp:=0;
-    AssignFile(Flogs, EditFileudplog.Text);
-    if not FileExists(EditFileudplog.Text) then
-    begin
-      Memoudp.lines.add('Error -> File not found');
-      exit;
-    end else
-    begin
-      Reset(Flogs,1);
-    end;
-    TimerUdplog.Enabled:=True;
-  end else begin
+
     Closefile(Flogs);
     SdpoUDP.listen(6000);
     TimerUdplog.Enabled:=False;
-  end;
+
 end;
 
 procedure TFMain.Timer_NoCameraTimer(Sender: TObject);
@@ -3469,8 +3103,8 @@ begin
     DStates[i].Vact:=StrToInt(gData[i+4]);
   end;
   LastObsBallState:=ObsBallState;
-  ObsBallState.x:=strtofloatDef(gData[7], 0);// + Random(10)*0.005;
-  ObsBallState.y:=strtofloatDef(gData[8], 0);// + Random(10)*0.005;
+  ObsBallState.x:=strtofloatDef(gData[7], 0);
+  ObsBallState.y:=strtofloatDef(gData[8], 0);
 
   WB:=strtointDef(gData[9], 0);
 
@@ -3619,71 +3253,6 @@ begin
   end else begin
     ObsBallState.quality:=-1000;
   end;
-
-  gData.Free;
-
-end;
-
-procedure TFMain.ProcessMermaidMsg(Data: string);
-var
-  gData: TStringList;
-  i:integer;
-  myNumb: array[0..4] of integer;
-  receivedX,receivedY,receivedTeta: array[0..4] of double;
-  mn,mx,my,mteta: array[0..4] of string;
-  vxb,vyb,xb,yb,sigr,sigphi: double;
-  mvxb,mvyb,mxb,myb,msigrb,msigphib: string;
-
-begin
-  Randomize;
-  gData:=TStringList.Create;
-  gData.Text:=Data;
-
-  SScanf(Data,'%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s',
-           [@mn[0], @mx[0], @my[0], @mteta[0],
-            @mn[1], @mx[1], @my[1], @mteta[1],
-            @mn[2], @mx[2], @my[2], @mteta[2],
-            @mn[3], @mx[3], @my[3], @mteta[3],
-            @mn[4], @mx[4], @my[4], @mteta[4],
-            @mvxb, @mvyb, @mxb, @myb,
-            @msigrb, @msigphib]);
-
-  for i:=0 to 4 do begin
-    myNumb[i]:=strtointdef(mn[i],2);
-    receivedX[i]:=strtofloatdef(mx[i],2);
-    receivedY[i]:=strtofloatdef(my[i],2);
-    receivedTeta[i]:=strtofloatdef(mteta[i],2);
-    if myNumber=i then begin
-        RobotState[myNumber].x:=receivedX[i];
-        RobotState[myNumber].y:=receivedY[i];
-        RobotState[myNumber].teta:=receivedTeta[i];
-    end else begin
-        RobotState[i].x:=receivedX[i];
-        RobotState[i].y:=receivedY[i];
-        RobotState[i].teta:=receivedTeta[i];
-    end;
-  end;
-  vxb:=strtofloatdef(mvxb,2);
-  vyb:=strtofloatdef(mvyb,2);
-  xb:=strtofloatdef(mxb,2);
-  yb:=strtofloatdef(myb,2);
-
-  Sr:=strtofloatdef(msigrb,2);
-  Sphi:=strtofloatdef(msigphib,2);
-
-  //sigr:=strtofloatdef(msigrb,2);
-  //sigphi:=strtofloatdef(msigphib,2);
-  //sigtemp.setv(0,0,sigr);
-  //sigtemp.setv(0,1,0);
-  //sigtemp.setv(1,0,0);
-  //sigtemp.setv(1,1,sigphi);
-  //sigmaT:=sigtemp;
-
-  LastObsBallState:=ObsBallState;
-  ObsBallState.x:=xb;
-  ObsBallState.y:=yb;
-  ObsBallState.vx:=vxb;
-  ObsBallState.vy:=vyb;
 
   gData.Free;
 

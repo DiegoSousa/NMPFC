@@ -277,8 +277,7 @@ begin
 
     if LogBufferCount<LogFrames then Inc(LogBufferCount);
   end;
-  if FMain.CBShowLogGraph.Checked then
-    RefreshGrid(TreeView);
+
 end;
 
 

@@ -253,7 +253,6 @@ begin
 
   sigX:=k1*(power(d,2));
   sigY:=k2*d;
-  //sigY:=k2*(1/power((d),2));
 
   sgt.setv(0,0,sigX);
   sgt.setv(0,1,0);
@@ -293,25 +292,13 @@ begin
   sgt.SetSize(2,2);
   sgt:=Mzeros(2,2);
 
-  //distance of Robot from Ball      = a
-  //aa:=sqrt(power((Robot.RobotState.x - Ball.BallState.x),2)+power((Robot.RobotState.y - Ball.BallState.y),2));
-  //distance of MyRobot from Ball    = b
-  //bb:=sqrt(power((MyRobot.RobotState.x - Ball.BallState.x),2)+power((MyRobot.RobotState.y - Ball.BallState.y),2));
-  //distance of MyRobot from Robot   = c
-  //cc:=sqrt(power((Robot.RobotState.x - MyRobot.RobotState.x),2)+power((Robot.RobotState.y - MyRobot.RobotState.y),2));
-
-  //angle between robots
-  //temp:=(power(aa,2)+power(bb,2)-power(cc,2))/(2*aa*bb);
-  //alfa:=arccos(temp);
   alfa:=atan2((MyRobot.RobotState.y - Ball.BallState.y),(MyRobot.RobotState.x - Ball.BallState.x))-atan2((Robot.RobotState.y - Ball.BallState.y),(Robot.RobotState.x - Ball.BallState.x));
 
   dist:=(sqrt(power((Robot.RobotState.x-Ball.BallState.x),2)+power((Robot.RobotState.y-Ball.BallState.y),2)));
 
   sigX:=k1*(power(dist,2));
   sigY:=k2*dist;
-  //sigY:=k2*(1/power((dist),2));
 
-  //Rt(a)*Cl*R(a)
   a:=(cos(alfa)*sigX*cos(alfa))+(sin(alfa)*sigY*sin(alfa));
   b:=(cos(alfa)*sigX*sin(alfa))-(sin(alfa)*sigY*cos(alfa));
   c:=(sin(alfa)*sigX*cos(alfa))-(cos(alfa)*sigY*sin(alfa));
@@ -340,12 +327,7 @@ begin
   cc:=sqrt(power((Robot.RobotState.x - MyRobot.RobotState.x),2)+power((Robot.RobotState.y - MyRobot.RobotState.y),2));
 
   //angle between robots
-  //lastalfa:=alfa;
   temp:=(power(aa,2)+power(bb,2)-power(cc,2))/(2*aa*bb);
-
-  //if temp<0 then begin
-  //   temp:=0;
-  //end;
 
   alfa:=arccos(temp);
 

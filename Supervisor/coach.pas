@@ -791,7 +791,11 @@ end;
 
 procedure TFCoach.SdpoUDPSuperError(const msg: string; aSocket: TLSocket);
 begin
-
+  try
+    SdpoUDPSuper.Disconnect(true);
+    SdpoUDPSuper.Listen(7272+RGRobotSel.ItemIndex);
+  except
+  end;
 end;
 
 procedure TFCoach.SdpoUDPSuperReceive(aSocket: TLSocket);
@@ -1166,7 +1170,7 @@ begin
               EditVbatRobot6.Text:=inttostr(output);
 
               if (output=0) then begin
-                  if i<>1 then begin
+                  if i<>0 then begin
                      CoachInfo.RobotState[i].role := roleGoSearch;
                      RobotInfo[i].role:=roleGoSearch;
                   end else begin
@@ -1180,7 +1184,7 @@ begin
 
           end else begin
               if BallState.quality<100 then begin
-                  if i<>1 then begin
+                  if i<>0 then begin
                      CoachInfo.RobotState[i].role := roleGoSearch;
                      RobotInfo[i].role:=roleGoSearch;
                   end else begin

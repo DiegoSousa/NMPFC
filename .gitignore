@@ -5,7 +5,7 @@ Backup
 *.o
 *.bak
 *.orig
-*~
+*.*~
 *.pdf
 *.dst
 *.dstgy

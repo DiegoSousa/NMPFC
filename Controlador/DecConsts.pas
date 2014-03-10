@@ -66,8 +66,6 @@ var
   Kw: double;
   SpeedMax: double=3.0;
   AvgSpeed: double=0.5; // average speed used to calculate ball intersection point
-  //AvgSpeed: double=3.0;
-
   MaxIntersectTime: double=1.00;
 
   MaxKickSpeed: double=5.0;

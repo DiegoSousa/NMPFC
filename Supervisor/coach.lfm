@@ -1,17 +1,17 @@
 object FCoach: TFCoach
-  Left = 326
+  Left = 1862
   Height = 664
-  Top = 142
+  Top = 302
   Width = 917
   ActiveControl = EditMessIP
   Caption = 'FCoach'
-  ClientHeight = 637
+  ClientHeight = 664
   ClientWidth = 917
   Menu = MainMenu
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '0.9.28.2'
+  LCLVersion = '1.0.14.0'
   object ImageMap: TPaintBox
     Left = 8
     Height = 504
@@ -25,7 +25,7 @@ object FCoach: TFCoach
     Left = 320
     Height = 18
     Top = 37
-    Width = 113
+    Width = 119
     Caption = 'Robots Available:'
     ParentColor = False
   end
@@ -65,7 +65,7 @@ object FCoach: TFCoach
       Left = 6
       Height = 18
       Top = 8
-      Width = 17
+      Width = 18
       Caption = 'IP:'
       ParentColor = False
     end
@@ -132,9 +132,9 @@ object FCoach: TFCoach
     TabOrder = 7
     object CBRobotActive1: TCheckBox
       Left = 6
-      Height = 22
+      Height = 24
       Top = 1
-      Width = 65
+      Width = 68
       Caption = 'Active'
       Checked = True
       State = cbChecked
@@ -142,9 +142,9 @@ object FCoach: TFCoach
     end
     object CBForceRobotActive1: TCheckBox
       Left = 78
-      Height = 22
+      Height = 24
       Top = 1
-      Width = 60
+      Width = 64
       Caption = 'Force'
       Checked = True
       State = cbChecked
@@ -159,9 +159,9 @@ object FCoach: TFCoach
     end
     object CBKeeperActive: TCheckBox
       Left = 14
-      Height = 22
+      Height = 24
       Top = 57
-      Width = 114
+      Width = 119
       Caption = 'Keeper Active'
       Checked = True
       OnChange = CBKeeperActiveChange
@@ -187,9 +187,9 @@ object FCoach: TFCoach
     TabOrder = 8
     object CBRobotActive2: TCheckBox
       Left = 6
-      Height = 22
+      Height = 24
       Top = 1
-      Width = 65
+      Width = 68
       Caption = 'Active'
       Checked = True
       State = cbChecked
@@ -204,9 +204,9 @@ object FCoach: TFCoach
     end
     object CBForceRobotActive2: TCheckBox
       Left = 78
-      Height = 22
+      Height = 24
       Top = 1
-      Width = 60
+      Width = 64
       Caption = 'Force'
       Checked = True
       OnChange = CBForceRobotActive2Change
@@ -232,9 +232,9 @@ object FCoach: TFCoach
     TabOrder = 9
     object CBRobotActive3: TCheckBox
       Left = 10
-      Height = 22
+      Height = 24
       Top = -3
-      Width = 65
+      Width = 68
       Caption = 'Active'
       Checked = True
       State = cbChecked
@@ -249,9 +249,9 @@ object FCoach: TFCoach
     end
     object CBForceRobotActive3: TCheckBox
       Left = 82
-      Height = 22
+      Height = 24
       Top = -3
-      Width = 60
+      Width = 64
       Caption = 'Force'
       Checked = True
       OnChange = CBForceRobotActive3Change
@@ -277,9 +277,9 @@ object FCoach: TFCoach
     TabOrder = 10
     object CBRobotActive4: TCheckBox
       Left = 6
-      Height = 22
+      Height = 24
       Top = 1
-      Width = 65
+      Width = 68
       Caption = 'Active'
       Checked = True
       State = cbChecked
@@ -294,9 +294,9 @@ object FCoach: TFCoach
     end
     object CBForceRobotActive4: TCheckBox
       Left = 78
-      Height = 22
+      Height = 24
       Top = 1
-      Width = 60
+      Width = 64
       Caption = 'Force'
       Checked = True
       OnChange = CBForceRobotActive4Change
@@ -322,9 +322,9 @@ object FCoach: TFCoach
     TabOrder = 11
     object CBRobotActive5: TCheckBox
       Left = 10
-      Height = 22
+      Height = 24
       Top = 1
-      Width = 65
+      Width = 68
       Caption = 'Active'
       Checked = True
       State = cbChecked
@@ -339,9 +339,9 @@ object FCoach: TFCoach
     end
     object CBForceRobotActive5: TCheckBox
       Left = 78
-      Height = 22
+      Height = 24
       Top = 1
-      Width = 60
+      Width = 64
       Caption = 'Force'
       Checked = True
       OnChange = CBForceRobotActive5Change
@@ -431,9 +431,9 @@ object FCoach: TFCoach
   end
   object CheckBoxOtherTactic: TCheckBox
     Left = 8
-    Height = 22
+    Height = 24
     Top = 96
-    Width = 40
+    Width = 42
     Caption = 'T1'
     TabOrder = 16
   end
@@ -468,17 +468,17 @@ object FCoach: TFCoach
   end
   object CheckBoxOtherTactic2: TCheckBox
     Left = 64
-    Height = 22
+    Height = 24
     Top = 96
-    Width = 40
+    Width = 42
     Caption = 'T2'
     TabOrder = 18
   end
   object CBFuzzy: TCheckBox
     Left = 120
-    Height = 22
+    Height = 24
     Top = 96
-    Width = 61
+    Width = 63
     Caption = 'Fuzzy'
     Checked = True
     State = cbChecked
@@ -495,9 +495,9 @@ object FCoach: TFCoach
     TabOrder = 20
     object CBRobotActive6: TCheckBox
       Left = 6
-      Height = 22
+      Height = 24
       Top = 1
-      Width = 65
+      Width = 68
       Caption = 'Active'
       Checked = True
       State = cbChecked
@@ -512,9 +512,9 @@ object FCoach: TFCoach
     end
     object CBForceRobotActive6: TCheckBox
       Left = 78
-      Height = 22
+      Height = 24
       Top = 1
-      Width = 60
+      Width = 64
       Caption = 'Force'
       Checked = True
       OnChange = CBForceRobotActive6Change
@@ -531,9 +531,9 @@ object FCoach: TFCoach
   end
   object CBOn: TCheckBox
     Left = 400
-    Height = 22
+    Height = 24
     Top = 96
-    Width = 42
+    Width = 45
     Caption = 'On'
     TabOrder = 21
   end

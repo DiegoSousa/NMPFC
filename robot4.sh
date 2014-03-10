@@ -1,4 +1,5 @@
 #/bin/sh -e
-cd Tese\ Tiago
+cd NMPC\ Pascal
+cd NMPFC
 cd Controlador
 ./decision data4	

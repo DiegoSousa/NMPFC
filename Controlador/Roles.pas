@@ -1216,7 +1216,7 @@ begin
 
   with TaskPars[num] do begin
       speed := staticSpeed;
-      //speed := strtofloatDef(FormMPC.EditVMax.Text,2);
+
   end;
 
   with RobotInfo[num] do begin
@@ -1233,7 +1233,7 @@ begin
 
   with TaskPars[num] do begin
       speed := staticSpeed;
-      //speed := strtofloatDef(FormMPC.EditVMax.Text,2);
+
   end;
 
   with RobotInfo[num] do begin
@@ -1249,8 +1249,6 @@ end;
 procedure RoleGoSearchRules(num: integer);
 var X1Loc,Y1Loc,X2Loc,Y2Loc,X3Loc,Y3Loc,X4Loc,Y4Loc,val:double;
 begin
-   if (FMain.CBDrone.Checked=false) then begin
-
        X1Loc:=FieldDims.FieldDepth/4;
        Y1Loc:=-FieldDims.FieldWidth/4;
        X2Loc:=-FieldDims.FieldDepth/4;
@@ -1306,15 +1304,7 @@ begin
          deltateta:=1;
          task:=taskGoToGoodPosition;
        end;
-   end else begin
 
-       TaskPars[num].speed:=0.7;
-       with RobotInfo[num], TaskPars[num] do begin
-         deltateta:=1;
-         task:=taskTest;
-         if RobotState[num].teta>2*pi then RobotState[num].teta:=RobotState[num].teta-(2*pi);
-       end;
-   end;
 end;
 
 procedure RoleWaitForFreeKickRules(num: integer);

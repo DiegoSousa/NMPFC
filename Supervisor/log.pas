@@ -370,7 +370,7 @@ begin
         for j:=0 to LogBufferCount-1 do begin
           idx:=(LogBufferIn-LogBufferCount+j+LogFrames) mod LogFrames;
           SGLog.Cells[j+1,cnt]:=GetLogString(tree,i,idx);
-          Tserie(Chart.Series[cnt-1]).AddXY(j,GetLogValue(tree,i,idx),'',Chart.Series[cnt-1].SeriesColor);
+          Tserie(Chart.Series[cnt-1]).AddXY(j,GetLogValue(tree,i,idx),'',Chart.Color);
         end;
       end;
     end;

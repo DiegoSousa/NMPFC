@@ -124,7 +124,7 @@ var
 
 implementation
 
-uses Main{, Poles}, CoachMain;
+uses Main;
 
 procedure TFField.FormCreate(Sender: TObject);
 var
@@ -146,13 +146,13 @@ begin
   FormStorage.Restore;
   //FormStorage.LoadProps;
   Fmain.InsertAuxForms(FField,'Field');
-  FCoachMain.InsertAuxForms(FField,'Field');
+ //===> FCoachMain.InsertAuxForms(FField,'Field');
 end;
 
 procedure TFField.FormClose(Sender: TObject);
 begin
   Fmain.AuxFormClosed('Field');
-  FCoachMain.AuxFormClosed('Field');
+  //===>  FCoachMain.AuxFormClosed('Field');
 end;
 
 

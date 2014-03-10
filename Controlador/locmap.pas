@@ -290,7 +290,7 @@ procedure DrawLocalizationData(var rp:TRLocState;var VList:TPointList);
 var
   r: localization.TPos;
 begin
-  if FMain.CBLocalization.Checked then begin
+  //===>  if FMain.CBLocalization.Checked then begin
     if FLocMap.CBMShow.Checked then begin
       //FLocMap.Canvas.Clear;
       FLocMap.Canvas.Draw(0,0,TempBitmap);
@@ -314,7 +314,7 @@ begin
       else
         FLocMap.Label1.Color:=clRed;
      end;
-  end;
+    //===>  end;
 
 end;
 

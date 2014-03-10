@@ -236,7 +236,6 @@ begin
       WorldToMap(xr,yr,Pts[i].x,Pts[i].y);
     end;
     Polygon(Pts);
-    //Polyline(Pts);
 
     brush.color:=clgreen;
     brush.style:=bsClear;
@@ -246,17 +245,8 @@ begin
     font.Color:=CTeamColorColor24[TeamColor];
     TextOut(x1-2,y1-5,inttostr(RS.num+1));
 
-//    WorldToMap(RS.x-sqrt(RS.cov_x),RS.y+sqrt(RS.cov_y),x1,y1);
-//    WorldToMap(RS.x+sqrt(RS.cov_x),RS.y-sqrt(RS.cov_y),x2,y2);
-//    brush.style:=bsClear;
-//    ellipse(rect(x1,y1,x2,y2));
-
-
     if RS.num=myNumber then begin
       DrawCovElipse(RS.x,RS.y,RS.cov_x,RS.cov_y,RS.cov_xy,10,CNV);
-//      EditRobotX.text:=format('%0.2f %2f',[RS.x,RS.cov_x]);
-//      EditRobotY.text:=format('%0.2f %2f',[RS.y,RS.cov_y]);
-//      EditRobotTeta.text:=format('%0.2f %2f',[RS.teta,RS.cov_teta]);
     end;
   end;
 end;
@@ -276,7 +266,6 @@ begin
       WorldToMap(xr,yr,Pts[i].x,Pts[i].y);
     end;
     Polygon(Pts);
-    //Polyline(Pts);
 
     brush.color:=clgreen;
     brush.style:=bsClear;
@@ -286,19 +275,10 @@ begin
     font.Color:=CTeamColorColor24[TeamColor];
     TextOut(x1-2,y1-5,inttostr(RS.num+1));
 
-//    WorldToMap(RS.x-sqrt(RS.cov_x),RS.y+sqrt(RS.cov_y),x1,y1);
-//    WorldToMap(RS.x+sqrt(RS.cov_x),RS.y-sqrt(RS.cov_y),x2,y2);
-//    brush.style:=bsClear;
-//    ellipse(rect(x1,y1,x2,y2));
-
-
     if RS.num=myNumber then begin
       font.Color:=clWhite;
       TextOut(x1-20,y1-20,format('%.1f,%.1f,%d',[RS.x,RS.Y,round(RS.teta/(2*pi)*360)]));
       DrawCovElipse(RS.x,RS.y,RS.cov_x,RS.cov_y,RS.cov_xy,10,CNV);
-//      EditRobotX.text:=format('%0.2f %2f',[RS.x,RS.cov_x]);
-//      EditRobotY.text:=format('%0.2f %2f',[RS.y,RS.cov_y]);
-//      EditRobotTeta.text:=format('%0.2f %2f',[RS.teta,RS.cov_teta]);
     end;
   end;
 end;
@@ -311,15 +291,12 @@ var i,x1,y1: integer;
     Pts: array[Low(RobotDrawingVertex)..High(RobotDrawingVertex)] of TPoint;
 begin
   with CNV do begin //tcanvas
-    //pen.color:=clWhite;
-    //brush.color:=clWhite;
-    //brush.style:=bsSolid;
+
     font.Color:=clWhite;
 
     RotateAndTranslate(xr,yr,0,0,RS.x,RS.y,RS.teta);
     WorldToMap(xr,yr,x1,y1);
-    //TextOut(x1-14,y1-35,RoleDefs[RI.role].name);
-    //TextOut(x1-14,y1-23,TaskString(RI.task));
+
     TextOut(x1-14,y1-23,RoleDefs[RI.role].name);
   end;
 end;

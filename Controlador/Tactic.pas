@@ -5,7 +5,7 @@ unit Tactic;
 interface
 
 uses
-  Classes, SysUtils, DecConsts, Roles, Actions, CoachMain, Main,
+  Classes, SysUtils, DecConsts, Roles, Actions, Main,
   Tasks, Math, Graphics, Field;
 
 type
@@ -765,7 +765,7 @@ begin
     end;
   end;
   
-  FCoachMain.EditRobotAvailableCount.Text:=IntToStr(RobotAvailableCount);
+//===> FCoachMain.EditRobotAvailableCount.Text:=IntToStr(RobotAvailableCount);
 
   // calculate role priority for current game situation
   CalcRolePriority(RolePri);
@@ -971,7 +971,7 @@ begin
   // set the "play" according to the game state and referee box state
   DoPlayRules;
   
-  FCoachMain.EditPlayState.Text:=CPlayString[Play];
+  //===>  FCoachMain.EditPlayState.Text:=CPlayString[Play];
 
   // select the right robots for each role
   DoRules;
@@ -1039,7 +1039,7 @@ begin
 
   if old_team_role<>RefereeState then begin
     RefereeStateTime:=ControlTimeStamp;
-    FCoachMain.EditRefState.Text:=CRefereeStateString[RefereeState];
+    //===>    FCoachMain.EditRefState.Text:=CRefereeStateString[RefereeState];
     RefereeStateEnterBallState:=RefereeStateBallFilter;
     RefereeStateWantBallMoveInfo:=true;
   end;

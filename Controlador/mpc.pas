@@ -153,7 +153,6 @@ type
     edk2: TEdit;
     edk3: TEdit;
     edk4: TEdit;
-    ISTCB: TCheckBox;
     EditJStop: TEdit;
     EditL1: TLabeledEdit;
     EditL2: TLabeledEdit;
@@ -418,11 +417,11 @@ begin
                                                    FormationSettings.formationMates[1],
                                                    FormationSettings.formationMates[2],
                                                    FormationSettings.formationMates[3]]));
-     MemoDebug.Append(Format('dRobotRobot: %.2f %.2f %.2f %.2f',[FormationState.RobotFormationDistance[FormationSettings.formationMates[0]],
+     {MemoDebug.Append(Format('dRobotRobot: %.2f %.2f %.2f %.2f',[FormationState.RobotFormationDistance[FormationSettings.formationMates[0]],
                                                                  FormationState.RobotFormationDistance[FormationSettings.formationMates[1]],
                                                                  FormationState.RobotFormationDistance[FormationSettings.formationMates[2]],
                                                                  FormationState.RobotFormationDistance[FormationSettings.formationMates[3]]
-                                                                 ]));
+                                                                 ]));  }
      MemoDebug.Append(Format('dRobotObstacle: %.2f %.2f',[FormationState.RobotFormationDistance[4],
                                                           FormationState.RobotFormationDistance[5]
                                                           ]));
@@ -430,18 +429,12 @@ begin
      MemoDebug.Append(Format('Matriz: %.2f %.2f',[sigver.getv(0,0),sigver.getv(0,1)]));
      MemoDebug.Append(Format('Matriz: %.2f %.2f',[sigver.getv(1,0),sigver.getv(1,1)]));
 
-
-     //DEBUG DEBUG DEBUG DEBUG
-    // MemoDebug.Append(format('Optimizer %d',[AlgItCount]));
-    // MemoDebug.Append('--------------------------');
-
      //DEBUG DEBUG DEBUG DEBUG DEBUG
      //--------------------------------------------------------------------------------------------
      MemoDebug.Append(format(' > It %d ----------------------',[OptData.iterationCount]));
      addDebug(' J:',JcurrentG);
      addDebug(' Jbest:',JbestG);
      MemoDebug.Append('--------------------------');
-     //MemoDebug.Append(format(' >>> Time: %d',[algTimeG]));
 
      MemoDebug.Append(format(' Ref U_ref: %.2f %.2f %.2f',[U_refG.getv(0,0),U_refG.getv(1,0),U_refG.getv(2,0)]));
      MemoDebug.Append(format(' Ref U_best: %.2f %.2f %.2f',[UbestG.getv(0,0),UbestG.getv(1,0),UbestG.getv(2,0)]));
@@ -486,7 +479,7 @@ end;
 function EditToFloatDef(edit: TLabeledEdit; default: double): double;
 begin
 try
-    result:=strtofloat(edit.text);
+    result:=strtofloatdef(edit.text,0);
   except
     result:=default;
     edit.text:=Format('%.8g',[default]);
@@ -497,7 +490,7 @@ end;
 function EditToFloatDef(edit: TEdit; default: double): double;
 begin
   try
-    result:=strtofloat(edit.text);
+    result:=strtofloatdef(edit.text,0);
   except
     result:=default;
     edit.text:=Format('%.8g',[default]);
@@ -1285,9 +1278,6 @@ begin
              currGrad := OptData.Jgradient.getv(3*i+j,0);
              prevGrad := OptData.Jgradient_prev.getv(3*i+j,0);
 
-             //MemoDebug.Append(format('%.4f %.4f %.4f',[prevStep,currGrad,prevGrad]));
-
-             //------------------begin algorithm
 
              if prevGrad*currGrad > 0 then
                 currStep := Min(prevStep*OptParameters.etaMinus,OptParameters.stepMax)
@@ -1309,8 +1299,6 @@ begin
                 Uref.setv(j,i,Uref.getv(j,i));
 
 
-             //-----------------end algorithm
-;
              OptData.Jstep_prev.setv(3*i+j,0,currStep);
 
          end;
@@ -1596,56 +1584,6 @@ begin
 
          end;
 
-
-         if FormMPC.ISTCB.Checked=true then begin
-             //Simulates the covariances in the formation
-             sigtemp0:=SimCovarianceIST(Robot,Ball,FormationSettings.parameters[0],FormationSettings.k1,FormationSettings.k2,FormationSettings.k3,FormationSettings.k4);
-             sgtemp:=sigtemp0;
-             if k1>=0 then begin
-                sigtemp1:=SimCovarianceIST2(Robot,SimFormationRobots[k1],Ball,FormationSettings.parameters[0],FormationSettings.k1,FormationSettings.k2,FormationSettings.k3,FormationSettings.k4);
-                aa:=(sgtemp.getv(0,0)+sigtemp1.getv(0,0));    //a
-                bb:=(sgtemp.getv(0,1)+sigtemp1.getv(0,1));    //b
-                cc:=(sgtemp.getv(1,0)+sigtemp1.getv(1,0));    //c
-                dd:=(sgtemp.getv(1,1)+sigtemp1.getv(1,1));    //d
-                if ((aa*dd)-(bb*cc))<>0 then begin
-                     sgtemp:=SimCovarianceSUM(sgtemp, sigtemp1);
-                end;
-             end;
-             if k2>=0 then begin
-                sigtemp2:=SimCovarianceIST2(Robot,SimFormationRobots[k2],Ball,FormationSettings.parameters[0],FormationSettings.k1,FormationSettings.k2,FormationSettings.k3,FormationSettings.k4);
-                aa:=(sgtemp.getv(0,0)+sigtemp2.getv(0,0));    //a
-                bb:=(sgtemp.getv(0,1)+sigtemp2.getv(0,1));    //b
-                cc:=(sgtemp.getv(1,0)+sigtemp2.getv(1,0));    //c
-                dd:=(sgtemp.getv(1,1)+sigtemp2.getv(1,1));    //d
-
-                if ((aa*dd)-(bb*cc))<>0 then begin
-                     sgtemp:=SimCovarianceSUM(sgtemp, sigtemp2);
-                end;
-             end;
-             if k3>=0 then begin
-                sigtemp3:=SimCovarianceIST2(Robot,SimFormationRobots[k3],Ball,FormationSettings.parameters[0],FormationSettings.k1,FormationSettings.k2,FormationSettings.k3,FormationSettings.k4);
-                aa:=(sgtemp.getv(0,0)+sigtemp3.getv(0,0));    //a
-                bb:=(sgtemp.getv(0,1)+sigtemp3.getv(0,1));    //b
-                cc:=(sgtemp.getv(1,0)+sigtemp3.getv(1,0));    //c
-                dd:=(sgtemp.getv(1,1)+sigtemp3.getv(1,1));    //d
-
-                if ((aa*dd)-(bb*cc))<>0 then begin
-                     sgtemp:=SimCovarianceSUM(sgtemp, sigtemp3);
-                end;
-             end;
-             if k4>=0 then begin
-                sigtemp4:=SimCovarianceIST2(Robot,SimFormationRobots[k4],Ball,FormationSettings.parameters[0],FormationSettings.k1,FormationSettings.k2,FormationSettings.k3,FormationSettings.k4);
-                aa:=(sgtemp.getv(0,0)+sigtemp4.getv(0,0));    //a
-                bb:=(sgtemp.getv(0,1)+sigtemp4.getv(0,1));    //b
-                cc:=(sgtemp.getv(1,0)+sigtemp4.getv(1,0));    //c
-                dd:=(sgtemp.getv(1,1)+sigtemp4.getv(1,1));    //d
-
-                if ((aa*dd)-(bb*cc))<>0 then begin
-                     sgtemp:=SimCovarianceSUM(sgtemp, sigtemp4);
-                end;
-             end;
-         end;
-         //if ((FormMPC.FEUPCB.Checked=true)and(FormationState.RobotBallDist<=1.5)and(FormationState.RobotBallDist>=1)) then begin
          if (FormMPC.FEUPCB.Checked=true) then begin
              //Simulates the covariances in the formation
              sigtemp0:=SimCovariance(Robot,Ball,FormationSettings.parameters[0],FormationSettings.k1,FormationSettings.k2);
@@ -1760,15 +1698,6 @@ begin
               lamb2:=-(80*FormationState.RobotBallDist)+320;
          end;
 
-         //if (FormationState.RobotBallDist>1.5) then begin
-         //     lambA:=0;
-         //end else if (FormationState.RobotBallDist<1) then begin
-         //     lambA:=0;
-         //end else begin
-         //     lambA:=FormationSettings.weights[6];
-         //end;
-
-
 
          for m:=0 to num_obs-1 do begin
              if (FormationState.RobotObstacleDistance[m]<0.6) then begin
@@ -1788,7 +1717,7 @@ begin
              end;
          end;
 
-         if ((FormationState.RobotFormationDistance[k1]<0.6)and(FormationState.RobotFormationDistance[k1]>0.1)and(k1>=0)) or
+  {       if ((FormationState.RobotFormationDistance[k1]<0.6)and(FormationState.RobotFormationDistance[k1]>0.1)and(k1>=0)) or
             ((FormationState.RobotFormationDistance[k2]<0.6)and(FormationState.RobotFormationDistance[k2]>0.1)and(k2>=0)) or
             ((FormationState.RobotFormationDistance[k3]<0.6)and(FormationState.RobotFormationDistance[k3]>0.1)and(k3>=0)) or
             ((FormationState.RobotFormationDistance[k4]<0.6)and(FormationState.RobotFormationDistance[k4]>0.1)and(k4>=0)) then begin
@@ -1805,7 +1734,7 @@ begin
            lamb3:=FormationSettings.weights[3];
            lamb4:=FormationSettings.weights[4];
            lamb5:=FormationSettings.weights[5];
-         end;
+         end; }
 
          //SUM COST
          sum_cost := sum_cost + lambA*abs(Ball.detsigma);
@@ -1820,15 +1749,13 @@ begin
          sum_cost := sum_cost + lamb2*abs(FormationState.RobotBallDotProduct);     //follow alongside
 
          //mate avoidance
-         //if k1>=0 then sum_cost := sum_cost + abs((-lamb4*FormationState.RobotFormationDistance[k1]/1.5)+lamb4);
          if k1>=0 then sum_cost := sum_cost + lamb4*abs(1/(FormationState.RobotFormationDistance[k1]+1e-6));
          if k2>=0 then sum_cost := sum_cost + lamb4*abs(1/(FormationState.RobotFormationDistance[k2]+1e-6));
          if k3>=0 then sum_cost := sum_cost + lamb4*abs(1/(FormationState.RobotFormationDistance[k3]+1e-6));
          if k4>=0 then sum_cost := sum_cost + lamb4*abs(1/(FormationState.RobotFormationDistance[k4]+1e-6));
 
 
- //-->        //obstacle avoidance - MODIFICAR PARA N OBSTÁCULOS
-         //sum_cost := sum_cost + abs((-lamb5*FormationState.RobotFormationDistance[4]/1.5)+lamb5);
+         //obstacle avoidance - PARA N OBSTÁCULOS
          for m:=0 to num_obs-1 do begin
              sum_cost := sum_cost + lamb5*abs(1/(FormationState.RobotObstacleDistance[m]+1e-6));
          end;
@@ -1991,14 +1918,12 @@ begin
          sum_cost := sum_cost + lamb2*abs(FormationState.RobotLeaderDotProduct);     //follow alongside
 
          //mate avoidance
-         //if k2>=0 then sum_cost := sum_cost + abs((-lamb4*FormationState.RobotFormationDistance[k2]/1.5)+lamb4);
-         if k2>=0 then sum_cost := sum_cost + lamb4*abs(1/(FormationState.RobotFormationDistance[k2]+1e-6));
+          if k2>=0 then sum_cost := sum_cost + lamb4*abs(1/(FormationState.RobotFormationDistance[k2]+1e-6));
          if k3>=0 then sum_cost := sum_cost + lamb4*abs(1/(FormationState.RobotFormationDistance[k3]+1e-6));
          if k4>=0 then sum_cost := sum_cost + lamb4*abs(1/(FormationState.RobotFormationDistance[k4]+1e-6));
 
 
  //-->        //obstacle avoidance - MODIFICAR PARA N OBSTÁCULOS
-         //sum_cost := sum_cost + abs((-lamb5*FormationState.RobotFormationDistance[4]/1.5)+lamb5);
          for m:=0 to num_obs-1 do begin
              sum_cost := sum_cost + lamb5*abs(1/(FormationState.RobotObstacleDistance[m]+1e-6));
          end;
