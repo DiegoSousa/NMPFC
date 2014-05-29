@@ -1,0 +1,180 @@
+object FCamera: TFCamera
+  Left = 738
+  Height = 168
+  Top = 425
+  Width = 253
+  HorzScrollBar.Page = 252
+  HorzScrollBar.Range = 243
+  VertScrollBar.Page = 167
+  VertScrollBar.Range = 161
+  ActiveControl = EditLCamHeight
+  Caption = 'Camera'
+  ClientHeight = 168
+  ClientWidth = 253
+  Font.Color = clText
+  Font.Height = 11
+  Font.Name = 'MS Sans Serif'
+  Font.Pitch = fpVariable
+  OnClose = FormClose
+  OnCreate = FormCreate
+  LCLVersion = '0.9.28.2'
+  object Label2: TLabel
+    Left = 8
+    Height = 19
+    Top = 45
+    Width = 47
+    Caption = 'Angle:'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 16
+    Height = 19
+    Top = 76
+    Width = 33
+    Caption = 'dist:'
+    ParentColor = False
+  end
+  object Label4: TLabel
+    Left = 16
+    Height = 19
+    Top = 12
+    Width = 52
+    Caption = 'height:'
+    ParentColor = False
+  end
+  object Label5: TLabel
+    Left = 16
+    Height = 19
+    Top = 100
+    Width = 25
+    Caption = 'Mt:'
+    ParentColor = False
+  end
+  object Label15: TLabel
+    Left = 136
+    Height = 19
+    Top = 12
+    Width = 42
+    Caption = 'Zball:'
+    ParentColor = False
+  end
+  object Label16: TLabel
+    Left = 136
+    Height = 19
+    Top = 36
+    Width = 55
+    Caption = 'Zrobot:'
+    ParentColor = False
+  end
+  object Label17: TLabel
+    Left = 136
+    Height = 19
+    Top = 60
+    Width = 42
+    Caption = 'Zadv:'
+    ParentColor = False
+  end
+  object Label20: TLabel
+    Left = 136
+    Height = 19
+    Top = 84
+    Width = 49
+    Caption = 'ZGoal:'
+    ParentColor = False
+  end
+  object Label21: TLabel
+    Left = 136
+    Height = 19
+    Top = 108
+    Width = 56
+    Caption = 'ZBlack:'
+    ParentColor = False
+  end
+  object BCamsRefresh: TButton
+    Left = 168
+    Height = 25
+    Top = 136
+    Width = 75
+    Caption = 'Refresh'
+    OnClick = BCamsRefreshClick
+    TabOrder = 0
+  end
+  object EditLCamAngle: TEdit
+    Left = 52
+    Height = 28
+    Top = 43
+    Width = 60
+    TabOrder = 1
+    Text = '-9.682'
+  end
+  object EditLCamDist: TEdit
+    Left = 52
+    Height = 28
+    Top = 72
+    Width = 60
+    TabOrder = 2
+    Text = '318'
+  end
+  object EditLCamHeight: TEdit
+    Left = 52
+    Height = 28
+    Top = 12
+    Width = 60
+    TabOrder = 3
+    Text = '253.5'
+  end
+  object EditLCamMt: TEdit
+    Left = 52
+    Height = 28
+    Top = 100
+    Width = 60
+    TabOrder = 4
+    Text = '6e-4'
+  end
+  object EditCamZBall: TEdit
+    Left = 180
+    Height = 28
+    Top = 12
+    Width = 60
+    TabOrder = 5
+    Text = '0.16'
+  end
+  object EditCamZrobot: TEdit
+    Left = 180
+    Height = 28
+    Top = 36
+    Width = 60
+    TabOrder = 6
+    Text = '0.5'
+  end
+  object EditCamZadv: TEdit
+    Left = 180
+    Height = 28
+    Top = 60
+    Width = 60
+    TabOrder = 7
+    Text = '0.4'
+  end
+  object EditCamZBlack: TEdit
+    Left = 180
+    Height = 28
+    Top = 108
+    Width = 60
+    TabOrder = 8
+    Text = '0.4'
+  end
+  object EditCamZGoal: TEdit
+    Left = 180
+    Height = 28
+    Top = 84
+    Width = 60
+    TabOrder = 9
+    Text = '0.5'
+  end
+  object FormStorage: TIniPropStorage
+    StoredValues = <>
+    IniSection = 'CAMERA'
+    left = 80
+    top = 136
+  end
+end

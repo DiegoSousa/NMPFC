@@ -1,0 +1,41 @@
+object Form_Hardware_Configure: TForm_Hardware_Configure
+  Left = 637
+  Height = 168
+  Top = 276
+  Width = 271
+  ActiveControl = Edit_Timer_Interval
+  Caption = 'Things'
+  ClientHeight = 168
+  ClientWidth = 271
+  LCLVersion = '0.9.28.2'
+  object Label1: TLabel
+    Left = 16
+    Height = 18
+    Top = 24
+    Width = 98
+    Caption = 'Timer Interval:'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 16
+    Height = 18
+    Top = 64
+    Width = 137
+    Caption = 'Timer Global Status:'
+    ParentColor = False
+  end
+  object Edit_Timer_Interval: TEdit
+    Left = 176
+    Height = 27
+    Top = 15
+    Width = 72
+    TabOrder = 0
+  end
+  object Edit_Timer_GlobalStatus: TEdit
+    Left = 176
+    Height = 27
+    Top = 55
+    Width = 72
+    TabOrder = 1
+  end
+end

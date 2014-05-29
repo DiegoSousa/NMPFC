@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="9"/>
+    <General>
+      <SessionStorage Value="InIDEConfig"/>
+      <MainUnit Value="0"/>
+      <Title Value="RoC"/>
+      <UseXPManifest Value="True"/>
+    </General>
+    <VersionInfo>
+      <StringTable ProductVersion=""/>
+    </VersionInfo>
+    <BuildModes Count="1">
+      <Item1 Name="default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+      <DestinationDirectory Value=""/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <UseExcludeFileFilter Value="True"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <CommandLineParams Value="data1"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="6">
+      <Item1>
+        <PackageName Value="SdpoJoystickLaz"/>
+        <MinVersion Minor="1" Release="1" Valid="True"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="SynEdit"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="LCL"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="lnetvisual"/>
+        <MinVersion Minor="5" Release="8" Valid="True"/>
+      </Item4>
+      <Item5>
+        <PackageName Value="TAChartLazarusPkg"/>
+        <MinVersion Valid="True"/>
+      </Item5>
+      <Item6>
+        <PackageName Value="SdpoSerialLaz"/>
+        <MinVersion Minor="1" Release="2" Valid="True"/>
+      </Item6>
+    </RequiredPackages>
+    <Units Count="41">
+      <Unit0>
+        <Filename Value="RoC.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="RoC"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="Main.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FMain"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Main"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="RLan.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="RLan"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="Utils.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Utils"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="Field.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FField"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Field"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="Camera.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FCamera"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Camera"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="Param.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FParam"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Param"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="Robots.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Robots"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="Tactic.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Tactic"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="Tasks.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Tasks"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="Actions.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Actions"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="Roles.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Roles"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="Log.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FLog"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Log"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="Joy.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FJoy"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Joy"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="daisybin.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="daisybin"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="localization.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FLocalization"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="localization"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="omni3.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FOmni3"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="omni3"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="kicker.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FKicker"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="kicker"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="obsavoid.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="obsavoid"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="LogCompat.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="LogCompat"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="WLan.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="WLan"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="CoachMain.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FCoachMain"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="CoachMain"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="dynmatrix.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="dynmatrix"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="locmap.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FLocMap"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="LocMap"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="debug.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FormDebug"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Debug"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="DecConsts.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="DecConsts"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="astarmapimage.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FAstarMap"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="astarmapimage"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="unit_hardware.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form_Hardware"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Unit_Hardware"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="unit_hardware_configure_udp.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form_Hardware_Configure_UDP"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Unit_Hardware_Configure_UDP"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="unit_hardware_configure.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form_Hardware_Configure"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="unit_hardware_configure"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="unit_flashbus.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Unit_FlashBus"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="unit_joystick.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form_joystick"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Unit_joystick"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="unit_localizationaux.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="unit_localizationAux"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="unit_localization.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form_Localization"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="unit_Localization"/>
+      </Unit33>
+      <Unit34>
+        <Filename Value="kalmanball.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FBall"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="KalmanBall"/>
+      </Unit34>
+      <Unit35>
+        <Filename Value="kalmanball_aux.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="KalmanBall_Aux"/>
+      </Unit35>
+      <Unit36>
+        <Filename Value="unit_obstacles.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form_Obstacles"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="unit_obstacles"/>
+      </Unit36>
+      <Unit37>
+        <Filename Value="unit_rolesaux.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form_Roles"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Unit_RolesAux"/>
+      </Unit37>
+      <Unit38>
+        <Filename Value="mpc.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FormMPC"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="MPC"/>
+      </Unit38>
+      <Unit39>
+        <Filename Value="rtdb.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="rtdb"/>
+      </Unit39>
+      <Unit40>
+        <Filename Value="trajfollow.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FTrajFollow"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="TrajFollow"/>
+      </Unit40>
+    </Units>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="11"/>
+    <Target>
+      <Filename Value="../bin/RoC"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="."/>
+      <UnitOutputDirectory Value="../target"/>
+    </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <CStyleOperator Value="False"/>
+        <UseAnsiStrings Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
+    <CodeGeneration>
+      <Optimizations>
+        <OptimizationLevel Value="0"/>
+      </Optimizations>
+    </CodeGeneration>
+    <Linking>
+      <Debugging>
+        <DebugInfoType Value="dsDwarf2"/>
+        <UseLineInfoUnit Value="False"/>
+      </Debugging>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <Verbosity>
+        <ShoLineNum Value="True"/>
+        <ShowAllProcsOnError Value="True"/>
+        <ShowDebugInfo Value="True"/>
+        <ShowSummary Value="True"/>
+        <ShowHintsForUnusedUnitsInMainSrc Value="True"/>
+        <ShowHintsForSenderNotUsed Value="True"/>
+      </Verbosity>
+      <WriteFPCLogo Value="False"/>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="1">
+      <Item1>
+        <Name Value="EConvertError"/>
+      </Item1>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

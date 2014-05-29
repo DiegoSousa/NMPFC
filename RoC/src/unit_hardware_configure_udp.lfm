@@ -1,0 +1,60 @@
+object Form_Hardware_Configure_UDP: TForm_Hardware_Configure_UDP
+  Left = 727
+  Height = 144
+  Top = 244
+  Width = 236
+  ActiveControl = Edit_Port
+  Caption = 'Configure UDP'
+  ClientHeight = 144
+  ClientWidth = 236
+  Position = poOwnerFormCenter
+  LCLVersion = '0.9.28.2'
+  object Label1: TLabel
+    Left = 8
+    Height = 18
+    Top = 16
+    Width = 64
+    Caption = 'Dec Port:'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 8
+    Height = 18
+    Top = 56
+    Width = 97
+    Caption = 'Flashbus Port:'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 8
+    Height = 18
+    Top = 97
+    Width = 80
+    Caption = 'Flashbus IP:'
+    ParentColor = False
+  end
+  object Edit_Port: TEdit
+    Left = 168
+    Height = 27
+    Top = 8
+    Width = 56
+    TabOrder = 0
+    Text = '50000'
+  end
+  object Edit_HostPort: TEdit
+    Left = 168
+    Height = 27
+    Top = 47
+    Width = 56
+    TabOrder = 1
+    Text = '50000'
+  end
+  object Edit_HostIP: TEdit
+    Left = 104
+    Height = 27
+    Top = 88
+    Width = 120
+    TabOrder = 2
+    Text = '192.168.104.102'
+  end
+end

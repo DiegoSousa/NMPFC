@@ -1,0 +1,515 @@
+object FBall: TFBall
+  Left = 486
+  Height = 554
+  Top = 54
+  Width = 546
+  ActiveControl = E_LoadBallLog
+  Caption = 'Ball'
+  ClientHeight = 554
+  ClientWidth = 546
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  SessionProperties = 'CB_Show.Checked;CB_ShowObsBall.Checked;CB_ShowObsVel.Checked;E_Cov0VXY.Text;E_Cov0XY.Text;E_errorRo.Text;E_errorTeta.Text;E_InitMode.Text;E_LoadBallLog.Text;E_MinCovVxy.Text;E_MinCovXY.Text;E_MinIter.Text;E_ModeObs.Text;E_ModPred.Text;E_OdoAng.Text;E_OdoVVn.Text;E_OdoXY.Text;E_powerRo.Text;E_powerTeta.Text;E_SRate.Text;E_VelPredQ.Text;RG_Mode.ItemIndex;E_qualDecay.Text;E_qualDecayLin.Text'
+  LCLVersion = '0.9.28.2'
+  object Label12: TLabel
+    Left = 432
+    Height = 18
+    Top = 192
+    Width = 13
+    Caption = 'x:'
+    ParentColor = False
+  end
+  object Label13: TLabel
+    Left = 434
+    Height = 18
+    Top = 232
+    Width = 12
+    Caption = 'y:'
+    ParentColor = False
+  end
+  object Label14: TLabel
+    Left = 432
+    Height = 18
+    Top = 272
+    Width = 22
+    Caption = 'Vx:'
+    ParentColor = False
+  end
+  object Label15: TLabel
+    Left = 432
+    Height = 18
+    Top = 312
+    Width = 21
+    Caption = 'Vy:'
+    ParentColor = False
+  end
+  object PC_KalmanBall: TPageControl
+    Left = 8
+    Height = 448
+    Top = 8
+    Width = 416
+    ActivePage = TB_BallParameters
+    TabIndex = 1
+    TabOrder = 0
+    object TS_BallMap: TTabSheet
+      Caption = 'BallMap'
+      ClientHeight = 413
+      ClientWidth = 410
+      object PB_BallMap: TPaintBox
+        Left = 5
+        Height = 400
+        Top = 8
+        Width = 400
+      end
+    end
+    object TB_BallParameters: TTabSheet
+      Caption = 'BallParameters'
+      ClientHeight = 413
+      ClientWidth = 410
+      object Label16: TLabel
+        Left = 6
+        Height = 18
+        Top = 262
+        Width = 69
+        Caption = 'MinCovXY:'
+        ParentColor = False
+      end
+      object Label17: TLabel
+        Left = 6
+        Height = 18
+        Top = 296
+        Width = 78
+        Caption = 'MinCovVxy:'
+        ParentColor = False
+      end
+      object Label20: TLabel
+        Left = 6
+        Height = 18
+        Top = 232
+        Width = 51
+        Caption = 'IterMin:'
+        ParentColor = False
+      end
+      object Label21: TLabel
+        Left = 6
+        Height = 18
+        Top = 328
+        Width = 75
+        Caption = 'QualDecay:'
+        ParentColor = False
+      end
+      object Label22: TLabel
+        Left = 3
+        Height = 18
+        Top = 360
+        Width = 95
+        Caption = 'QualDecayLin:'
+        ParentColor = False
+      end
+      object GB_Prediction: TGroupBox
+        Left = 3
+        Height = 224
+        Top = 0
+        Width = 186
+        Caption = 'Prediction'
+        ClientHeight = 205
+        ClientWidth = 182
+        TabOrder = 0
+        object Label1: TLabel
+          Left = 9
+          Height = 18
+          Top = 7
+          Width = 46
+          Caption = 'OdoXY:'
+          ParentColor = False
+        end
+        object Label2: TLabel
+          Left = 9
+          Height = 18
+          Top = 47
+          Width = 56
+          Caption = 'OdoAng:'
+          ParentColor = False
+          OnClick = Label2Click
+        end
+        object Label4: TLabel
+          Left = 9
+          Height = 18
+          Top = 87
+          Width = 43
+          Caption = 'SRate:'
+          ParentColor = False
+        end
+        object Label3: TLabel
+          Left = 9
+          Height = 18
+          Top = 133
+          Width = 62
+          Caption = 'ModPred:'
+          ParentColor = False
+        end
+        object Label19: TLabel
+          Left = 9
+          Height = 18
+          Top = 174
+          Width = 64
+          Caption = 'VelPredQ:'
+          ParentColor = False
+        end
+        object E_OdoXY: TEdit
+          Left = 78
+          Height = 27
+          Top = 7
+          Width = 80
+          TabOrder = 0
+        end
+        object E_OdoAng: TEdit
+          Left = 78
+          Height = 27
+          Top = 47
+          Width = 80
+          TabOrder = 1
+        end
+        object E_SRate: TEdit
+          Left = 78
+          Height = 27
+          Top = 87
+          Width = 80
+          TabOrder = 2
+        end
+        object E_ModPred: TEdit
+          Left = 78
+          Height = 27
+          Top = 133
+          Width = 80
+          TabOrder = 3
+        end
+        object E_VelPredQ: TEdit
+          Left = 80
+          Height = 27
+          Top = 174
+          Width = 80
+          TabOrder = 4
+        end
+      end
+      object GB_Update: TGroupBox
+        Left = 205
+        Height = 224
+        Top = 0
+        Width = 193
+        Caption = 'Update'
+        ClientHeight = 205
+        ClientWidth = 189
+        TabOrder = 1
+        object Label5: TLabel
+          Left = 6
+          Height = 18
+          Top = 16
+          Width = 52
+          Caption = 'errorRo:'
+          ParentColor = False
+        end
+        object Label6: TLabel
+          Left = 6
+          Height = 18
+          Top = 96
+          Width = 63
+          Caption = 'errorTeta:'
+          ParentColor = False
+        end
+        object Label7: TLabel
+          Left = 6
+          Height = 18
+          Top = 55
+          Width = 61
+          Caption = 'powerRo:'
+          ParentColor = False
+        end
+        object Label8: TLabel
+          Left = 6
+          Height = 18
+          Top = 135
+          Width = 72
+          Caption = 'powerTeta:'
+          ParentColor = False
+        end
+        object Label18: TLabel
+          Left = 14
+          Height = 18
+          Top = 174
+          Width = 58
+          Caption = 'ModObs:'
+          ParentColor = False
+        end
+        object E_errorRo: TEdit
+          Left = 78
+          Height = 27
+          Top = 7
+          Width = 80
+          TabOrder = 0
+        end
+        object E_errorTeta: TEdit
+          Left = 78
+          Height = 27
+          Top = 94
+          Width = 80
+          TabOrder = 1
+        end
+        object E_powerRo: TEdit
+          Left = 78
+          Height = 27
+          Top = 47
+          Width = 80
+          TabOrder = 2
+        end
+        object E_powerTeta: TEdit
+          Left = 78
+          Height = 27
+          Top = 135
+          Width = 80
+          TabOrder = 3
+        end
+        object E_ModeObs: TEdit
+          Left = 78
+          Height = 27
+          Top = 174
+          Width = 80
+          TabOrder = 4
+        end
+      end
+      object B_Set: TButton
+        Left = 3
+        Height = 25
+        Top = 384
+        Width = 75
+        Caption = 'Set'
+        OnClick = B_SetClick
+        TabOrder = 2
+      end
+      object GroupBox1: TGroupBox
+        Left = 205
+        Height = 155
+        Top = 240
+        Width = 193
+        Caption = 'InitCov'
+        ClientHeight = 136
+        ClientWidth = 189
+        TabOrder = 3
+        object Label9: TLabel
+          Left = 6
+          Height = 18
+          Top = 16
+          Width = 57
+          Caption = 'Cov0 XY:'
+          ParentColor = False
+        end
+        object Label10: TLabel
+          Left = 6
+          Height = 18
+          Top = 55
+          Width = 66
+          Caption = 'Cov0 Vxy:'
+          ParentColor = False
+        end
+        object Label11: TLabel
+          Left = 8
+          Height = 18
+          Top = 95
+          Width = 62
+          Caption = 'InitMode:'
+          ParentColor = False
+        end
+        object E_Cov0XY: TEdit
+          Left = 86
+          Height = 27
+          Top = 7
+          Width = 80
+          TabOrder = 0
+        end
+        object E_Cov0VXY: TEdit
+          Left = 86
+          Height = 27
+          Top = 47
+          Width = 80
+          TabOrder = 1
+        end
+        object E_InitMode: TEdit
+          Left = 86
+          Height = 27
+          Top = 87
+          Width = 80
+          TabOrder = 2
+        end
+      end
+      object E_MinCovXY: TEdit
+        Left = 109
+        Height = 27
+        Top = 262
+        Width = 80
+        TabOrder = 4
+      end
+      object E_MinCovVxy: TEdit
+        Left = 109
+        Height = 27
+        Top = 294
+        Width = 80
+        OnChange = E_MinCovVxyChange
+        TabOrder = 5
+      end
+      object E_MinIter: TEdit
+        Left = 109
+        Height = 27
+        Top = 232
+        Width = 80
+        TabOrder = 6
+      end
+      object E_qualDecay: TEdit
+        Left = 109
+        Height = 27
+        Top = 328
+        Width = 80
+        TabOrder = 7
+      end
+      object E_qualDecayLin: TEdit
+        Left = 109
+        Height = 27
+        Top = 360
+        Width = 80
+        TabOrder = 8
+      end
+    end
+  end
+  object M_Debug: TMemo
+    Left = 8
+    Height = 80
+    Top = 464
+    Width = 416
+    TabOrder = 1
+  end
+  object B_Load: TButton
+    Left = 434
+    Height = 25
+    Top = 24
+    Width = 102
+    Caption = 'Load'
+    OnClick = B_LoadClick
+    TabOrder = 2
+  end
+  object E_LoadBallLog: TEdit
+    Left = 296
+    Height = 27
+    Top = 8
+    Width = 128
+    TabOrder = 3
+    Text = '/data/logBall.txt'
+  end
+  object B_Play: TButton
+    Left = 432
+    Height = 25
+    Top = 56
+    Width = 104
+    Caption = 'Play'
+    Enabled = False
+    OnClick = B_PlayClick
+    TabOrder = 4
+  end
+  object Button1: TButton
+    Left = 432
+    Height = 25
+    Top = 88
+    Width = 104
+    Caption = 'Stop'
+    OnClick = Button1Click
+    TabOrder = 5
+  end
+  object E_Sample: TEdit
+    Left = 432
+    Height = 27
+    Top = 152
+    Width = 104
+    OnChange = E_SampleChange
+    TabOrder = 6
+  end
+  object B_Reset: TButton
+    Left = 432
+    Height = 25
+    Top = 120
+    Width = 104
+    Caption = 'Reset'
+    OnClick = B_ResetClick
+    TabOrder = 7
+  end
+  object E_estX: TEdit
+    Left = 456
+    Height = 27
+    Top = 192
+    Width = 80
+    TabOrder = 8
+  end
+  object E_estY: TEdit
+    Left = 456
+    Height = 27
+    Top = 232
+    Width = 80
+    TabOrder = 9
+  end
+  object E_estVx: TEdit
+    Left = 456
+    Height = 27
+    Top = 272
+    Width = 80
+    TabOrder = 10
+  end
+  object E_estVy: TEdit
+    Left = 456
+    Height = 27
+    Top = 312
+    Width = 80
+    TabOrder = 11
+  end
+  object B_Up: TButton
+    Left = 456
+    Height = 25
+    Top = 344
+    Width = 75
+    Caption = 'Up'
+    OnClick = B_UpClick
+    TabOrder = 12
+  end
+  object CB_Show: TCheckBox
+    Left = 434
+    Height = 22
+    Top = 384
+    Width = 59
+    Caption = 'Show'
+    TabOrder = 13
+  end
+  object CB_ShowObsVel: TCheckBox
+    Left = 434
+    Height = 22
+    Top = 412
+    Width = 104
+    Caption = 'ShowObsVel'
+    TabOrder = 14
+  end
+  object CB_ShowObsBall: TCheckBox
+    Left = 434
+    Height = 22
+    Top = 440
+    Width = 109
+    Caption = 'ShowObsBall'
+    TabOrder = 15
+  end
+  object IniPropStorage: TIniPropStorage
+    StoredValues = <>
+    left = 216
+    top = 424
+  end
+  object Timer: TTimer
+    Enabled = False
+    Interval = 25
+    OnTimer = TimerTimer
+    left = 256
+    top = 424
+  end
+end
