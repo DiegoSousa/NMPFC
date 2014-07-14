@@ -1,5 +1,8 @@
 target
 Backup
+/bin/RoC
+/bin/Watchtower
+RoC/bin/data/
 *.lrs
 *.ppu
 *.o
@@ -13,3 +16,4 @@ Backup
 *.log
 *.mat
 *.res
+*.project
