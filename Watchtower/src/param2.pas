@@ -14,14 +14,19 @@ type
 
   TFParam2 = class(TForm)
     BOk1: TButton;
-    EditIPBase: TEdit;
+    EditRoc2IP: TEdit;
+    Edit2: TEdit;
+    EditRoc1IP: TEdit;
+    EditRoC3IP: TEdit;
+    Label4: TLabel;
+    Label5: TLabel;
+    RoC1: TEdit;
     EditSimTwoIP: TEdit;
     EditSimTwoListenPort: TEdit;
     EditSimTwoPort: TEdit;
     FormStorage: TIniPropStorage;
     Label1: TLabel;
     Label18: TLabel;
-    Label19: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     PageControl: TPageControl;
@@ -29,6 +34,7 @@ type
     TabConfig: TTabSheet;
     procedure FormCreate(Sender: TObject);
     procedure BOkClick(Sender: TObject);
+    procedure Label1Click(Sender: TObject);
     procedure RGRobotNumberClick(Sender: TObject);
   private
   public
@@ -92,6 +98,11 @@ end;
 procedure TFParam2.BOkClick(Sender: TObject);
 begin
   myNumber:=RGRobotNumber.ItemIndex;
+end;
+
+procedure TFParam2.Label1Click(Sender: TObject);
+begin
+
 end;
 
 

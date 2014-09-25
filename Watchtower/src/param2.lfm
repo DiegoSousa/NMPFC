@@ -1,12 +1,13 @@
 object FParam2: TFParam2
-  Left = 347
-  Height = 113
-  Top = 181
+  Left = 416
+  Height = 167
+  Top = 223
   Width = 374
   Caption = 'FParam2'
-  ClientHeight = 113
+  ClientHeight = 167
   ClientWidth = 374
-  LCLVersion = '1.0.14.0'
+  OnCreate = FormCreate
+  LCLVersion = '1.2.4.0'
   object RGRobotNumber: TRadioGroup
     Left = 8
     Height = 37
@@ -22,8 +23,8 @@ object FParam2: TFParam2
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 7
-    ClientHeight = 20
-    ClientWidth = 213
+    ClientHeight = 21
+    ClientWidth = 215
     Columns = 7
     Font.CharSet = ANSI_CHARSET
     Font.Height = 9
@@ -41,82 +42,101 @@ object FParam2: TFParam2
     ParentFont = False
     TabOrder = 0
   end
-  object Label19: TLabel
-    Left = 12
-    Height = 16
-    Top = 47
-    Width = 48
-    Caption = 'IP Base:'
-    Font.CharSet = ANSI_CHARSET
-    Font.Height = 9
-    Font.Name = '-misc-new-medium-r-normal-*-*-90-*-*-*-*-iso8859-1'
-    Font.Pitch = fpVariable
-    ParentColor = False
-    ParentFont = False
-  end
-  object EditIPBase: TEdit
-    Left = 62
-    Height = 25
-    Top = 43
-    Width = 100
-    Font.CharSet = ANSI_CHARSET
-    Font.Height = 9
-    Font.Name = '-misc-new-medium-r-normal-*-*-90-*-*-*-*-iso8859-1'
-    Font.Pitch = fpVariable
-    ParentFont = False
-    TabOrder = 1
-    Text = '192.168.1'
-  end
   object Label2: TLabel
     Left = 8
-    Height = 18
-    Top = 81
-    Width = 108
+    Height = 15
+    Top = 140
+    Width = 92
     Caption = 'SimTwo IP/Port:'
     ParentColor = False
   end
   object EditSimTwoIP: TEdit
-    Left = 116
-    Height = 27
-    Top = 77
+    Left = 104
+    Height = 25
+    Top = 136
     Width = 112
-    TabOrder = 2
-    Text = '192.168.1.100'
+    TabOrder = 1
   end
   object EditSimTwoPort: TEdit
-    Left = 228
-    Height = 27
-    Top = 77
+    Left = 217
+    Height = 25
+    Top = 136
     Width = 40
-    TabOrder = 3
-    Text = '5001'
+    TabOrder = 2
+    Text = '6001'
   end
   object Label3: TLabel
-    Left = 276
-    Height = 18
-    Top = 81
-    Width = 46
+    Left = 265
+    Height = 15
+    Top = 140
+    Width = 40
     Caption = 'Listen:'
     ParentColor = False
   end
   object EditSimTwoListenPort: TEdit
-    Left = 324
-    Height = 27
-    Top = 77
+    Left = 313
+    Height = 25
+    Top = 136
     Width = 40
-    TabOrder = 4
-    Text = '500'
+    TabOrder = 3
+    Text = '6000'
   end
   object BOk1: TButton
-    Left = 287
+    Left = 289
     Height = 25
-    Top = 16
+    Top = 18
     Width = 75
     Anchors = [akRight, akBottom]
     Caption = '&Ok'
     Default = True
     OnClick = BOkClick
+    TabOrder = 4
+  end
+  object EditRoC3IP: TEdit
+    Left = 62
+    Height = 25
+    Top = 105
+    Width = 112
     TabOrder = 5
+  end
+  object Label1: TLabel
+    Left = 9
+    Height = 15
+    Top = 56
+    Width = 53
+    Caption = 'RoC 1 IP:'
+    ParentColor = False
+    OnClick = Label1Click
+  end
+  object EditRoc1IP: TEdit
+    Left = 62
+    Height = 25
+    Top = 52
+    Width = 112
+    TabOrder = 6
+  end
+  object Label4: TLabel
+    Left = 8
+    Height = 15
+    Top = 84
+    Width = 53
+    Caption = 'RoC 2 IP:'
+    ParentColor = False
+  end
+  object Label5: TLabel
+    Left = 8
+    Height = 15
+    Top = 111
+    Width = 53
+    Caption = 'RoC 3 IP:'
+    ParentColor = False
+  end
+  object EditRoc2IP: TEdit
+    Left = 62
+    Height = 25
+    Top = 79
+    Width = 112
+    TabOrder = 7
   end
   object FormStorage: TIniPropStorage
     StoredValues = <>

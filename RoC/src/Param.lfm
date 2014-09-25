@@ -1,7 +1,7 @@
 object FParam: TFParam
-  Left = 273
+  Left = 271
   Height = 390
-  Top = 209
+  Top = 161
   Width = 429
   ActiveControl = PageControl
   Caption = 'Parameters'
@@ -14,12 +14,12 @@ object FParam: TFParam
   Font.Pitch = fpVariable
   OnClose = FormClose
   OnCreate = FormCreate
-  LCLVersion = '0.9.28.2'
+  LCLVersion = '1.2.4.0'
   object Label29: TLabel
     Left = 12
-    Height = 16
+    Height = 15
     Top = 116
-    Width = 155
+    Width = 154
     Caption = 'Wheel to Center Dist.(m):'
     Font.CharSet = ANSI_CHARSET
     Font.Height = 9
@@ -29,7 +29,7 @@ object FParam: TFParam
     ParentFont = False
   end
   object PageControl: TPageControl
-    Left = -3
+    Left = -1
     Height = 348
     Top = 0
     Width = 429
@@ -39,7 +39,7 @@ object FParam: TFParam
     TabOrder = 0
     object TabBall: TTabSheet
       Caption = '&Ball'
-      ClientHeight = 313
+      ClientHeight = 315
       ClientWidth = 423
       ImageIndex = 2
       object Label11: TLabel
@@ -384,7 +384,7 @@ object FParam: TFParam
     end
     object TabKeeperLineY: TTabSheet
       Caption = 'Position'
-      ClientHeight = 313
+      ClientHeight = 315
       ClientWidth = 423
       ImageIndex = 3
       object Label15: TLabel
@@ -536,7 +536,7 @@ object FParam: TFParam
     end
     object TabRobot: TTabSheet
       Caption = 'Robot'
-      ClientHeight = 313
+      ClientHeight = 315
       ClientWidth = 423
       ImageIndex = 4
       object Label26: TLabel
@@ -888,7 +888,7 @@ object FParam: TFParam
     end
     object TabTactic: TTabSheet
       Caption = 'Tactic'
-      ClientHeight = 313
+      ClientHeight = 315
       ClientWidth = 423
       object ChListPar: TCheckListBox
         Left = 0
@@ -904,40 +904,28 @@ object FParam: TFParam
     end
     object TabConfig: TTabSheet
       Caption = 'Config'
-      ClientHeight = 313
+      ClientHeight = 315
       ClientWidth = 423
       object Label1: TLabel
         Left = 12
-        Height = 16
+        Height = 15
         Top = 128
-        Width = 50
-        Caption = '&Super:'
+        Width = 76
+        Caption = 'WatchTower:'
         Font.CharSet = ANSI_CHARSET
         Font.Height = 9
         Font.Name = '-misc-new-medium-r-normal-*-*-90-*-*-*-*-iso8859-1'
         Font.Pitch = fpVariable
         ParentColor = False
         ParentFont = False
+        OnClick = Label1Click
       end
       object Label18: TLabel
         Left = 12
-        Height = 16
-        Top = 154
-        Width = 49
+        Height = 15
+        Top = 179
+        Width = 39
         Caption = '&Vision:'
-        Font.CharSet = ANSI_CHARSET
-        Font.Height = 9
-        Font.Name = '-misc-new-medium-r-normal-*-*-90-*-*-*-*-iso8859-1'
-        Font.Pitch = fpVariable
-        ParentColor = False
-        ParentFont = False
-      end
-      object Label19: TLabel
-        Left = 12
-        Height = 16
-        Top = 178
-        Width = 48
-        Caption = 'IP Base:'
         Font.CharSet = ANSI_CHARSET
         Font.Height = 9
         Font.Name = '-misc-new-medium-r-normal-*-*-90-*-*-*-*-iso8859-1'
@@ -947,18 +935,18 @@ object FParam: TFParam
       end
       object Label2: TLabel
         Left = 10
-        Height = 16
-        Top = 201
-        Width = 93
+        Height = 15
+        Top = 153
+        Width = 92
         Caption = 'SimTwo IP/Port:'
         ParentColor = False
         OnClick = Label2Click
       end
       object Label3: TLabel
-        Left = 270
-        Height = 16
-        Top = 201
-        Width = 41
+        Left = 264
+        Height = 15
+        Top = 153
+        Width = 40
         Caption = 'Listen:'
         ParentColor = False
       end
@@ -977,8 +965,8 @@ object FParam: TFParam
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 7
-        ClientHeight = 33
-        ClientWidth = 213
+        ClientHeight = 21
+        ClientWidth = 215
         Columns = 7
         Font.CharSet = ANSI_CHARSET
         Font.Height = 9
@@ -997,9 +985,9 @@ object FParam: TFParam
         TabOrder = 0
       end
       object EditBadCount: TEdit
-        Left = 208
+        Left = 264
         Height = 25
-        Top = 150
+        Top = 175
         Width = 41
         Font.CharSet = ANSI_CHARSET
         Font.Height = 9
@@ -1010,40 +998,43 @@ object FParam: TFParam
         Text = '0'
       end
       object EditSuperIP: TEdit
-        Left = 56
+        Left = 104
         Height = 25
-        Top = 126
-        Width = 100
+        Top = 124
+        Width = 112
         Font.CharSet = ANSI_CHARSET
         Font.Height = 9
         Font.Name = '-misc-new-medium-r-normal-*-*-90-*-*-*-*-iso8859-1'
         Font.Pitch = fpVariable
+        OnChange = EditSuperIPChange
         ParentFont = False
         TabOrder = 2
         Text = '192.168.0.71'
       end
       object EditVisionIP: TEdit
-        Left = 56
+        Left = 104
         Height = 25
-        Top = 150
-        Width = 100
+        Top = 175
+        Width = 112
         Font.CharSet = ANSI_CHARSET
         Font.Height = 9
         Font.Name = '-misc-new-medium-r-normal-*-*-90-*-*-*-*-iso8859-1'
         Font.Pitch = fpVariable
+        OnChange = EditVisionIPChange
         ParentFont = False
         TabOrder = 3
         Text = '192.168.0.71'
       end
       object EditBadIPCount: TEdit
-        Left = 160
+        Left = 217
         Height = 25
-        Top = 150
+        Top = 175
         Width = 41
         Font.CharSet = ANSI_CHARSET
         Font.Height = 9
         Font.Name = '-misc-new-medium-r-normal-*-*-90-*-*-*-*-iso8859-1'
         Font.Pitch = fpVariable
+        OnChange = EditBadIPCountChange
         ParentFont = False
         TabOrder = 4
         Text = '0'
@@ -1052,7 +1043,7 @@ object FParam: TFParam
         Left = 8
         Height = 33
         Top = 40
-        Width = 137
+        Width = 168
         AutoFill = True
         Caption = 'Attack Side'
         ChildSizing.LeftRightSpacing = 6
@@ -1063,8 +1054,8 @@ object FParam: TFParam
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 29
-        ClientWidth = 133
+        ClientHeight = 17
+        ClientWidth = 166
         Columns = 2
         Font.CharSet = ANSI_CHARSET
         Font.Height = 9
@@ -1082,7 +1073,7 @@ object FParam: TFParam
         Left = 8
         Height = 33
         Top = 76
-        Width = 137
+        Width = 152
         AutoFill = True
         Caption = 'Team Color'
         ChildSizing.LeftRightSpacing = 6
@@ -1093,8 +1084,8 @@ object FParam: TFParam
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 29
-        ClientWidth = 133
+        ClientHeight = 17
+        ClientWidth = 150
         Columns = 2
         Font.CharSet = ANSI_CHARSET
         Font.Height = 9
@@ -1134,48 +1125,38 @@ object FParam: TFParam
         TabOrder = 8
         Text = 'C'
       end
-      object EditIPBase: TEdit
-        Left = 62
-        Height = 25
-        Top = 174
-        Width = 100
-        Font.CharSet = ANSI_CHARSET
-        Font.Height = 9
-        Font.Name = '-misc-new-medium-r-normal-*-*-90-*-*-*-*-iso8859-1'
-        Font.Pitch = fpVariable
-        ParentFont = False
-        TabOrder = 9
-        Text = '192.168.0'
-      end
       object EditSimTwoPort: TEdit
-        Left = 222
+        Left = 217
         Height = 25
-        Top = 197
+        Top = 149
         Width = 40
-        TabOrder = 10
+        OnChange = EditSimTwoPortChange
+        TabOrder = 9
         Text = '9808'
       end
       object EditSimTwoIP: TEdit
-        Left = 110
+        Left = 104
         Height = 25
-        Top = 197
+        Top = 149
         Width = 112
-        TabOrder = 11
+        OnChange = EditSimTwoIPChange
+        TabOrder = 10
         Text = '192.168.106.43'
       end
       object EditSimTwoListenPort: TEdit
-        Left = 310
+        Left = 304
         Height = 25
-        Top = 197
+        Top = 149
         Width = 40
+        OnChange = EditSimTwoListenPortChange
         OnEditingDone = EditSimTwoListenPortEditingDone
-        TabOrder = 12
+        TabOrder = 11
         Text = '9810'
       end
     end
     object TabRoles: TTabSheet
       Caption = 'Roles'
-      ClientHeight = 313
+      ClientHeight = 315
       ClientWidth = 423
       object Label33: TLabel
         Left = 36
@@ -1210,7 +1191,7 @@ object FParam: TFParam
     end
     object TabTasks: TTabSheet
       Caption = 'Tasks'
-      ClientHeight = 313
+      ClientHeight = 315
       ClientWidth = 423
       object PageControl1: TPageControl
         Left = -2
@@ -1222,8 +1203,8 @@ object FParam: TFParam
         TabOrder = 0
         object TabBehindBall: TTabSheet
           Caption = 'BehindBall'
-          ClientHeight = 269
-          ClientWidth = 419
+          ClientHeight = 300
+          ClientWidth = 421
           OnContextPopup = TabBehindBallContextPopup
           object Label4: TLabel
             Left = 17

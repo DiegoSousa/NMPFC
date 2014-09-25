@@ -53,7 +53,7 @@
         <MinVersion Minor="1" Release="2" Valid="True"/>
       </Item6>
     </RequiredPackages>
-    <Units Count="41">
+    <Units Count="40">
       <Unit0>
         <Filename Value="RoC.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -186,137 +186,129 @@
         <UnitName Value="WLan"/>
       </Unit20>
       <Unit21>
-        <Filename Value="CoachMain.pas"/>
-        <IsPartOfProject Value="True"/>
-        <ComponentName Value="FCoachMain"/>
-        <HasResources Value="True"/>
-        <ResourceBaseClass Value="Form"/>
-        <UnitName Value="CoachMain"/>
-      </Unit21>
-      <Unit22>
         <Filename Value="dynmatrix.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="dynmatrix"/>
-      </Unit22>
-      <Unit23>
+      </Unit21>
+      <Unit22>
         <Filename Value="locmap.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="FLocMap"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="LocMap"/>
-      </Unit23>
-      <Unit24>
+      </Unit22>
+      <Unit23>
         <Filename Value="debug.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="FormDebug"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Debug"/>
-      </Unit24>
-      <Unit25>
+      </Unit23>
+      <Unit24>
         <Filename Value="DecConsts.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="DecConsts"/>
-      </Unit25>
-      <Unit26>
+      </Unit24>
+      <Unit25>
         <Filename Value="astarmapimage.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="FAstarMap"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="astarmapimage"/>
-      </Unit26>
-      <Unit27>
+      </Unit25>
+      <Unit26>
         <Filename Value="unit_hardware.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Form_Hardware"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit_Hardware"/>
-      </Unit27>
-      <Unit28>
+      </Unit26>
+      <Unit27>
         <Filename Value="unit_hardware_configure_udp.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Form_Hardware_Configure_UDP"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit_Hardware_Configure_UDP"/>
-      </Unit28>
-      <Unit29>
+      </Unit27>
+      <Unit28>
         <Filename Value="unit_hardware_configure.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Form_Hardware_Configure"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="unit_hardware_configure"/>
-      </Unit29>
-      <Unit30>
+      </Unit28>
+      <Unit29>
         <Filename Value="unit_flashbus.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Unit_FlashBus"/>
-      </Unit30>
-      <Unit31>
+      </Unit29>
+      <Unit30>
         <Filename Value="unit_joystick.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Form_joystick"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit_joystick"/>
-      </Unit31>
-      <Unit32>
+      </Unit30>
+      <Unit31>
         <Filename Value="unit_localizationaux.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="unit_localizationAux"/>
-      </Unit32>
-      <Unit33>
+      </Unit31>
+      <Unit32>
         <Filename Value="unit_localization.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Form_Localization"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="unit_Localization"/>
-      </Unit33>
-      <Unit34>
+      </Unit32>
+      <Unit33>
         <Filename Value="kalmanball.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="FBall"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="KalmanBall"/>
-      </Unit34>
-      <Unit35>
+      </Unit33>
+      <Unit34>
         <Filename Value="kalmanball_aux.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="KalmanBall_Aux"/>
-      </Unit35>
-      <Unit36>
+      </Unit34>
+      <Unit35>
         <Filename Value="unit_obstacles.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Form_Obstacles"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="unit_obstacles"/>
-      </Unit36>
-      <Unit37>
+      </Unit35>
+      <Unit36>
         <Filename Value="unit_rolesaux.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Form_Roles"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit_RolesAux"/>
-      </Unit37>
-      <Unit38>
+      </Unit36>
+      <Unit37>
         <Filename Value="mpc.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="FormMPC"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="MPC"/>
-      </Unit38>
-      <Unit39>
+      </Unit37>
+      <Unit38>
         <Filename Value="rtdb.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="rtdb"/>
-      </Unit39>
-      <Unit40>
+      </Unit38>
+      <Unit39>
         <Filename Value="trajfollow.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="FTrajFollow"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="TrajFollow"/>
-      </Unit40>
+      </Unit39>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

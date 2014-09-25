@@ -132,7 +132,6 @@ type
     EditSuperIP: TEdit;
     Edittimedelay1: TEdit;
     EditVisionIP: TEdit;
-    EditIPBase: TEdit;
     EditWheel1Diameter1: TEdit;
     EditWheel2Diameter1: TEdit;
     EditWheel3Diameter1: TEdit;
@@ -142,7 +141,6 @@ type
     Label10: TLabel;
     Label13: TLabel;
     Label18: TLabel;
-    Label19: TLabel;
     Label2: TLabel;
     Label20: TLabel;
     Label21: TLabel;
@@ -236,8 +234,15 @@ type
     TabTactic: TTabSheet;
     procedure ButtonSetStartStopClick(Sender: TObject);
     procedure ChListParClickCheck(Sender: TObject);
+    procedure EditBadIPCountChange(Sender: TObject);
     procedure EditBallSpaceChange(Sender: TObject);
+    procedure EditIPBaseChange(Sender: TObject);
+    procedure EditSimTwoIPChange(Sender: TObject);
+    procedure EditSimTwoListenPortChange(Sender: TObject);
     procedure EditSimTwoListenPortEditingDone(Sender: TObject);
+    procedure EditSimTwoPortChange(Sender: TObject);
+    procedure EditSuperIPChange(Sender: TObject);
+    procedure EditVisionIPChange(Sender: TObject);
     procedure EditXstartChange(Sender: TObject);
     procedure ETaskBehindBallSpeedExit(Sender: TObject);
     procedure ETaskBehindBallDistToBallExit(Sender: TObject);
@@ -250,6 +255,8 @@ type
     procedure BtnreadkickerClick(Sender: TObject);
     procedure BtnwritekickerClick(Sender: TObject);
     procedure FillListNames;
+    procedure Label19Click(Sender: TObject);
+    procedure Label1Click(Sender: TObject);
     procedure Label2Click(Sender: TObject);
     procedure LoadArray;
     procedure RGRobotNumberClick(Sender: TObject);
@@ -413,6 +420,11 @@ begin
   //else FMain.RGMode.color:=clBtnFace;
 end;
 
+procedure TFParam.EditBadIPCountChange(Sender: TObject);
+begin
+
+end;
+
 procedure TFParam.ButtonSetStartStopClick(Sender: TObject);
 begin
     Xstart:=strtofloatDef(EditXstart.Text,0);
@@ -426,10 +438,40 @@ begin
 
 end;
 
+procedure TFParam.EditIPBaseChange(Sender: TObject);
+begin
+
+end;
+
+procedure TFParam.EditSimTwoIPChange(Sender: TObject);
+begin
+
+end;
+
+procedure TFParam.EditSimTwoListenPortChange(Sender: TObject);
+begin
+
+end;
+
 procedure TFParam.EditSimTwoListenPortEditingDone(Sender: TObject);
 begin
   FMain.SdpoUDPSimTwo.Disconnect;
   FMain.SdpoUDPSimTwo.Listen(StrToInt(EditSimTwoListenPort.text));
+end;
+
+procedure TFParam.EditSimTwoPortChange(Sender: TObject);
+begin
+
+end;
+
+procedure TFParam.EditSuperIPChange(Sender: TObject);
+begin
+
+end;
+
+procedure TFParam.EditVisionIPChange(Sender: TObject);
+begin
+
 end;
 
 procedure TFParam.EditXstartChange(Sender: TObject);
@@ -530,6 +572,16 @@ begin
   for i:=Low(paramType) to High(paramType) do begin
     ChListPar.Items.Add(CparamTypeString[i]);
   end;
+end;
+
+procedure TFParam.Label19Click(Sender: TObject);
+begin
+
+end;
+
+procedure TFParam.Label1Click(Sender: TObject);
+begin
+
 end;
 
 procedure TFParam.Label2Click(Sender: TObject); 
