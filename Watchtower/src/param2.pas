@@ -14,12 +14,18 @@ type
 
   TFParam2 = class(TForm)
     BOk1: TButton;
+    EditRoc4IP: TEdit;
     EditRoc2IP: TEdit;
     Edit2: TEdit;
     EditRoc1IP: TEdit;
+    EditRoc5IP: TEdit;
     EditRoC3IP: TEdit;
+    EditRoc6IP: TEdit;
     Label4: TLabel;
     Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
     RoC1: TEdit;
     EditSimTwoIP: TEdit;
     EditSimTwoListenPort: TEdit;

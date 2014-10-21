@@ -23,7 +23,6 @@ uses
 begin
   Application.Initialize;
   Application.CreateForm(TFMain, FMain);
-  //===>  Application.CreateForm(TFCoachMain, FCoachMain);
   Application.CreateForm(TFField, FField);
   Application.CreateForm(TFCamera, FCamera);
   Application.CreateForm(TFJoy, FJoy);

@@ -1,7 +1,7 @@
 object FCoach: TFCoach
-  Left = 276
+  Left = 273
   Height = 599
-  Top = 25
+  Top = 0
   Width = 917
   Caption = 'Watchtower'
   ClientHeight = 578

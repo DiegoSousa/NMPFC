@@ -1,10 +1,10 @@
 object FParam2: TFParam2
-  Left = 416
-  Height = 167
-  Top = 223
+  Left = 415
+  Height = 215
+  Top = 199
   Width = 374
   Caption = 'FParam2'
-  ClientHeight = 167
+  ClientHeight = 215
   ClientWidth = 374
   OnCreate = FormCreate
   LCLVersion = '1.2.4.0'
@@ -45,7 +45,7 @@ object FParam2: TFParam2
   object Label2: TLabel
     Left = 8
     Height = 15
-    Top = 140
+    Top = 151
     Width = 92
     Caption = 'SimTwo IP/Port:'
     ParentColor = False
@@ -53,14 +53,14 @@ object FParam2: TFParam2
   object EditSimTwoIP: TEdit
     Left = 104
     Height = 25
-    Top = 136
+    Top = 147
     Width = 112
     TabOrder = 1
   end
   object EditSimTwoPort: TEdit
     Left = 217
     Height = 25
-    Top = 136
+    Top = 147
     Width = 40
     TabOrder = 2
     Text = '6001'
@@ -68,7 +68,7 @@ object FParam2: TFParam2
   object Label3: TLabel
     Left = 265
     Height = 15
-    Top = 140
+    Top = 151
     Width = 40
     Caption = 'Listen:'
     ParentColor = False
@@ -76,15 +76,15 @@ object FParam2: TFParam2
   object EditSimTwoListenPort: TEdit
     Left = 313
     Height = 25
-    Top = 136
+    Top = 147
     Width = 40
     TabOrder = 3
     Text = '6000'
   end
   object BOk1: TButton
-    Left = 289
+    Left = 278
     Height = 25
-    Top = 18
+    Top = 184
     Width = 75
     Anchors = [akRight, akBottom]
     Caption = '&Ok'
@@ -95,14 +95,14 @@ object FParam2: TFParam2
   object EditRoC3IP: TEdit
     Left = 62
     Height = 25
-    Top = 105
+    Top = 111
     Width = 112
     TabOrder = 5
   end
   object Label1: TLabel
     Left = 9
     Height = 15
-    Top = 56
+    Top = 62
     Width = 53
     Caption = 'RoC 1 IP:'
     ParentColor = False
@@ -111,14 +111,14 @@ object FParam2: TFParam2
   object EditRoc1IP: TEdit
     Left = 62
     Height = 25
-    Top = 52
+    Top = 58
     Width = 112
     TabOrder = 6
   end
   object Label4: TLabel
     Left = 8
     Height = 15
-    Top = 84
+    Top = 90
     Width = 53
     Caption = 'RoC 2 IP:'
     ParentColor = False
@@ -126,7 +126,7 @@ object FParam2: TFParam2
   object Label5: TLabel
     Left = 8
     Height = 15
-    Top = 111
+    Top = 117
     Width = 53
     Caption = 'RoC 3 IP:'
     ParentColor = False
@@ -134,14 +134,62 @@ object FParam2: TFParam2
   object EditRoc2IP: TEdit
     Left = 62
     Height = 25
-    Top = 79
+    Top = 85
     Width = 112
     TabOrder = 7
+  end
+  object EditRoc4IP: TEdit
+    Left = 245
+    Height = 25
+    Top = 58
+    Width = 112
+    TabOrder = 8
+  end
+  object EditRoc5IP: TEdit
+    Left = 245
+    Height = 25
+    Top = 85
+    Width = 112
+    TabOrder = 9
+  end
+  object EditRoc6IP: TEdit
+    Left = 245
+    Height = 25
+    Top = 111
+    Width = 112
+    TabOrder = 10
+  end
+  object Label6: TLabel
+    Left = 191
+    Height = 15
+    Top = 62
+    Width = 53
+    Caption = 'RoC 4 IP:'
+    ParentColor = False
+    OnClick = Label1Click
+  end
+  object Label7: TLabel
+    Left = 191
+    Height = 15
+    Top = 90
+    Width = 53
+    Caption = 'RoC 5 IP:'
+    ParentColor = False
+    OnClick = Label1Click
+  end
+  object Label8: TLabel
+    Left = 191
+    Height = 15
+    Top = 117
+    Width = 53
+    Caption = 'RoC 6 IP:'
+    ParentColor = False
+    OnClick = Label1Click
   end
   object FormStorage: TIniPropStorage
     StoredValues = <>
     IniSection = 'PARAM'
-    left = 232
+    left = 240
     top = 16
   end
 end

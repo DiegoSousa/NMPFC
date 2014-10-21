@@ -1220,20 +1220,38 @@ begin
       packet_str := StringOfChar(#0, sizeof(CoachInfo));
       copymemory(@(packet_str[1]), @CoachInfo, sizeof(CoachInfo));
 
+    //  for i := 0 to MaxRobots-1 do begin
+           // robots ip+port must be 'IPBase'.'101-106':'7271-7276'
+     //   if RGDecision.ItemIndex=0 then //Local Host
+     //    SdpoUDPSuper.SendMessage(packet_str, '127.0.0.1:'+inttostr(7271 + i))
+      //  else //Net
+     //    SdpoUDPSuper.SendMessage(packet_str, FParam2.EditRoc1IP.Text +'.'+IntToStr(101 + i)+ ':'+inttostr(7272 + i));
+    //  end;
+
    //Diego: Se os RoCs estiverem na MESMA máquina (localhost) do Watchtower,
    //esse if será executado, com o intuito de abrir uma porta para cada RoC.
       if (RGDecision.ItemIndex=0) then
-         for i := 0 to MaxRobots-1 do begin
+        for i := 0 to MaxRobots-1 do begin
             SdpoUDPSuper.SendMessage(packet_str, '127.0.0.1:'+inttostr(7271 + i))
-          end;
-   //Diego: Se os RoCs estiverem em uma máquina DIFERENTE do Watchtower,
+        end
+   //Diego: Se os RoCs estiverem em máquina DIFERENTE do Watchtower,
    //esse if será executado, com o intuito de abrir uma porta para cada RoC.
-      if (RGDecision.ItemIndex=1) then //Net
+      else  //Net
           begin
-            SdpoUDPSuper.SendMessage(packet_str, FParam2.EditRoc1IP.Text +':'+inttostr(7272));
-            SdpoUDPSuper.SendMessage(packet_str, FParam2.EditRoc2IP.Text +':'+inttostr(7273));
-            SdpoUDPSuper.SendMessage(packet_str, FParam2.EditRoC3IP.Text +':'+inttostr(7274));
+              if(FParam2.EditRoc1IP.Text <> '') then
+                SdpoUDPSuper.SendMessage(packet_str, FParam2.EditRoc1IP.Text +':'+inttostr(7272));
+              if(FParam2.EditRoc2IP.Text <> '') then
+                SdpoUDPSuper.SendMessage(packet_str, FParam2.EditRoc2IP.Text +':'+inttostr(7273));
+              if(FParam2.EditRoc3IP.Text <> '') then
+                SdpoUDPSuper.SendMessage(packet_str, FParam2.EditRoC3IP.Text +':'+inttostr(7274));
+              if(FParam2.EditRoc4IP.Text <> '') then
+                SdpoUDPSuper.SendMessage(packet_str, FParam2.EditRoC4IP.Text +':'+inttostr(7275));
+              if(FParam2.EditRoc5IP.Text <> '') then
+                SdpoUDPSuper.SendMessage(packet_str, FParam2.EditRoC5IP.Text +':'+inttostr(7276));
+              if(FParam2.EditRoc6IP.Text <> '') then
+                SdpoUDPSuper.SendMessage(packet_str, FParam2.EditRoC6IP.Text +':'+inttostr(7277));
           end;
+
   except
   end;
 end;
