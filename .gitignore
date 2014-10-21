@@ -3,6 +3,7 @@ Backup
 /bin/RoC
 /bin/Watchtower
 RoC/bin/data/
+RoC/bin/RoC.app/
 *.lrs
 *.ppu
 *.o
