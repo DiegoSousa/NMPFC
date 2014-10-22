@@ -1,9 +1,10 @@
 target
 Backup
-/bin/RoC
-/bin/Watchtower
-RoC/bin/data/
+RoC/bin/RoC
 RoC/bin/RoC.app/
+RoC/bin/*.sh
+Watchtower/bin/Watchtower
+RoC/bin/data/
 *.lrs
 *.ppu
 *.o
